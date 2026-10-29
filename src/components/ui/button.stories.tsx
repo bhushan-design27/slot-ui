@@ -45,7 +45,7 @@ export const AllVariants: Story = {
     <table className="border-separate border-spacing-(--space-4) text-(length:--font-size-small) leading-(--font-line-height-small) text-(--color-text-secondary)">
       <thead>
         <tr>
-          <th />
+          <td />
           {variants.map((variant) => (
             <th key={variant} colSpan={sizes.length} className="text-left font-medium text-(--color-text-primary)">
               {variant}
@@ -53,7 +53,7 @@ export const AllVariants: Story = {
           ))}
         </tr>
         <tr>
-          <th />
+          <td />
           {variants.flatMap((variant) =>
             sizes.map((size) => (
               <th key={`${variant}-${size}`} className="text-left font-normal">

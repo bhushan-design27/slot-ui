@@ -9,6 +9,8 @@ const preview: Preview = {
        date: /Date$/i,
       },
     },
+    // axe runs on every story. 'error' = violations fail test runs instead of being only listed.
+    a11y: { test: 'error' },
   },
 };
 
