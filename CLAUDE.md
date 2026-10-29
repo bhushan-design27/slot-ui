@@ -26,6 +26,8 @@ Rules for working in the **Slot** Figma file (`kcQ8UEPlSVCNw8Qs2LL6aZ`).
 - Exception: color primitives have **no scopes**, so they're hidden from
   pickers. Components bind colors through Semantic tokens, which carry the
   scopes.
+- Every new variable gets web code syntax when it's created
+  (`var(--path-joined-with-dashes)`, e.g. `var(--color-text-primary)`).
 
 ## Naming components and layers
 - Component names and variant values use **Title Case** (e.g. `Button`, `Primary`, `Hover`).
@@ -83,6 +85,22 @@ TypeScript, Tailwind CSS v4, shadcn/ui, Storybook.
 - Check the component in Figma (`get_design_context`) before writing or
   changing its props.
 
+### Figma states → code
+- `Default`, `Hover` and `Focus` are CSS (`:hover`, `:focus-visible`),
+  not props.
+- `Disabled` is the native `disabled` attribute.
+- `Error` is an `invalid` prop, rendered as `aria-invalid`.
+- `Selected` is a `selected` prop. `Open` is an `open` prop.
+- Other variant properties map 1:1 to lowercase props, with the Figma
+  values unchanged (`variant`, `size`, …).
+- Figma strokes are inside and excluded from layout, so draw borders with
+  `inset-ring-*` (box-shadow), not `border`, to keep Figma padding and the
+  36 / 48 / 56 heights.
+- `cn` (the `cn` package) merges `ring-offset-(length:…)` and
+  `ring-offset-(--color-…)` as one class and drops the width. The Slot
+  focus ring is written as one shadow instead:
+  `focus-visible:shadow-[0_0_0_var(--border-width-2)_var(--color-surface-page),0_0_0_var(--border-width-4)_var(--color-border-focus)]`.
+
 ### Tokens
 - Source of truth: `tokens/slot.tokens.json` (W3C DTCG, exported from the
   Figma Primitives + Semantic collections; semantic tokens are aliases).
@@ -90,6 +108,9 @@ TypeScript, Tailwind CSS v4, shadcn/ui, Storybook.
   `npm run tokens`.
 - CSS variable names = Figma code syntax (WEB). Variables without code
   syntax get the path joined with `-` (`npm run tokens` lists them).
+- Before finishing: `npm run check:tokens` (fails on hex / `rgb()` /
+  `hsl()` colors and non-Slot Tailwind color or radius classes) and
+  `npx tsc -b`.
 
 ### shadcn/ui
 - Add components with `npx shadcn add <name>`, then check their classes

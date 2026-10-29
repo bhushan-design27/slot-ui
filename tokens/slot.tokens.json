@@ -168,7 +168,9 @@
           "com.figma": {
             "collection": "Primitives",
             "scopes": [],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-red-700)"
+            }
           }
         }
       }
@@ -300,7 +302,9 @@
           "com.figma": {
             "collection": "Primitives",
             "scopes": [],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-slate-900-a10)"
+            }
           }
         }
       },
@@ -320,7 +324,9 @@
           "com.figma": {
             "collection": "Primitives",
             "scopes": [],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-slate-900-a50)"
+            }
           }
         }
       }
@@ -358,7 +364,9 @@
               "FRAME_FILL",
               "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-action-danger)"
+            }
           }
         }
       },
@@ -372,7 +380,9 @@
               "FRAME_FILL",
               "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-action-danger-hover)"
+            }
           }
         }
       },
@@ -466,7 +476,9 @@
               "FRAME_FILL",
               "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-action-selected)"
+            }
           }
         }
       }
@@ -511,7 +523,9 @@
             "scopes": [
               "STROKE_COLOR"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-border-control)"
+            }
           }
         }
       },
@@ -585,7 +599,9 @@
             "scopes": [
               "STROKE_COLOR"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-border-subtle)"
+            }
           }
         }
       }
@@ -600,7 +616,9 @@
             "scopes": [
               "STROKE_COLOR"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-icon-default)"
+            }
           }
         }
       },
@@ -613,7 +631,9 @@
             "scopes": [
               "STROKE_COLOR"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-icon-disabled)"
+            }
           }
         }
       }
@@ -628,7 +648,9 @@
             "scopes": [
               "EFFECT_COLOR"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-shadow-raised)"
+            }
           }
         }
       }
@@ -676,7 +698,9 @@
               "FRAME_FILL",
               "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-surface-hover)"
+            }
           }
         }
       },
@@ -690,7 +714,9 @@
               "FRAME_FILL",
               "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-surface-overlay)"
+            }
           }
         }
       },
@@ -721,7 +747,9 @@
               "FRAME_FILL",
               "SHAPE_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-surface-selected)"
+            }
           }
         }
       }
@@ -811,7 +839,9 @@
             "scopes": [
               "TEXT_FILL"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--color-text-on-disabled)"
+            }
           }
         }
       },
@@ -929,7 +959,9 @@
             "scopes": [
               "LINE_HEIGHT"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--font-line-height-heading-sm)"
+            }
           }
         }
       },
@@ -1002,7 +1034,9 @@
             "scopes": [
               "FONT_SIZE"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--font-size-heading-sm)"
+            }
           }
         }
       },
@@ -1113,7 +1147,9 @@
           "scopes": [
             "CORNER_RADIUS"
           ],
-          "codeSyntax": {}
+          "codeSyntax": {
+            "WEB": "var(--radius-sm)"
+          }
         }
       }
     }
@@ -1132,7 +1168,9 @@
             "scopes": [
               "EFFECT_FLOAT"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--shadow-blur-md)"
+            }
           }
         }
       }
@@ -1150,7 +1188,9 @@
             "scopes": [
               "EFFECT_FLOAT"
             ],
-            "codeSyntax": {}
+            "codeSyntax": {
+              "WEB": "var(--shadow-offset-sm)"
+            }
           }
         }
       }
