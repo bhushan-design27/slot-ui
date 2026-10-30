@@ -71,11 +71,9 @@ function Input({
           id={helperId}
           className={cn(
             "w-full text-(length:--font-size-small) leading-(--font-line-height-small) font-normal",
-            disabled
-              ? "text-(--color-text-disabled)"
-              : invalid
-                ? "text-(--color-text-error)"
-                : "text-(--color-text-secondary)"
+            // Helper text keeps text-secondary when disabled: it often
+            // explains why the field is disabled.
+            invalid && !disabled ? "text-(--color-text-error)" : "text-(--color-text-secondary)"
           )}
         >
           {helper}

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Select } from './select'
 
-const states = ['Default', 'Focus', 'Error', 'Disabled', 'Open'] as const
+const states = ['Default', 'Focus', 'Error', 'Disabled'] as const
 
 const services = [
   { value: 'massage', label: 'Massage' },
@@ -49,9 +49,9 @@ export const Playground: Story = {
 }
 
 /**
- * Every Figma state side by side, like the component sheet. The Open column
- * is held open with `open`; Radix then treats the menu as modal (the rest of
- * the page is inert until it closes).
+ * The closed Figma states side by side, like the component sheet. Open has
+ * its own story: an open Select is modal (Radix aria-hides the rest of the
+ * page), so it can't share a page with other focusable fields.
  */
 export const AllVariants: Story = {
   name: 'All variants',
@@ -64,12 +64,8 @@ export const AllVariants: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-start gap-(--space-6)">
       {states.map((state) => (
-        // 320px columns like Figma; the Open column leaves room for the menu.
-        <div
-          key={state}
-          data-figma-state={state}
-          className={`flex w-80 flex-col gap-(--space-2) ${state === 'Open' ? 'min-h-72' : ''}`}
-        >
+        // 320px columns like Figma.
+        <div key={state} data-figma-state={state} className="flex w-80 flex-col gap-(--space-2)">
           <span className="text-(length:--font-size-small) leading-(--font-line-height-small) font-medium text-(--color-text-secondary)">
             {state}
           </span>
@@ -77,11 +73,22 @@ export const AllVariants: Story = {
             {...args}
             invalid={state === 'Error'}
             disabled={state === 'Disabled'}
-            open={state === 'Open' ? true : undefined}
-            value={state === 'Open' ? 'massage' : undefined}
           />
         </div>
       ))}
     </div>
   ),
+}
+
+/** Figma Open state: menu held open with "Massage" selected (field shows it, row has the check). */
+export const Open: Story = {
+  args: { open: true, value: 'massage' },
+  decorators: [
+    (Story) => (
+      // Room below the field for the menu.
+      <div className="min-h-72 w-80 max-w-full">
+        <Story />
+      </div>
+    ),
+  ],
 }

@@ -42,6 +42,7 @@ Rules for working in the **Slot** Figma file (`kcQ8UEPlSVCNw8Qs2LL6aZ`).
   (e.g. `Label/Medium`, `Label/Small`, `Body/Medium`).
 - Use Heading/Large once per screen, for the page title. Section and card
   titles use Heading/Small.
+- Helper text always uses text/secondary, including in disabled states.
 
 ## UI copy
 - UI copy uses sentence case (e.g. "Save changes", not "Save Changes").
@@ -52,6 +53,7 @@ Rules for working in the **Slot** Figma file (`kcQ8UEPlSVCNw8Qs2LL6aZ`).
 - Nested corners: inner radius = outer radius minus padding.
 
 ## After every change
+- Never disable a check to make it pass; fix the cause.
 - Check sizes.
 - Verify the rendered result with a screenshot (`get_screenshot`), not only the bindings.
 - Report every variable used.

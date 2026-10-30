@@ -47,8 +47,22 @@ function Select({
   disabled = false,
   id,
   className,
+  open: openProp,
+  defaultOpen = false,
+  onOpenChange,
   ...rootProps
 }: SelectProps) {
+  // Open state is tracked here (controlled or not) so the trigger can leave
+  // the tab order while the menu is open: Radix aria-hides everything
+  // outside the open menu, trigger included, and an aria-hidden element
+  // must not be tabbable. Focus is trapped in the menu meanwhile, and Radix
+  // returns it to the trigger on close.
+  const [openState, setOpenState] = React.useState(defaultOpen)
+  const open = openProp ?? openState
+  const handleOpenChange = (next: boolean) => {
+    setOpenState(next)
+    onOpenChange?.(next)
+  }
   const generatedId = React.useId()
   const triggerId = id ?? generatedId
   const helperId = helper ? `${triggerId}-helper` : undefined
@@ -70,13 +84,19 @@ function Select({
           {label}
         </label>
       )}
-      <SelectPrimitive.Root disabled={disabled} {...rootProps}>
+      <SelectPrimitive.Root
+        disabled={disabled}
+        open={open}
+        onOpenChange={handleOpenChange}
+        {...rootProps}
+      >
         {/* Body/Medium */}
         <SelectPrimitive.Trigger
           id={triggerId}
           data-slot="select-trigger"
           aria-invalid={invalid || undefined}
           aria-describedby={helperId}
+          tabIndex={open ? -1 : undefined}
           className={cn(
             "flex w-full min-w-0 items-center gap-(--space-2) rounded-(--radius-md) px-(--space-4) py-(--space-3) text-left text-(length:--font-size-body) leading-(--font-line-height-body) font-normal outline-none",
             "bg-(--color-surface-field) text-(--color-text-primary) enabled:data-placeholder:text-(--color-text-placeholder)",
@@ -122,11 +142,9 @@ function Select({
           id={helperId}
           className={cn(
             "w-full text-(length:--font-size-small) leading-(--font-line-height-small) font-normal",
-            disabled
-              ? "text-(--color-text-disabled)"
-              : invalid
-                ? "text-(--color-text-error)"
-                : "text-(--color-text-secondary)"
+            // Helper text keeps text-secondary when disabled: it often
+            // explains why the field is disabled.
+            invalid && !disabled ? "text-(--color-text-error)" : "text-(--color-text-secondary)"
           )}
         >
           {helper}
