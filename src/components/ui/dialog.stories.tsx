@@ -7,10 +7,10 @@ import { Dialog, DialogClose } from './dialog'
 const cancelBookingFooter = (
   <>
     <DialogClose asChild>
-      <Button variant="Secondary">Keep booking</Button>
+      <Button variant="secondary">Keep booking</Button>
     </DialogClose>
     <DialogClose asChild>
-      <Button variant="Danger">Cancel booking</Button>
+      <Button variant="danger">Cancel booking</Button>
     </DialogClose>
   </>
 )
@@ -41,7 +41,7 @@ const meta = {
     return (
       <Dialog
         {...args}
-        trigger={<Button variant="Secondary">Open dialog</Button>}
+        trigger={<Button variant="secondary">Open dialog</Button>}
         onOpenChange={(open) => {
           args.onOpenChange?.(open)
           updateArgs({ open })
@@ -68,7 +68,7 @@ export const CancelBooking: Story = {
     return (
       <Dialog
         {...args}
-        trigger={<Button variant="Danger">Cancel booking</Button>}
+        trigger={<Button variant="danger">Cancel booking</Button>}
         onOpenChange={(open) => updateArgs({ open })}
       />
     )

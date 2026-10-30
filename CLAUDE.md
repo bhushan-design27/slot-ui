@@ -30,7 +30,9 @@ Rules for working in the **Slot** Figma file (`kcQ8UEPlSVCNw8Qs2LL6aZ`).
   (`var(--path-joined-with-dashes)`, e.g. `var(--color-text-primary)`).
 
 ## Naming components and layers
-- Component names and variant values use **Title Case** (e.g. `Button`, `Primary`, `Hover`).
+- In Figma, component names and variant values use **Title Case**
+  (e.g. `Button`, `Primary`, `Hover`). In code, prop values are always
+  lowercase (see "Props mirror Figma" below).
 - Property names and layer names are lowercase (e.g. `size`, `state`, `label`).
 - Exception: Icon variant values use Lucide names exactly
   (e.g. `chevron-down`, `check`).
@@ -79,9 +81,10 @@ TypeScript, Tailwind CSS v4, shadcn/ui, Storybook.
   allowed: they are mapped to Slot semantic tokens in `src/index.css`.
 
 ### Props mirror Figma
-- Component props use the Figma property names and values exactly
-  (e.g. Figma `size` = `Small | Medium | Large` →
-  `size?: 'Small' | 'Medium' | 'Large'`).
+- Component props use the Figma property names, with the Figma values
+  lowercased (e.g. Figma `size` = `Small | Medium | Large` →
+  `size?: 'small' | 'medium' | 'large'`). Prop values are always
+  lowercase, even though Figma variant values are Title Case.
 - Check the component in Figma (`get_design_context`) before writing or
   changing its props.
 
@@ -91,8 +94,8 @@ TypeScript, Tailwind CSS v4, shadcn/ui, Storybook.
 - `Disabled` is the native `disabled` attribute.
 - `Error` is an `invalid` prop, rendered as `aria-invalid`.
 - `Selected` is a `selected` prop. `Open` is an `open` prop.
-- Other variant properties map 1:1 to lowercase props, with the Figma
-  values unchanged (`variant`, `size`, …).
+- Other variant properties map 1:1 to lowercase props with lowercase
+  values (`variant`, `size`, …).
 - Figma strokes are inside and excluded from layout, so draw borders with
   `inset-ring-*` (box-shadow), not `border`, to keep Figma padding and the
   36 / 48 / 56 heights.
@@ -108,9 +111,14 @@ TypeScript, Tailwind CSS v4, shadcn/ui, Storybook.
   `npm run tokens`.
 - CSS variable names = Figma code syntax (WEB). Variables without code
   syntax get the path joined with `-` (`npm run tokens` lists them).
-- Before finishing: `npm run check:tokens` (fails on hex / `rgb()` /
+- Before finishing: `npm run test:a11y` (axe on every story, headless),
+  `npm run check:tokens` (fails on hex / `rgb()` /
   `hsl()` colors and non-Slot Tailwind color or radius classes) and
   `npx tsc -b`.
+
+### Dialogs
+- A dialog without a close button must always have a visible dismiss
+  action, and must close on Escape.
 
 ### shadcn/ui
 - Add components with `npx shadcn add <name>`, then check their classes

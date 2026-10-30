@@ -19,22 +19,22 @@ const cardVariants = cva(
   {
     variants: {
       elevation: {
-        Flat: "",
-        Raised: "shadow-[0_var(--shadow-offset-sm)_var(--shadow-blur-md)_0_var(--color-shadow-raised)]",
+        flat: "",
+        raised: "shadow-[0_var(--shadow-offset-sm)_var(--shadow-blur-md)_0_var(--color-shadow-raised)]",
       },
     },
     defaultVariants: {
-      elevation: "Flat",
+      elevation: "flat",
     },
   }
 )
 
 type CardProps = Omit<React.ComponentProps<"div">, "title"> & {
   title?: string
-  elevation?: "Flat" | "Raised"
+  elevation?: "flat" | "raised"
 }
 
-function Card({ className, title, elevation = "Flat", children, ...props }: CardProps) {
+function Card({ className, title, elevation = "flat", children, ...props }: CardProps) {
   return (
     <div
       data-slot="card"

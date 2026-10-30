@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Button } from './button'
 
-const variants = ['Primary', 'Secondary', 'Danger'] as const
-const sizes = ['Small', 'Medium', 'Large'] as const
+const variants = ['primary', 'secondary', 'danger'] as const
+const sizes = ['small', 'medium', 'large'] as const
 const states = ['Default', 'Hover', 'Focus', 'Disabled'] as const
 
 const meta = {
@@ -11,8 +11,8 @@ const meta = {
   parameters: { layout: 'centered' },
   args: {
     children: 'Book now',
-    variant: 'Primary',
-    size: 'Medium',
+    variant: 'primary',
+    size: 'medium',
     disabled: false,
   },
   argTypes: {

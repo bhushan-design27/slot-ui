@@ -25,17 +25,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        Primary: [
+        primary: [
           "bg-(--color-action-primary) text-(--color-text-on-action)",
           "enabled:hover:bg-(--color-action-primary-hover)",
           "disabled:bg-(--color-action-disabled) disabled:text-(--color-text-on-disabled)",
         ],
-        Secondary: [
+        secondary: [
           "bg-(--color-action-secondary) text-(--color-text-action) inset-ring-(length:--border-width-1) inset-ring-(--color-border-action)",
           "enabled:hover:bg-(--color-action-secondary-hover) enabled:hover:text-(--color-text-action-hover) enabled:hover:inset-ring-(--color-border-action-hover)",
           "disabled:text-(--color-text-disabled) disabled:inset-ring-(--color-border-disabled)",
         ],
-        Danger: [
+        danger: [
           "bg-(--color-action-danger) text-(--color-text-on-action)",
           "enabled:hover:bg-(--color-action-danger-hover)",
           "disabled:bg-(--color-action-disabled) disabled:text-(--color-text-on-disabled)",
@@ -43,33 +43,33 @@ const buttonVariants = cva(
       },
       size: {
         // Label/Small
-        Small:
+        small:
           "px-(--space-3) py-(--space-2) text-(length:--font-size-small) leading-(--font-line-height-small)",
         // Label/Medium
-        Medium:
+        medium:
           "px-(--space-4) py-(--space-3) text-(length:--font-size-body) leading-(--font-line-height-body)",
         // Label/Medium
-        Large:
+        large:
           "px-(--space-6) py-(--space-4) text-(length:--font-size-body) leading-(--font-line-height-body)",
       },
     },
     defaultVariants: {
-      variant: "Primary",
-      size: "Medium",
+      variant: "primary",
+      size: "medium",
     },
   }
 )
 
 type ButtonProps = React.ComponentProps<"button"> & {
-  variant?: "Primary" | "Secondary" | "Danger"
-  size?: "Small" | "Medium" | "Large"
+  variant?: "primary" | "secondary" | "danger"
+  size?: "small" | "medium" | "large"
   asChild?: boolean
 }
 
 function Button({
   className,
-  variant = "Primary",
-  size = "Medium",
+  variant = "primary",
+  size = "medium",
   asChild = false,
   type = "button",
   ...props

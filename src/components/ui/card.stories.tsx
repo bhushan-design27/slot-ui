@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Card } from './card'
 
-const elevations = ['Flat', 'Raised'] as const
+const elevations = ['flat', 'raised'] as const
 
 // The Figma sample content: Body/Medium + Body/Small.
 const bookingSummary = (
@@ -29,7 +29,7 @@ const meta = {
   ],
   args: {
     title: 'Booking summary',
-    elevation: 'Flat',
+    elevation: 'flat',
     children: bookingSummary,
   },
   argTypes: {
