@@ -1,0 +1,62 @@
+# Checks every push to main, then deploys Storybook to GitHub Pages.
+# The deploy job needs the check job, so a failed check means no deploy.
+name: Check and deploy Storybook
+
+on:
+  push:
+    branches: [main]
+  # Manual run from the Actions tab (e.g. the first deploy after enabling Pages).
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One deploy at a time; a newer push doesn't cancel a deploy in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Tokens
+        run: npm run check:tokens
+
+      - name: TypeScript
+        run: npx tsc -b
+
+      - name: Install Chromium for the accessibility tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Accessibility (axe on every story)
+        run: npm run test:a11y
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: storybook-static
+
+  deploy:
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
