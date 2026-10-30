@@ -8,7 +8,7 @@ design intends, without guesswork.
 This repository, `slot-ui`, is the code version of Slot. Every component
 is built from its Figma component set and uses only Slot design tokens.
 
-- Storybook: [STORYBOOK_URL](STORYBOOK_URL)
+- Storybook: [bhushan-design27.github.io/slot-ui](https://bhushan-design27.github.io/slot-ui/)
 - Figma: [FIGMA_URL](FIGMA_URL)
 
 ## Stack
