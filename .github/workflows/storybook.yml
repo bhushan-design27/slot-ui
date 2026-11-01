@@ -29,16 +29,8 @@ jobs:
 
       - run: npm ci
 
-      # Fails when `npm run manifest` would change manifest/ or registry.json.
-      - name: Manifest is up to date
-        run: npm run check:manifest
-
       - name: Tokens
         run: npm run check:tokens
-
-      # Screens use only Slot components, props and values (manifest allow-list).
-      - name: Slot screens
-        run: npm run check:slot
 
       - name: TypeScript
         run: npx tsc -b
@@ -60,11 +52,9 @@ jobs:
       - name: Build Storybook
         run: npm run build-storybook
 
-      # Published next to Storybook: /r/<item>.json (shadcn registry) and /slot.manifest.json.
-      - name: Build shadcn registry and add the manifest
-        run: |
-          npm run registry:build
-          cp manifest/slot.manifest.json storybook-static/
+      # Published next to Storybook: /r/<item>.json (shadcn registry).
+      - name: Build shadcn registry
+        run: npm run registry:build
 
       - uses: actions/upload-pages-artifact@v4
         with:
