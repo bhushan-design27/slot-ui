@@ -52,6 +52,7 @@
   --color-action-secondary: var(--color-white);
   --color-action-secondary-hover: var(--color-blue-50);
   --color-action-selected: var(--color-blue-600);
+  --color-action-selected-hover: var(--color-blue-700);
   --color-border-action: var(--color-blue-600);
   --color-border-action-hover: var(--color-blue-700);
   --color-border-control: var(--color-slate-400);
@@ -59,6 +60,8 @@
   --color-border-error: var(--color-red-600);
   --color-border-field: var(--color-slate-400);
   --color-border-focus: var(--color-blue-600);
+  --color-border-selected: var(--color-blue-600);
+  --color-border-selected-hover: var(--color-blue-700);
   --color-border-subtle: var(--color-slate-200);
   --color-icon-default: var(--color-slate-500);
   --color-icon-disabled: var(--color-slate-400);

@@ -91,7 +91,7 @@
       "accessibility": [
         "Renders a native <button> with type=\"button\" by default, so it never submits a form by accident.",
         "Disabled uses the native attribute: the button leaves the tab order and is announced as unavailable.",
-        "Focus ring: 2px border-focus ring with a 2px surface-page gap, on :focus-visible only."
+        "Focus ring: 2px border-focus outline, 2px from the button (transparent gap), on :focus-visible only."
       ],
       "importPath": "@/components/ui/button",
       "exports": [
@@ -804,8 +804,8 @@
       {
         "name": "color/action/danger",
         "cssVariable": "--color-action-danger",
-        "job": "Background fill: action / danger",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for destructive actions, e.g. a Danger button.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -819,8 +819,8 @@
       {
         "name": "color/action/danger-hover",
         "cssVariable": "--color-action-danger-hover",
-        "job": "Background fill: action / danger-hover",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for destructive actions on hover.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -834,8 +834,8 @@
       {
         "name": "color/action/disabled",
         "cssVariable": "--color-action-disabled",
-        "job": "Background fill: action / disabled",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for filled actions that are disabled, e.g. a disabled Primary button.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -849,8 +849,8 @@
       {
         "name": "color/action/primary",
         "cssVariable": "--color-action-primary",
-        "job": "Background fill: action / primary",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for the main action, e.g. a Primary button.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -858,15 +858,14 @@
         "aliasOf": "color/blue/600",
         "value": "#3e7ca6",
         "usedBy": [
-          "Button",
-          "RadioGroup"
+          "Button"
         ]
       },
       {
         "name": "color/action/primary-hover",
         "cssVariable": "--color-action-primary-hover",
-        "job": "Background fill: action / primary-hover",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for the main action on hover.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -874,15 +873,14 @@
         "aliasOf": "color/blue/700",
         "value": "#2f6890",
         "usedBy": [
-          "Button",
-          "RadioGroup"
+          "Button"
         ]
       },
       {
         "name": "color/action/secondary",
         "cssVariable": "--color-action-secondary",
-        "job": "Background fill: action / secondary",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for secondary actions and unselected toggles, e.g. a Secondary button or a chip.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -897,8 +895,8 @@
       {
         "name": "color/action/secondary-hover",
         "cssVariable": "--color-action-secondary-hover",
-        "job": "Background fill: action / secondary-hover",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for secondary actions and unselected toggles or radios on hover.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -914,8 +912,8 @@
       {
         "name": "color/action/selected",
         "cssVariable": "--color-action-selected",
-        "job": "Background fill: action / selected",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for a chosen option: a selected chip or a checked radio.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -923,30 +921,44 @@
         "aliasOf": "color/blue/600",
         "value": "#3e7ca6",
         "usedBy": [
-          "Chip"
+          "Chip",
+          "RadioGroup"
+        ]
+      },
+      {
+        "name": "color/action/selected-hover",
+        "cssVariable": "--color-action-selected-hover",
+        "job": "Background for a checked radio on hover.",
+        "jobSource": "figma-description",
+        "scopes": [
+          "FRAME_FILL",
+          "SHAPE_FILL"
+        ],
+        "aliasOf": "color/blue/700",
+        "value": "#2f6890",
+        "usedBy": [
+          "RadioGroup"
         ]
       },
       {
         "name": "color/border/action",
         "cssVariable": "--color-border-action",
-        "job": "Border colour: border / action",
-        "jobSource": "derived from scopes and name",
+        "job": "Border for secondary actions, e.g. a Secondary button.",
+        "jobSource": "figma-description",
         "scopes": [
           "STROKE_COLOR"
         ],
         "aliasOf": "color/blue/600",
         "value": "#3e7ca6",
         "usedBy": [
-          "Button",
-          "Chip",
-          "RadioGroup"
+          "Button"
         ]
       },
       {
         "name": "color/border/action-hover",
         "cssVariable": "--color-border-action-hover",
-        "job": "Border colour: border / action-hover",
-        "jobSource": "derived from scopes and name",
+        "job": "Border for secondary actions and unselected toggles on hover, e.g. a hovered Secondary button or chip.",
+        "jobSource": "figma-description",
         "scopes": [
           "STROKE_COLOR"
         ],
@@ -954,15 +966,14 @@
         "value": "#2f6890",
         "usedBy": [
           "Button",
-          "Chip",
-          "RadioGroup"
+          "Chip"
         ]
       },
       {
         "name": "color/border/control",
         "cssVariable": "--color-border-control",
-        "job": "Border colour: border / control",
-        "jobSource": "derived from scopes and name",
+        "job": "Border for unselected toggles and choice controls, e.g. chips and radios.",
+        "jobSource": "figma-description",
         "scopes": [
           "STROKE_COLOR"
         ],
@@ -976,8 +987,8 @@
       {
         "name": "color/border/disabled",
         "cssVariable": "--color-border-disabled",
-        "job": "Border colour: border / disabled",
-        "jobSource": "derived from scopes and name",
+        "job": "Border for disabled fields and controls.",
+        "jobSource": "figma-description",
         "scopes": [
           "STROKE_COLOR"
         ],
@@ -994,8 +1005,8 @@
       {
         "name": "color/border/error",
         "cssVariable": "--color-border-error",
-        "job": "Border colour: border / error",
-        "jobSource": "derived from scopes and name",
+        "job": "Border or marker for a field or group with an error.",
+        "jobSource": "figma-description",
         "scopes": [
           "STROKE_COLOR"
         ],
@@ -1010,8 +1021,8 @@
       {
         "name": "color/border/field",
         "cssVariable": "--color-border-field",
-        "job": "Border colour: border / field",
-        "jobSource": "derived from scopes and name",
+        "job": "Border for text fields and selects at rest.",
+        "jobSource": "figma-description",
         "scopes": [
           "STROKE_COLOR"
         ],
@@ -1025,8 +1036,8 @@
       {
         "name": "color/border/focus",
         "cssVariable": "--color-border-focus",
-        "job": "Border colour: border / focus",
-        "jobSource": "derived from scopes and name",
+        "job": "Keyboard focus ring, and the border of a focused or open field.",
+        "jobSource": "figma-description",
         "scopes": [
           "STROKE_COLOR",
           "EFFECT_COLOR"
@@ -1042,10 +1053,39 @@
         ]
       },
       {
+        "name": "color/border/selected",
+        "cssVariable": "--color-border-selected",
+        "job": "Border for a chosen option: a selected chip or a checked radio; also previews the choice on a hovered radio.",
+        "jobSource": "figma-description",
+        "scopes": [
+          "STROKE_COLOR"
+        ],
+        "aliasOf": "color/blue/600",
+        "value": "#3e7ca6",
+        "usedBy": [
+          "Chip",
+          "RadioGroup"
+        ]
+      },
+      {
+        "name": "color/border/selected-hover",
+        "cssVariable": "--color-border-selected-hover",
+        "job": "Border for a checked radio on hover.",
+        "jobSource": "figma-description",
+        "scopes": [
+          "STROKE_COLOR"
+        ],
+        "aliasOf": "color/blue/700",
+        "value": "#2f6890",
+        "usedBy": [
+          "RadioGroup"
+        ]
+      },
+      {
         "name": "color/border/subtle",
         "cssVariable": "--color-border-subtle",
-        "job": "Border colour: border / subtle",
-        "jobSource": "derived from scopes and name",
+        "job": "Quiet outline that separates a container from the page, e.g. cards, menus and dialogs.",
+        "jobSource": "figma-description",
         "scopes": [
           "STROKE_COLOR"
         ],
@@ -1060,8 +1100,8 @@
       {
         "name": "color/icon/default",
         "cssVariable": "--color-icon-default",
-        "job": "Icon colour: icon / default",
-        "jobSource": "derived from scopes and name",
+        "job": "Icons at rest.",
+        "jobSource": "figma-description",
         "scopes": [
           "STROKE_COLOR"
         ],
@@ -1074,8 +1114,8 @@
       {
         "name": "color/icon/disabled",
         "cssVariable": "--color-icon-disabled",
-        "job": "Icon colour: icon / disabled",
-        "jobSource": "derived from scopes and name",
+        "job": "Icons and marks in disabled controls, e.g. the dot of a disabled selected radio.",
+        "jobSource": "figma-description",
         "scopes": [
           "SHAPE_FILL",
           "STROKE_COLOR"
@@ -1105,8 +1145,8 @@
       {
         "name": "color/shadow/raised",
         "cssVariable": "--color-shadow-raised",
-        "job": "Shadow colour: shadow / raised",
-        "jobSource": "derived from scopes and name",
+        "job": "Shadow under raised surfaces, e.g. raised cards, menus and dialogs.",
+        "jobSource": "figma-description",
         "scopes": [
           "EFFECT_COLOR"
         ],
@@ -1121,8 +1161,8 @@
       {
         "name": "color/surface/disabled",
         "cssVariable": "--color-surface-disabled",
-        "job": "Background fill: surface / disabled",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for disabled fields and controls.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -1138,8 +1178,8 @@
       {
         "name": "color/surface/field",
         "cssVariable": "--color-surface-field",
-        "job": "Background fill: surface / field",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for text fields, selects and unselected radios.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -1155,8 +1195,8 @@
       {
         "name": "color/surface/hover",
         "cssVariable": "--color-surface-hover",
-        "job": "Background fill: surface / hover",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for the hovered or keyboard-highlighted row in a menu or list.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -1170,8 +1210,8 @@
       {
         "name": "color/surface/overlay",
         "cssVariable": "--color-surface-overlay",
-        "job": "Background fill: surface / overlay",
-        "jobSource": "derived from scopes and name",
+        "job": "Scrim behind a dialog that dims the page.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -1185,8 +1225,8 @@
       {
         "name": "color/surface/page",
         "cssVariable": "--color-surface-page",
-        "job": "Background fill: surface / page",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for the page and for content areas that sit on it, e.g. cards, menus and dialogs; also the gap in the focus ring.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL",
@@ -1195,19 +1235,16 @@
         "aliasOf": "color/white",
         "value": "#ffffff",
         "usedBy": [
-          "Button",
           "Card",
-          "Chip",
           "Dialog",
-          "RadioGroup",
           "Select"
         ]
       },
       {
         "name": "color/surface/selected",
         "cssVariable": "--color-surface-selected",
-        "job": "Background fill: surface / selected",
-        "jobSource": "derived from scopes and name",
+        "job": "Background for the selected row in a menu or list.",
+        "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
           "SHAPE_FILL"
@@ -1221,8 +1258,8 @@
       {
         "name": "color/text/action",
         "cssVariable": "--color-text-action",
-        "job": "Text colour: text / action",
-        "jobSource": "derived from scopes and name",
+        "job": "Label of secondary actions, e.g. a Secondary button.",
+        "jobSource": "figma-description",
         "scopes": [
           "TEXT_FILL"
         ],
@@ -1235,8 +1272,8 @@
       {
         "name": "color/text/action-hover",
         "cssVariable": "--color-text-action-hover",
-        "job": "Text colour: text / action-hover",
-        "jobSource": "derived from scopes and name",
+        "job": "Label of secondary actions and unselected toggles on hover.",
+        "jobSource": "figma-description",
         "scopes": [
           "TEXT_FILL"
         ],
@@ -1250,8 +1287,8 @@
       {
         "name": "color/text/disabled",
         "cssVariable": "--color-text-disabled",
-        "job": "Text colour: text / disabled",
-        "jobSource": "derived from scopes and name",
+        "job": "Text and labels in disabled fields and controls.",
+        "jobSource": "figma-description",
         "scopes": [
           "TEXT_FILL"
         ],
@@ -1268,8 +1305,8 @@
       {
         "name": "color/text/error",
         "cssVariable": "--color-text-error",
-        "job": "Text colour: text / error",
-        "jobSource": "derived from scopes and name",
+        "job": "Error messages, e.g. helper text in the Error state.",
+        "jobSource": "figma-description",
         "scopes": [
           "TEXT_FILL"
         ],
@@ -1284,8 +1321,8 @@
       {
         "name": "color/text/on-action",
         "cssVariable": "--color-text-on-action",
-        "job": "Text colour: text / on-action",
-        "jobSource": "derived from scopes and name",
+        "job": "Text on a filled action or selected toggle, e.g. a Primary button or selected chip label.",
+        "jobSource": "figma-description",
         "scopes": [
           "TEXT_FILL"
         ],
@@ -1299,8 +1336,8 @@
       {
         "name": "color/text/on-disabled",
         "cssVariable": "--color-text-on-disabled",
-        "job": "Text colour: text / on-disabled",
-        "jobSource": "derived from scopes and name",
+        "job": "Text on a disabled filled action, e.g. a disabled Primary button label.",
+        "jobSource": "figma-description",
         "scopes": [
           "TEXT_FILL"
         ],
@@ -1313,8 +1350,8 @@
       {
         "name": "color/text/placeholder",
         "cssVariable": "--color-text-placeholder",
-        "job": "Text colour: text / placeholder",
-        "jobSource": "derived from scopes and name",
+        "job": "Placeholder text in empty fields and selects.",
+        "jobSource": "figma-description",
         "scopes": [
           "TEXT_FILL"
         ],
@@ -1328,8 +1365,8 @@
       {
         "name": "color/text/primary",
         "cssVariable": "--color-text-primary",
-        "job": "Text colour: text / primary",
-        "jobSource": "derived from scopes and name",
+        "job": "Main text: titles, labels, body copy and field values.",
+        "jobSource": "figma-description",
         "scopes": [
           "TEXT_FILL"
         ],
@@ -1347,8 +1384,8 @@
       {
         "name": "color/text/secondary",
         "cssVariable": "--color-text-secondary",
-        "job": "Text colour: text / secondary",
-        "jobSource": "derived from scopes and name",
+        "job": "Supporting text: helper text, descriptions and captions.",
+        "jobSource": "figma-description",
         "scopes": [
           "TEXT_FILL"
         ],
@@ -1589,7 +1626,8 @@
       "rules": [
         "For components with borders, exclude strokes from layout.",
         "Verify component heights match the size scale: **36 / 48 / 56**. The scale applies to controls with a background or border box (Button, Input, Select, Chip). Radio rows are 24px (20px circle + Body/Medium line); stacked with space/3 they repeat every 36px.",
-        "Nested corners: inner radius = outer radius minus padding."
+        "Nested corners: inner radius = outer radius minus padding.",
+        "Error indicators that mark a whole group sit outside the group's box, so showing them never shifts or indents content. (Radio Group: the bar is 14px left of the content, border/width/2 + space/3; containers must leave that space unclipped. Form columns have at least 16px of margin on mobile.)"
       ]
     },
     {
@@ -1617,7 +1655,7 @@
         "`Selected` is a `selected` prop. `Open` is an `open` prop.",
         "Other variant properties map 1:1 to lowercase props with lowercase values (`variant`, `size`, …).",
         "Figma strokes are inside and excluded from layout, so draw borders with `inset-ring-*` (box-shadow), not `border`, to keep Figma padding and the 36 / 48 / 56 heights.",
-        "`cn` (the `cn` package) merges `ring-offset-(length:…)` and `ring-offset-(--color-…)` as one class and drops the width. The Slot focus ring is written as one shadow instead: `focus-visible:shadow-[0_0_0_var(--border-width-2)_var(--color-surface-page),0_0_0_var(--border-width-4)_var(--color-border-focus)]`."
+        "In code, focus rings use outline + outline-offset, so they work on any background: `focus-visible:outline-solid focus-visible:outline-(length:--border-width-2) focus-visible:outline-offset-(length:--border-width-2) focus-visible:outline-(--color-border-focus)`. (Figma keeps the two drop shadows; same geometry.) `outline-solid` is needed because components set `outline-none`."
       ]
     },
     {

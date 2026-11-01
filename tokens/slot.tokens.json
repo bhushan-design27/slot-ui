@@ -357,6 +357,7 @@
       "danger": {
         "$type": "color",
         "$value": "{color.red.600}",
+        "$description": "Background for destructive actions, e.g. a Danger button.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -373,6 +374,7 @@
       "danger-hover": {
         "$type": "color",
         "$value": "{color.red.700}",
+        "$description": "Background for destructive actions on hover.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -389,6 +391,7 @@
       "disabled": {
         "$type": "color",
         "$value": "{color.slate.200}",
+        "$description": "Background for filled actions that are disabled, e.g. a disabled Primary button.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -405,6 +408,7 @@
       "primary": {
         "$type": "color",
         "$value": "{color.blue.600}",
+        "$description": "Background for the main action, e.g. a Primary button.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -421,6 +425,7 @@
       "primary-hover": {
         "$type": "color",
         "$value": "{color.blue.700}",
+        "$description": "Background for the main action on hover.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -437,6 +442,7 @@
       "secondary": {
         "$type": "color",
         "$value": "{color.white}",
+        "$description": "Background for secondary actions and unselected toggles, e.g. a Secondary button or a chip.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -453,6 +459,7 @@
       "secondary-hover": {
         "$type": "color",
         "$value": "{color.blue.50}",
+        "$description": "Background for secondary actions and unselected toggles or radios on hover.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -469,6 +476,7 @@
       "selected": {
         "$type": "color",
         "$value": "{color.blue.600}",
+        "$description": "Background for a chosen option: a selected chip or a checked radio.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -481,12 +489,30 @@
             }
           }
         }
+      },
+      "selected-hover": {
+        "$type": "color",
+        "$value": "{color.blue.700}",
+        "$description": "Background for a checked radio on hover.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-action-selected-hover)"
+            }
+          }
+        }
       }
     },
     "border": {
       "action": {
         "$type": "color",
         "$value": "{color.blue.600}",
+        "$description": "Border for secondary actions, e.g. a Secondary button.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -502,6 +528,7 @@
       "action-hover": {
         "$type": "color",
         "$value": "{color.blue.700}",
+        "$description": "Border for secondary actions and unselected toggles on hover, e.g. a hovered Secondary button or chip.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -517,6 +544,7 @@
       "control": {
         "$type": "color",
         "$value": "{color.slate.400}",
+        "$description": "Border for unselected toggles and choice controls, e.g. chips and radios.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -532,6 +560,7 @@
       "disabled": {
         "$type": "color",
         "$value": "{color.slate.200}",
+        "$description": "Border for disabled fields and controls.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -547,6 +576,7 @@
       "error": {
         "$type": "color",
         "$value": "{color.red.600}",
+        "$description": "Border or marker for a field or group with an error.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -562,6 +592,7 @@
       "field": {
         "$type": "color",
         "$value": "{color.slate.400}",
+        "$description": "Border for text fields and selects at rest.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -577,6 +608,7 @@
       "focus": {
         "$type": "color",
         "$value": "{color.blue.600}",
+        "$description": "Keyboard focus ring, and the border of a focused or open field.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -590,9 +622,42 @@
           }
         }
       },
+      "selected": {
+        "$type": "color",
+        "$value": "{color.blue.600}",
+        "$description": "Border for a chosen option: a selected chip or a checked radio; also previews the choice on a hovered radio.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-selected)"
+            }
+          }
+        }
+      },
+      "selected-hover": {
+        "$type": "color",
+        "$value": "{color.blue.700}",
+        "$description": "Border for a checked radio on hover.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-selected-hover)"
+            }
+          }
+        }
+      },
       "subtle": {
         "$type": "color",
         "$value": "{color.slate.200}",
+        "$description": "Quiet outline that separates a container from the page, e.g. cards, menus and dialogs.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -610,6 +675,7 @@
       "default": {
         "$type": "color",
         "$value": "{color.slate.500}",
+        "$description": "Icons at rest.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -625,6 +691,7 @@
       "disabled": {
         "$type": "color",
         "$value": "{color.slate.400}",
+        "$description": "Icons and marks in disabled controls, e.g. the dot of a disabled selected radio.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -660,6 +727,7 @@
       "raised": {
         "$type": "color",
         "$value": "{color.slate.900-a10}",
+        "$description": "Shadow under raised surfaces, e.g. raised cards, menus and dialogs.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -677,6 +745,7 @@
       "disabled": {
         "$type": "color",
         "$value": "{color.slate.50}",
+        "$description": "Background for disabled fields and controls.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -693,6 +762,7 @@
       "field": {
         "$type": "color",
         "$value": "{color.white}",
+        "$description": "Background for text fields, selects and unselected radios.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -709,6 +779,7 @@
       "hover": {
         "$type": "color",
         "$value": "{color.slate.50}",
+        "$description": "Background for the hovered or keyboard-highlighted row in a menu or list.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -725,6 +796,7 @@
       "overlay": {
         "$type": "color",
         "$value": "{color.slate.900-a50}",
+        "$description": "Scrim behind a dialog that dims the page.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -741,6 +813,7 @@
       "page": {
         "$type": "color",
         "$value": "{color.white}",
+        "$description": "Background for the page and for content areas that sit on it, e.g. cards, menus and dialogs; also the gap in the focus ring.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -758,6 +831,7 @@
       "selected": {
         "$type": "color",
         "$value": "{color.blue.50}",
+        "$description": "Background for the selected row in a menu or list.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -776,6 +850,7 @@
       "action": {
         "$type": "color",
         "$value": "{color.blue.600}",
+        "$description": "Label of secondary actions, e.g. a Secondary button.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -791,6 +866,7 @@
       "action-hover": {
         "$type": "color",
         "$value": "{color.blue.700}",
+        "$description": "Label of secondary actions and unselected toggles on hover.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -806,6 +882,7 @@
       "disabled": {
         "$type": "color",
         "$value": "{color.slate.400}",
+        "$description": "Text and labels in disabled fields and controls.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -821,6 +898,7 @@
       "error": {
         "$type": "color",
         "$value": "{color.red.600}",
+        "$description": "Error messages, e.g. helper text in the Error state.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -836,6 +914,7 @@
       "on-action": {
         "$type": "color",
         "$value": "{color.white}",
+        "$description": "Text on a filled action or selected toggle, e.g. a Primary button or selected chip label.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -851,6 +930,7 @@
       "on-disabled": {
         "$type": "color",
         "$value": "{color.slate.500}",
+        "$description": "Text on a disabled filled action, e.g. a disabled Primary button label.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -866,6 +946,7 @@
       "placeholder": {
         "$type": "color",
         "$value": "{color.slate.500}",
+        "$description": "Placeholder text in empty fields and selects.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -881,6 +962,7 @@
       "primary": {
         "$type": "color",
         "$value": "{color.slate.900}",
+        "$description": "Main text: titles, labels, body copy and field values.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -896,6 +978,7 @@
       "secondary": {
         "$type": "color",
         "$value": "{color.slate.500}",
+        "$description": "Supporting text: helper text, descriptions and captions.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",

@@ -15,6 +15,10 @@ export default defineConfig({
     },
   },
   test: {
+    // Keep failure details: the JSON report has every failure message and
+    // stack (CI uploads test-results/ when a run fails).
+    reporters: ['default', 'json'],
+    outputFile: { json: 'test-results/a11y.json' },
     projects: [
       {
         // Every story runs as a test in headless Chromium; the a11y addon

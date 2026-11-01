@@ -11,15 +11,15 @@ import { Slot } from "radix-ui"
  * with inset-ring (box-shadow) rather than `border`: padding stays exactly
  * the Figma padding and heights land on 36 / 48 / 56.
  *
- * Focus ring = the two Figma drop shadows: border-width-2 of surface-page
- * (the 2px gap) under border-width-4 of border-focus (the 2px ring).
- * Written as one shadow, not ring + ring-offset utilities: `cn` treats
- * ring-offset width and color as the same class and drops the width.
+ * Focus ring: Figma draws it as two drop shadows (a surface-page gap under
+ * a border-focus ring). In code it is an outline with outline-offset, both
+ * border-width-2: same geometry, but the gap is transparent, so it works on
+ * any background.
  */
 const buttonVariants = cva(
   [
     "inline-flex shrink-0 items-center justify-center gap-(--space-2) rounded-(--radius-md) font-medium whitespace-nowrap select-none outline-none transition-colors",
-    "focus-visible:shadow-[0_0_0_var(--border-width-2)_var(--color-surface-page),0_0_0_var(--border-width-4)_var(--color-border-focus)]",
+    "focus-visible:outline-solid focus-visible:outline-(length:--border-width-2) focus-visible:outline-offset-(length:--border-width-2) focus-visible:outline-(--color-border-focus)",
     "disabled:cursor-not-allowed",
   ],
   {
@@ -80,7 +80,7 @@ type ButtonProps = React.ComponentProps<"button"> & {
  * @states Default, Hover, Focus, Disabled
  * @a11y Renders a native <button> with type="button" by default, so it never submits a form by accident.
  * @a11y Disabled uses the native attribute: the button leaves the tab order and is announced as unavailable.
- * @a11y Focus ring: 2px border-focus ring with a 2px surface-page gap, on :focus-visible only.
+ * @a11y Focus ring: 2px border-focus outline, 2px from the button (transparent gap), on :focus-visible only.
  */
 
 function Button({

@@ -28,6 +28,7 @@ debug-storybook.log
 # Test output (coverage, Vitest browser failure screenshots)
 coverage
 __screenshots__
+test-results
 
 # Editor directories and files
 .vscode/*

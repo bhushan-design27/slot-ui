@@ -54,6 +54,11 @@ Rules for working in the **Slot** Figma file (`kcQ8UEPlSVCNw8Qs2LL6aZ`).
   Input, Select, Chip). Radio rows are 24px (20px circle + Body/Medium
   line); stacked with space/3 they repeat every 36px.
 - Nested corners: inner radius = outer radius minus padding.
+- Error indicators that mark a whole group sit outside the group's box,
+  so showing them never shifts or indents content. (Radio Group: the bar
+  is 14px left of the content, border/width/2 + space/3; containers must
+  leave that space unclipped. Form columns have at least 16px of margin
+  on mobile.)
 
 ## After every change
 - Never disable a check to make it pass; fix the cause.
@@ -104,10 +109,11 @@ TypeScript, Tailwind CSS v4, shadcn/ui, Storybook.
 - Figma strokes are inside and excluded from layout, so draw borders with
   `inset-ring-*` (box-shadow), not `border`, to keep Figma padding and the
   36 / 48 / 56 heights.
-- `cn` (the `cn` package) merges `ring-offset-(length:…)` and
-  `ring-offset-(--color-…)` as one class and drops the width. The Slot
-  focus ring is written as one shadow instead:
-  `focus-visible:shadow-[0_0_0_var(--border-width-2)_var(--color-surface-page),0_0_0_var(--border-width-4)_var(--color-border-focus)]`.
+- In code, focus rings use outline + outline-offset, so they work on any
+  background:
+  `focus-visible:outline-solid focus-visible:outline-(length:--border-width-2) focus-visible:outline-offset-(length:--border-width-2) focus-visible:outline-(--color-border-focus)`.
+  (Figma keeps the two drop shadows; same geometry.) `outline-solid` is
+  needed because components set `outline-none`.
 
 ### Tokens
 - Source of truth: `tokens/slot.tokens.json` (W3C DTCG, exported from the

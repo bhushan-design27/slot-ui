@@ -55,8 +55,8 @@ function Chip({
         "inline-flex shrink-0 items-center justify-center gap-(--space-2) rounded-(--radius-full) px-(--space-4) py-(--space-2) text-(length:--font-size-small) leading-(--font-line-height-small) font-medium whitespace-nowrap select-none outline-none transition-colors",
         "bg-(--color-action-secondary) text-(--color-text-primary) inset-ring-(length:--border-width-1) inset-ring-(--color-border-control)",
         "enabled:not-aria-pressed:hover:bg-(--color-action-secondary-hover) enabled:not-aria-pressed:hover:text-(--color-text-action-hover) enabled:not-aria-pressed:hover:inset-ring-(--color-border-action-hover)",
-        "enabled:aria-pressed:bg-(--color-action-selected) enabled:aria-pressed:text-(--color-text-on-action) enabled:aria-pressed:inset-ring-(--color-border-action)",
-        "focus-visible:shadow-[0_0_0_var(--border-width-2)_var(--color-surface-page),0_0_0_var(--border-width-4)_var(--color-border-focus)]",
+        "enabled:aria-pressed:bg-(--color-action-selected) enabled:aria-pressed:text-(--color-text-on-action) enabled:aria-pressed:inset-ring-(--color-border-selected)",
+        "focus-visible:outline-solid focus-visible:outline-(length:--border-width-2) focus-visible:outline-offset-(length:--border-width-2) focus-visible:outline-(--color-border-focus)",
         "disabled:cursor-not-allowed disabled:text-(--color-text-disabled) disabled:inset-ring-(--color-border-disabled)",
         className
       )}

@@ -8,12 +8,13 @@ import { RadioGroup as RadioGroupPrimitive } from "radix-ui"
  * move and select, Space selects the focused option.
  *
  * Group: label / options / helper stacked with space-2, options with
- * space-3 (24px rows, so a 36px rhythm). Error = `invalid`: a border-width-2
- * border-error bar on the left of the whole group, space-3 from the content,
- * and the helper turns error red; the circles stay neutral (as Figma).
- * The bar is a real border (in layout, unlike Slot's inset-ring strokes):
- * Figma includes this stroke in layout so the gap is exactly space-3.
- * Disabled = the native attribute on every option.
+ * space-3 (24px rows, so a 36px rhythm). Error = `invalid`: the helper
+ * turns error red and a border-width-2 border-error bar runs down the left
+ * of the whole group, OUTSIDE its box (border-width-2 + space-3 = 14px to
+ * the left, like the absolutely positioned Figma bar), so showing the error
+ * never shifts or indents content. Containers must not clip those 14px.
+ * The circles stay neutral (as Figma). Disabled = the native attribute on
+ * every option.
  *
  * Radio: a 20px circle, stroke as inset-ring like Chip. The Figma Radio
  * `selected` variant is Radix data-state=checked; Hover = hovering the row
@@ -71,10 +72,12 @@ function RadioGroup({
     <div
       data-slot="radio-group-field"
       className={cn(
-        "flex w-full flex-col items-start gap-(--space-2)",
-        // Error bar. Like the helper colour, not shown while disabled.
-        invalid && !disabled &&
-          "border-l-(length:--border-width-2) border-(--color-border-error) pl-(--space-3)",
+        "relative flex w-full flex-col items-start gap-(--space-2)",
+        // Error bar, outside the box. Like the helper colour, not shown while disabled.
+        invalid && !disabled && [
+          "before:absolute before:inset-y-0 before:left-[calc(-1*(var(--border-width-2)+var(--space-3)))]",
+          "before:border-l-(length:--border-width-2) before:border-(--color-border-error)",
+        ],
         className
       )}
     >
@@ -154,11 +157,11 @@ function RadioGroupItem({
         className={cn(
           "flex size-5 shrink-0 items-center justify-center rounded-(--radius-full) outline-none",
           "bg-(--color-surface-field) inset-ring-(length:--border-width-1) inset-ring-(--color-border-control)",
-          "enabled:group-hover:bg-(--color-action-secondary-hover) enabled:group-hover:inset-ring-(--color-border-action)",
-          "data-checked:bg-(--color-action-primary) data-checked:inset-ring-(--color-border-action)",
-          "enabled:data-checked:group-hover:bg-(--color-action-primary-hover) enabled:data-checked:group-hover:inset-ring-(--color-border-action-hover)",
+          "enabled:group-hover:bg-(--color-action-secondary-hover) enabled:group-hover:inset-ring-(--color-border-selected)",
+          "data-checked:bg-(--color-action-selected) data-checked:inset-ring-(--color-border-selected)",
+          "enabled:data-checked:group-hover:bg-(--color-action-selected-hover) enabled:data-checked:group-hover:inset-ring-(--color-border-selected-hover)",
           "disabled:cursor-not-allowed disabled:bg-(--color-surface-disabled) disabled:inset-ring-(--color-border-disabled)",
-          "focus-visible:shadow-[0_0_0_var(--border-width-2)_var(--color-surface-page),0_0_0_var(--border-width-4)_var(--color-border-focus)]",
+          "focus-visible:outline-solid focus-visible:outline-(length:--border-width-2) focus-visible:outline-offset-(length:--border-width-2) focus-visible:outline-(--color-border-focus)",
           className
         )}
         {...props}
