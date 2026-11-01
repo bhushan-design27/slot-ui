@@ -98,7 +98,18 @@ function Dialog({
   )
 }
 
-/** Closes the dialog when its child is activated, e.g. `<DialogClose asChild><Button>…</Button></DialogClose>`. */
-const DialogClose = DialogPrimitive.Close
+type DialogCloseProps = React.ComponentProps<typeof DialogPrimitive.Close> & {
+  /** Render the child (a Button) as the close control instead of a plain button. */
+  asChild?: boolean
+  /** The control that closes the dialog, e.g. a Button. */
+  children?: React.ReactNode
+}
 
-export { Dialog, DialogClose, type DialogProps }
+/**
+ * Closes the dialog when its child is activated, e.g. `<DialogClose asChild><Button variant="secondary">Keep booking</Button></DialogClose>`.
+ */
+function DialogClose({ ...props }: DialogCloseProps) {
+  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
+}
+
+export { Dialog, DialogClose, type DialogCloseProps, type DialogProps }
