@@ -11,11 +11,12 @@
  * Figma (it is where the literal values live), so it is skipped.
  *
  * Run with: npm run check:tokens
+ * SLOT_ROOT=<dir> scans another copy of the repo instead (npm run eval:score).
  */
 import { readdirSync, readFileSync } from 'node:fs'
 import { extname, join, relative, resolve } from 'node:path'
 
-const ROOT = resolve(import.meta.dirname, '..')
+const ROOT = process.env.SLOT_ROOT ? resolve(process.env.SLOT_ROOT) : resolve(import.meta.dirname, '..')
 const SCAN = ['src', '.storybook']
 const EXTENSIONS = new Set(['.ts', '.tsx', '.css', '.mdx'])
 const SKIP = new Set(['src/styles/tokens.css'])
