@@ -20,9 +20,18 @@ type IconName = keyof typeof icons
 const iconNames = Object.keys(icons) as IconName[]
 
 type IconProps = Omit<React.ComponentProps<"svg">, "name"> & {
+  /** Lucide icon name, as in the Figma Icon variants. */
   name: IconName
+  /** Use the icon-disabled colour. */
   disabled?: boolean
 }
+
+/**
+ * A 20px Lucide icon in the Slot icon colours.
+ *
+ * @figma Icon 79:22
+ * @a11y Decorative by default (aria-hidden). Pass aria-label to make it a meaningful image (role="img").
+ */
 
 function Icon({ name, disabled = false, className, ...props }: IconProps) {
   const Glyph = icons[name]

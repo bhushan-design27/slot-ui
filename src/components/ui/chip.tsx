@@ -16,10 +16,26 @@ type ChipProps = Omit<
   React.ComponentProps<typeof TogglePrimitive.Root>,
   "pressed" | "defaultPressed" | "onPressedChange"
 > & {
+  /** The label. Sentence case, one or two words. */
+  children?: React.ReactNode
+  /** Figma Selected state (controlled). Rendered as aria-pressed. */
   selected?: boolean
+  /** Initial selected state when uncontrolled. */
   defaultSelected?: boolean
   onSelectedChange?: (selected: boolean) => void
+  /** Figma Disabled state. Native attribute. */
+  disabled?: boolean
 }
+
+/**
+ * A toggle button for filtering or picking options, shown as a 36px pill.
+ *
+ * @figma Chip 74:29
+ * @states Default, Hover, Selected, Disabled, Focus
+ * @a11y A native <button> with aria-pressed reflecting `selected`; screen readers announce it as a toggle button.
+ * @a11y Selected is shown by colour and announced by aria-pressed, never by colour alone.
+ * @a11y Group related chips in a labelled container (e.g. role="group" with aria-label).
+ */
 
 function Chip({
   className,

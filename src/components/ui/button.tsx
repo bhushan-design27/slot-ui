@@ -61,10 +61,27 @@ const buttonVariants = cva(
 )
 
 type ButtonProps = React.ComponentProps<"button"> & {
+  /** Visual emphasis: primary, secondary or danger (destructive). */
   variant?: "primary" | "secondary" | "danger"
+  /** Height 36 / 48 / 56. */
   size?: "small" | "medium" | "large"
+  /** The label. Sentence case. */
+  children?: React.ReactNode
+  /** Figma Disabled state. Native attribute. */
+  disabled?: boolean
+  /** Render the single child (e.g. a link) with button styles instead of a <button>. */
   asChild?: boolean
 }
+
+/**
+ * An action the user can take.
+ *
+ * @figma Button 12:54
+ * @states Default, Hover, Focus, Disabled
+ * @a11y Renders a native <button> with type="button" by default, so it never submits a form by accident.
+ * @a11y Disabled uses the native attribute: the button leaves the tab order and is announced as unavailable.
+ * @a11y Focus ring: 2px border-focus ring with a 2px surface-page gap, on :focus-visible only.
+ */
 
 function Button({
   className,

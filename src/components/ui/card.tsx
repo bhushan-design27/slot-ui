@@ -30,9 +30,21 @@ const cardVariants = cva(
 )
 
 type CardProps = Omit<React.ComponentProps<"div">, "title"> & {
+  /** Card title, Heading/Small. */
   title?: string
+  /** flat = border only; raised = border plus the raised shadow. */
   elevation?: "flat" | "raised"
+  /** Content slot, stacked with space-2. */
+  children?: React.ReactNode
 }
+
+/**
+ * A bordered container that groups related content under a title.
+ *
+ * @figma Card 74:40
+ * @a11y Title renders as an <h2>; check the heading order on the screen (Heading/Large page title is the <h1>).
+ * @a11y A plain <div>, not a landmark, so a list of cards doesn't flood the landmark list.
+ */
 
 function Card({ className, title, elevation = "flat", children, ...props }: CardProps) {
   return (

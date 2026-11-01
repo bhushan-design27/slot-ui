@@ -1,0 +1,251 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "slot",
+  "homepage": "https://bhushan-design27.github.io/slot-ui/",
+  "items": [
+    {
+      "name": "slot-tokens",
+      "type": "registry:theme",
+      "title": "Slot tokens",
+      "description": "Slot design tokens as CSS variables, with the shadcn/ui theme variables mapped onto them.",
+      "cssVars": {
+        "light": {
+          "border-width-1": "1px",
+          "border-width-2": "2px",
+          "border-width-4": "4px",
+          "color-blue-50": "#eef4f9",
+          "color-blue-600": "#3e7ca6",
+          "color-blue-700": "#2f6890",
+          "color-red-600": "#dc2626",
+          "color-red-700": "#b91c1c",
+          "color-slate-50": "#f8fafc",
+          "color-slate-200": "#e2e8f0",
+          "color-slate-400": "#8592a5",
+          "color-slate-500": "#64748b",
+          "color-slate-900": "#0f172a",
+          "color-slate-900-a10": "rgb(15 23 42 / 0.1)",
+          "color-slate-900-a50": "rgb(15 23 42 / 0.5)",
+          "color-white": "#ffffff",
+          "font-family-base": "\"Inter\"",
+          "font-line-height-body": "24px",
+          "font-line-height-heading": "36px",
+          "font-line-height-heading-sm": "28px",
+          "font-line-height-small": "20px",
+          "font-size-body": "16px",
+          "font-size-heading": "28px",
+          "font-size-heading-sm": "20px",
+          "font-size-small": "14px",
+          "layout-content-max": "1200px",
+          "layout-form-max": "560px",
+          "radius-full": "9999px",
+          "radius-md": "8px",
+          "radius-sm": "4px",
+          "shadow-blur-md": "8px",
+          "shadow-offset-sm": "2px",
+          "space-1": "4px",
+          "space-2": "8px",
+          "space-3": "12px",
+          "space-4": "16px",
+          "space-6": "24px",
+          "space-8": "32px",
+          "color-action-danger": "var(--color-red-600)",
+          "color-action-danger-hover": "var(--color-red-700)",
+          "color-action-disabled": "var(--color-slate-200)",
+          "color-action-primary": "var(--color-blue-600)",
+          "color-action-primary-hover": "var(--color-blue-700)",
+          "color-action-secondary": "var(--color-white)",
+          "color-action-secondary-hover": "var(--color-blue-50)",
+          "color-action-selected": "var(--color-blue-600)",
+          "color-border-action": "var(--color-blue-600)",
+          "color-border-action-hover": "var(--color-blue-700)",
+          "color-border-control": "var(--color-slate-400)",
+          "color-border-disabled": "var(--color-slate-200)",
+          "color-border-error": "var(--color-red-600)",
+          "color-border-field": "var(--color-slate-400)",
+          "color-border-focus": "var(--color-blue-600)",
+          "color-border-subtle": "var(--color-slate-200)",
+          "color-icon-default": "var(--color-slate-500)",
+          "color-icon-disabled": "var(--color-slate-400)",
+          "color-shadow-raised": "var(--color-slate-900-a10)",
+          "color-surface-disabled": "var(--color-slate-50)",
+          "color-surface-field": "var(--color-white)",
+          "color-surface-hover": "var(--color-slate-50)",
+          "color-surface-overlay": "var(--color-slate-900-a50)",
+          "color-surface-page": "var(--color-white)",
+          "color-surface-selected": "var(--color-blue-50)",
+          "color-text-action": "var(--color-blue-600)",
+          "color-text-action-hover": "var(--color-blue-700)",
+          "color-text-disabled": "var(--color-slate-400)",
+          "color-text-error": "var(--color-red-600)",
+          "color-text-on-action": "var(--color-white)",
+          "color-text-on-disabled": "var(--color-slate-500)",
+          "color-text-placeholder": "var(--color-slate-500)",
+          "color-text-primary": "var(--color-slate-900)",
+          "color-text-secondary": "var(--color-slate-500)",
+          "background": "var(--color-surface-page)",
+          "foreground": "var(--color-text-primary)",
+          "card": "var(--color-surface-page)",
+          "card-foreground": "var(--color-text-primary)",
+          "popover": "var(--color-surface-page)",
+          "popover-foreground": "var(--color-text-primary)",
+          "primary": "var(--color-action-primary)",
+          "primary-foreground": "var(--color-text-on-action)",
+          "secondary": "var(--color-action-secondary)",
+          "secondary-foreground": "var(--color-text-action)",
+          "muted": "var(--color-surface-hover)",
+          "muted-foreground": "var(--color-text-secondary)",
+          "accent": "var(--color-surface-hover)",
+          "accent-foreground": "var(--color-text-primary)",
+          "destructive": "var(--color-action-danger)",
+          "destructive-foreground": "var(--color-text-on-action)",
+          "border": "var(--color-border-subtle)",
+          "input": "var(--color-border-field)",
+          "ring": "var(--color-border-focus)",
+          "radius": "var(--radius-md)",
+          "sidebar": "var(--color-surface-page)",
+          "sidebar-foreground": "var(--color-text-primary)",
+          "sidebar-primary": "var(--color-action-primary)",
+          "sidebar-primary-foreground": "var(--color-text-on-action)",
+          "sidebar-accent": "var(--color-surface-hover)",
+          "sidebar-accent-foreground": "var(--color-text-primary)",
+          "sidebar-border": "var(--color-border-subtle)",
+          "sidebar-ring": "var(--color-border-focus)"
+        }
+      }
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "An action the user can take.",
+      "dependencies": [
+        "class-variance-authority",
+        "cn",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "A bordered container that groups related content under a title.",
+      "dependencies": [
+        "class-variance-authority",
+        "cn"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "chip",
+      "type": "registry:ui",
+      "title": "Chip",
+      "description": "A toggle button for filtering or picking options, shown as a 36px pill.",
+      "dependencies": [
+        "cn",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/chip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "A modal window that asks the user to confirm or decide before continuing.",
+      "dependencies": [
+        "cn",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "icon",
+      "type": "registry:ui",
+      "title": "Icon",
+      "description": "A 20px Lucide icon in the Slot icon colours.",
+      "dependencies": [
+        "cn",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/icon.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "A single-line text field with label and helper text, 48px tall.",
+      "dependencies": [
+        "cn"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Pick one option from a list, in a 48px field with a menu.",
+      "dependencies": [
+        "cn",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json",
+        "https://bhushan-design27.github.io/slot-ui/r/icon.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

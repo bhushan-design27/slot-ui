@@ -19,6 +19,7 @@ type DialogProps = {
   onOpenChange?: (open: boolean) => void
   title: string
   description?: string
+  /** Actions, right-aligned. Always include a visible dismiss action, wrapped in DialogClose. */
   footer?: React.ReactNode
   /** Optional extra content between the description and the footer. */
   children?: React.ReactNode
@@ -27,6 +28,14 @@ type DialogProps = {
   className?: string
 }
 
+/**
+ * A modal window that asks the user to confirm or decide before continuing.
+ *
+ * @figma Dialog 79:66
+ * @a11y role="dialog", labelled by the title and described by the description; the rest of the page is aria-hidden while open.
+ * @a11y Focus moves into the dialog on open, is trapped while open, and returns to the trigger on close.
+ * @a11y Escape and an overlay click close it. There is no close (×) button, so the footer must always contain a visible dismiss action.
+ */
 function Dialog({
   open,
   defaultOpen,

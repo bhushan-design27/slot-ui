@@ -11,10 +11,27 @@ import { cn } from "cn"
  * stays 48px tall.
  */
 type InputProps = Omit<React.ComponentProps<"input">, "size"> & {
+  /** Visible label, Label/Small. */
   label?: string
+  /** Example input shown while empty. Never a replacement for the label. */
+  placeholder?: string
+  /** Helper text under the field; turns error red when invalid. */
   helper?: string
+  /** Figma Error state. Rendered as aria-invalid. */
   invalid?: boolean
+  /** Figma Disabled state. Native attribute. */
+  disabled?: boolean
 }
+
+/**
+ * A single-line text field with label and helper text, 48px tall.
+ *
+ * @figma Input 27:14
+ * @states Default, Focus, Error, Disabled
+ * @a11y The label is a <label for>, so clicking it focuses the field and screen readers announce it.
+ * @a11y Helper text is linked with aria-describedby; in the Error state it should say how to fix the problem.
+ * @a11y Error sets aria-invalid; helper text stays text-secondary when disabled (WCAG contrast).
+ */
 
 function Input({
   className,

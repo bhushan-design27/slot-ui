@@ -20,9 +20,13 @@ import { Icon } from "@/components/ui/icon"
 type SelectOption = { value: string; label: string }
 
 type SelectProps = {
+  /** Visible label, Label/Small. */
   label?: string
+  /** Shown while no option is selected. */
   placeholder?: string
+  /** Helper text under the field; turns error red when invalid. */
   helper?: string
+  /** The choices, in display order. */
   options: SelectOption[]
   value?: string
   defaultValue?: string
@@ -30,7 +34,9 @@ type SelectProps = {
   open?: boolean
   defaultOpen?: boolean
   onOpenChange?: (open: boolean) => void
+  /** Figma Error state. Rendered as aria-invalid. */
   invalid?: boolean
+  /** Figma Disabled state. Native attribute. */
   disabled?: boolean
   required?: boolean
   name?: string
@@ -38,6 +44,15 @@ type SelectProps = {
   className?: string
 }
 
+/**
+ * Pick one option from a list, in a 48px field with a menu.
+ *
+ * @figma Select 79:65
+ * @states Default, Focus, Error, Disabled, Open
+ * @a11y The field is a combobox labelled by the <label>; helper text is linked with aria-describedby.
+ * @a11y Keyboard: Enter, Space or arrows open the menu, arrows move, Enter selects, Escape closes.
+ * @a11y While open, the menu is modal: focus is trapped in it, the rest of the page is aria-hidden and the field leaves the tab order; focus returns to the field on close.
+ */
 function Select({
   label,
   placeholder,
@@ -154,7 +169,11 @@ function Select({
   )
 }
 
-// Figma: Select Option (82:44). Body/Medium.
+/**
+ * One option row in the Select menu. Select renders these from `options`; use directly only to compose a custom Select.
+ *
+ * @figma Select Option 82:44
+ */
 function SelectItem({
   className,
   children,
