@@ -36,6 +36,10 @@ jobs:
       - name: Tokens
         run: npm run check:tokens
 
+      # Screens use only Slot components, props and values (manifest allow-list).
+      - name: Slot screens
+        run: npm run check:slot
+
       - name: TypeScript
         run: npx tsc -b
 

@@ -123,7 +123,8 @@ TypeScript, Tailwind CSS v4, shadcn/ui, Storybook.
 - CSS variable names = Figma code syntax (WEB). Variables without code
   syntax get the path joined with `-` (`npm run tokens` lists them).
 - Before finishing: `npm run manifest` (then commit `manifest/` and
-  `registry.json`), `npm run test:a11y` (axe on every story, headless),
+  `registry.json`), `npm run check:slot` (screens use only Slot),
+  `npm run test:a11y` (axe on every story, headless),
   `npm run check:tokens` (fails on hex / `rgb()` /
   `hsl()` colors and non-Slot Tailwind color or radius classes) and
   `npx tsc -b`.
