@@ -129,6 +129,15 @@ TypeScript, Tailwind CSS v4, shadcn/ui, Storybook.
   `hsl()` colors and non-Slot Tailwind color or radius classes) and
   `npx tsc -b`.
 
+### Usage guidance
+- `manifest/usage.md` holds when to use each component. Only the repo
+  owner changes an entry's `Status:` to `Approved`. Agents always write
+  `Status: DRAFT - needs review`: for every new entry, and when they change
+  an existing entry, even one that was Approved.
+- Name only components, props and prop values that exist in the manifest
+  (`npm run manifest` fails otherwise). Name things Slot doesn't have in
+  lowercase ("Slot has no checkbox yet").
+
 ### Dialogs
 - A dialog without a close button must always have a visible dismiss
   action, and must close on Escape.

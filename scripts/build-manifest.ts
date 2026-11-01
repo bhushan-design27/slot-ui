@@ -12,7 +12,8 @@
  * - tokens/slot.tokens.json and src/styles/tokens.css: tokens.
  * - CLAUDE.md: rules, copied verbatim from the sections in RULE_SECTIONS.
  * - manifest/usage.md: purpose / use when / don't use when, with a review
- *   status per component.
+ *   status per component. Every component, prop and prop value it names
+ *   must exist (checkUsageReferences).
  *
  * Output is deterministic (no timestamps), so CI can fail when it is stale.
  * Run with: npm run manifest
@@ -40,6 +41,7 @@ const RULE_SECTIONS = [
   'Only Slot CSS variables',
   'Props mirror Figma',
   'Figma states → code',
+  'Usage guidance',
   'Dialogs',
 ]
 
@@ -227,6 +229,67 @@ const components: ComponentEntry[] = componentFiles.map(describeComponent)
 for (const name of usage.keys()) {
   if (!components.some((c) => c.name === name)) fail(`usage.md: "## ${name}" has no component in ${COMPONENT_DIR}`)
 }
+
+/** Capitalised words usage.md may use that aren't components. Things Slot doesn't have are named in lowercase. */
+const PROSE_NAMES = new Set(['Slot', 'Figma', 'Lucide'])
+/** Native ARIA attributes every component passes through. */
+const ARIA_ATTRIBUTE = /^(aria-[a-z]+|role)$/
+
+/**
+ * usage.md may only name components, props and prop values that exist:
+ * - a `backticked` term must be a prop or allowed prop value of the entry's
+ *   component, or of a component named in the same bullet or paragraph;
+ * - a capitalised word in the prose (outside backticks, "quoted copy" and
+ *   Text/Style names, not starting a sentence) must be a component, its
+ *   plural, or one of PROSE_NAMES.
+ */
+function checkUsageReferences(markdown: string, entries: ComponentEntry[]) {
+  const vocabulary = new Map<string, Set<string>>()
+  for (const c of entries) {
+    const words = new Set<string>()
+    for (const d of [c, ...(c.parts ?? [])]) {
+      for (const p of d.props) {
+        words.add(p.name)
+        for (const v of p.allowedValues ?? []) words.add(String(v))
+      }
+    }
+    vocabulary.set(c.name, words)
+    for (const part of c.parts ?? []) vocabulary.set(part.name, words)
+  }
+  const isComponent = (word: string) => vocabulary.has(word) || (word.endsWith('s') && vocabulary.has(word.slice(0, -1)))
+  const problems: string[] = []
+
+  for (const block of markdown.split(/^## /m).slice(1)) {
+    const [heading, ...rest] = block.split('\n')
+    const name = heading.trim()
+    const units = rest
+      .join('\n')
+      .split(/\n(?=- )|\n\s*\n/)
+      .map((u) => u.replace(/^- /, '').replace(/\s*\n\s*/g, ' ').trim())
+      .filter((u) => u && !u.startsWith('#') && !u.startsWith('Status:'))
+
+    for (const unit of units) {
+      const named = [name, ...[...vocabulary.keys()].filter((k) => k !== name && new RegExp(`\\b${k}s?\\b`).test(unit))]
+      for (const [, term] of unit.matchAll(/`([^`]+)`/g)) {
+        if (ARIA_ATTRIBUTE.test(term) || named.some((n) => vocabulary.get(n)!.has(term))) continue
+        problems.push(`${name}: \`${term}\` is not a prop or prop value of ${named.join(' or ')} ("${unit.slice(0, 60)}…")`)
+      }
+      const prose = unit
+        .replace(/`[^`]*`/g, ' ')
+        .replace(/"[^"]*"/g, ' ')
+        .replace(/\b\w+(?:\/\w+)+\b/g, ' ')
+      for (const sentence of prose.split(/(?<=[.!?:;])\s+/)) {
+        const start = sentence.search(/\S/)
+        for (const m of sentence.matchAll(/\b[A-Z][A-Za-z]*\b/g)) {
+          if (m.index === start || isComponent(m[0]) || PROSE_NAMES.has(m[0])) continue
+          problems.push(`${name}: "${m[0]}" is not a Slot component (name things Slot doesn't have in lowercase)`)
+        }
+      }
+    }
+  }
+  if (problems.length) fail(`usage.md names things that don't exist:\n  ${problems.join('\n  ')}`)
+}
+checkUsageReferences(read(USAGE), components)
 
 // ---------------------------------------------------------------------------
 // Tokens

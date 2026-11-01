@@ -99,7 +99,7 @@
         "buttonVariants"
       ],
       "usage": {
-        "status": "DRAFT - needs review",
+        "status": "Approved",
         "purpose": "Triggers an action: submitting, saving, confirming, opening a dialog. The variant tells the user how important or risky the action is.",
         "useWhen": [
           "`primary`: the main action of a screen, form or dialog (\"Book now\", \"Save changes\"). At most one primary button per area.",
@@ -166,7 +166,7 @@
         "cardVariants"
       ],
       "usage": {
-        "status": "DRAFT - needs review",
+        "status": "Approved",
         "purpose": "Groups related content under a title so it reads as one unit, e.g. a booking summary.",
         "useWhen": [
           "`flat`: the default, inside a page that already has structure (a list of bookings, a summary in a form).",
@@ -261,7 +261,7 @@
         "Chip"
       ],
       "usage": {
-        "status": "DRAFT - needs review",
+        "status": "Approved",
         "purpose": "Toggles a filter on or off. Each chip is independent, so the user can turn on several at once, e.g. filtering services by type.",
         "useWhen": [
           "Filtering content: each chip turns one filter on or off, and several can be on at the same time.",
@@ -345,10 +345,10 @@
         "DialogClose"
       ],
       "usage": {
-        "status": "DRAFT - needs review",
+        "status": "Approved",
         "purpose": "Interrupts the current task to ask for a decision or confirmation that must happen before the user continues.",
         "useWhen": [
-          "Confirming a destructive or irreversible action (\"Cancel booking?\"), with a `secondary` dismiss action and a `danger` or `primary` confirm action.",
+          "Confirming a destructive or irreversible action (\"Cancel booking?\"), with a `secondary` Button to dismiss and a `danger` or `primary` Button to confirm.",
           "A short, focused decision or input that belongs to the current screen and can't be skipped."
         ],
         "dontUseWhen": [
@@ -501,7 +501,7 @@
         "iconNames"
       ],
       "usage": {
-        "status": "DRAFT - needs review",
+        "status": "Approved",
         "purpose": "A small Lucide glyph that supports a label or shows state, in the Slot icon colours. Only the icons in the Figma Icon component are available.",
         "useWhen": [
           "Reinforcing meaning next to text (a check next to a selected option, a chevron that opens a menu).",
@@ -596,7 +596,7 @@
         "Input"
       ],
       "usage": {
-        "status": "DRAFT - needs review",
+        "status": "Approved",
         "purpose": "A single-line text field for free text the user types, such as a name or email, with a label and optional helper text.",
         "useWhen": [
           "The answer is free text or a number that can't be picked from a known list.",
@@ -718,7 +718,7 @@
         }
       ],
       "usage": {
-        "status": "DRAFT - needs review",
+        "status": "Approved",
         "purpose": "Chooses exactly one of 2 to 5 options, all visible at once, e.g. the appointment type.",
         "useWhen": [
           "The user must choose exactly one option, and there are 2 to 5 of them.",
@@ -879,7 +879,7 @@
         }
       ],
       "usage": {
-        "status": "DRAFT - needs review",
+        "status": "Approved",
         "purpose": "Picks exactly one value from a list of predefined options, in a compact field that fits in a form.",
         "useWhen": [
           "The user picks exactly one value and there are more than 5 options.",
@@ -1874,6 +1874,13 @@
         "Other variant properties map 1:1 to lowercase props with lowercase values (`variant`, `size`, …).",
         "Figma strokes are inside and excluded from layout, so draw borders with `inset-ring-*` (box-shadow), not `border`, to keep Figma padding and the 36 / 48 / 56 heights.",
         "In code, focus rings use outline + outline-offset, so they work on any background: `focus-visible:outline-solid focus-visible:outline-(length:--border-width-2) focus-visible:outline-offset-(length:--border-width-2) focus-visible:outline-(--color-border-focus)`. (Figma keeps the two drop shadows; same geometry.) `outline-solid` is needed because components set `outline-none`."
+      ]
+    },
+    {
+      "section": "Usage guidance",
+      "rules": [
+        "`manifest/usage.md` holds when to use each component. Only the repo owner changes an entry's `Status:` to `Approved`. Agents always write `Status: DRAFT - needs review`: for every new entry, and when they change an existing entry, even one that was Approved.",
+        "Name only components, props and prop values that exist in the manifest (`npm run manifest` fails otherwise). Name things Slot doesn't have in lowercase (\"Slot has no checkbox yet\")."
       ]
     },
     {

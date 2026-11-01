@@ -4,13 +4,15 @@ When to use each component. `npm run manifest` merges this file into
 `manifest/slot.manifest.json`.
 
 Format, per component: `## Name`, a `Status:` line, then `### Purpose`,
-`### Use when` and `### Don't use when`. Change `Status:` to `Approved`
-once an entry is reviewed. The manifest build fails if a component has no
-entry, or an entry has no component.
+`### Use when` and `### Don't use when`. Only the owner changes `Status:`
+to `Approved`; agents always write `DRAFT - needs review` (CLAUDE.md,
+"Usage guidance"). The manifest build fails if a component has no entry,
+an entry has no component, or an entry names a component, prop or prop
+value that doesn't exist. Name things Slot doesn't have in lowercase.
 
 ## Button
 
-Status: DRAFT - needs review
+Status: Approved
 
 ### Purpose
 
@@ -33,7 +35,7 @@ The variant tells the user how important or risky the action is.
 
 ## Card
 
-Status: DRAFT - needs review
+Status: Approved
 
 ### Purpose
 
@@ -55,7 +57,7 @@ booking summary.
 
 ## Chip
 
-Status: DRAFT - needs review
+Status: Approved
 
 ### Purpose
 
@@ -76,7 +78,7 @@ turn on several at once, e.g. filtering services by type.
 
 ## Dialog
 
-Status: DRAFT - needs review
+Status: Approved
 
 ### Purpose
 
@@ -85,7 +87,7 @@ must happen before the user continues.
 
 ### Use when
 
-- Confirming a destructive or irreversible action ("Cancel booking?"), with a `secondary` dismiss action and a `danger` or `primary` confirm action.
+- Confirming a destructive or irreversible action ("Cancel booking?"), with a `secondary` Button to dismiss and a `danger` or `primary` Button to confirm.
 - A short, focused decision or input that belongs to the current screen and can't be skipped.
 
 ### Don't use when
@@ -121,7 +123,7 @@ e.g. a compact booking summary on mobile.
 
 ## Icon
 
-Status: DRAFT - needs review
+Status: Approved
 
 ### Purpose
 
@@ -141,7 +143,7 @@ icon colours. Only the icons in the Figma Icon component are available.
 
 ## Input
 
-Status: DRAFT - needs review
+Status: Approved
 
 ### Purpose
 
@@ -162,7 +164,7 @@ or email, with a label and optional helper text.
 
 ## RadioGroup
 
-Status: DRAFT - needs review
+Status: Approved
 
 ### Purpose
 
@@ -185,7 +187,7 @@ appointment type.
 
 ## Select
 
-Status: DRAFT - needs review
+Status: Approved
 
 ### Purpose
 

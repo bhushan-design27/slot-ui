@@ -40,6 +40,11 @@ don't skip one.
    then the manifest). Recommend one. Don't build around a gap silently,
    and don't use raw HTML controls or third-party UI to fill it.
 
+   When a gap leads to a new component or a usage change, write its
+   `manifest/usage.md` entry with `Status: DRAFT - needs review`. Never
+   set `Status: Approved`, even after the user approves the component:
+   only the user changes it (CLAUDE.md, "Usage guidance").
+
 ## 2. BUILD
 
 1. `src/screens/<Screen>.tsx`: one exported component `<Screen>`.
