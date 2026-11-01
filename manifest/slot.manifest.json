@@ -1524,6 +1524,14 @@
         ]
       },
       {
+        "name": "radius/lg",
+        "cssVariable": "--radius-lg",
+        "value": "12px",
+        "scopes": [
+          "CORNER_RADIUS"
+        ]
+      },
+      {
         "name": "radius/md",
         "cssVariable": "--radius-md",
         "value": "8px",

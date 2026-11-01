@@ -14,11 +14,12 @@ import { Slot } from "radix-ui"
  * Focus ring: Figma draws it as two drop shadows (a surface-page gap under
  * a border-focus ring). In code it is an outline with outline-offset, both
  * border-width-2: same geometry, but the gap is transparent, so it works on
- * any background.
+ * any background. Only colours transition (not outline-color, which
+ * `transition-colors` includes), so the ring appears instantly.
  */
 const buttonVariants = cva(
   [
-    "inline-flex shrink-0 items-center justify-center gap-(--space-2) rounded-(--radius-md) font-medium whitespace-nowrap select-none outline-none transition-colors",
+    "inline-flex shrink-0 items-center justify-center gap-(--space-2) rounded-(--radius-md) font-medium whitespace-nowrap select-none outline-none transition-[color,background-color,border-color,text-decoration-color,fill,stroke]",
     "focus-visible:outline-solid focus-visible:outline-(length:--border-width-2) focus-visible:outline-offset-(length:--border-width-2) focus-visible:outline-(--color-border-focus)",
     "disabled:cursor-not-allowed",
   ],

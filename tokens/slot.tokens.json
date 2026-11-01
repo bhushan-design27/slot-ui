@@ -1218,6 +1218,24 @@
         }
       }
     },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.figma": {
+          "collection": "Primitives",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--radius-lg)"
+          }
+        }
+      }
+    },
     "md": {
       "$type": "dimension",
       "$value": {

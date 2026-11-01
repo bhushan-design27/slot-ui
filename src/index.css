@@ -55,10 +55,10 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Slot has radius/sm, radius/md and radius/full; larger shadcn steps collapse onto radius/md. */
+  /* Slot has radius/sm, radius/md, radius/lg and radius/full; larger shadcn steps collapse onto radius/md. */
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
-  --radius-lg: var(--radius);
+  --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius);
   --radius-2xl: var(--radius);
   --radius-3xl: var(--radius);

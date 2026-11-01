@@ -52,7 +52,7 @@ function Chip({
       onPressedChange={onSelectedChange}
       className={cn(
         // Label/Small
-        "inline-flex shrink-0 items-center justify-center gap-(--space-2) rounded-(--radius-full) px-(--space-4) py-(--space-2) text-(length:--font-size-small) leading-(--font-line-height-small) font-medium whitespace-nowrap select-none outline-none transition-colors",
+        "inline-flex shrink-0 items-center justify-center gap-(--space-2) rounded-(--radius-full) px-(--space-4) py-(--space-2) text-(length:--font-size-small) leading-(--font-line-height-small) font-medium whitespace-nowrap select-none outline-none transition-[color,background-color,border-color,text-decoration-color,fill,stroke]",
         "bg-(--color-action-secondary) text-(--color-text-primary) inset-ring-(length:--border-width-1) inset-ring-(--color-border-control)",
         "enabled:not-aria-pressed:hover:bg-(--color-action-secondary-hover) enabled:not-aria-pressed:hover:text-(--color-text-action-hover) enabled:not-aria-pressed:hover:inset-ring-(--color-border-action-hover)",
         "enabled:aria-pressed:bg-(--color-action-selected) enabled:aria-pressed:text-(--color-text-on-action) enabled:aria-pressed:inset-ring-(--color-border-selected)",
