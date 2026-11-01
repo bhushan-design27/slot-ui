@@ -8,9 +8,12 @@ import { RadioGroup as RadioGroupPrimitive } from "radix-ui"
  * move and select, Space selects the focused option.
  *
  * Group: label / options / helper stacked with space-2, options with
- * space-3 (24px rows, so a 36px rhythm). Error = `invalid`: only the helper
- * turns error red, the circles stay neutral (as Figma). Disabled = the
- * native attribute on every option.
+ * space-3 (24px rows, so a 36px rhythm). Error = `invalid`: a border-width-2
+ * border-error bar on the left of the whole group, space-3 from the content,
+ * and the helper turns error red; the circles stay neutral (as Figma).
+ * The bar is a real border (in layout, unlike Slot's inset-ring strokes):
+ * Figma includes this stroke in layout so the gap is exactly space-3.
+ * Disabled = the native attribute on every option.
  *
  * Radio: a 20px circle, stroke as inset-ring like Chip. The Figma Radio
  * `selected` variant is Radix data-state=checked; Hover = hovering the row
@@ -44,7 +47,8 @@ type RadioGroupProps = Omit<
  *
  * @figma Radio Group 103:107
  * @states Default, Error, Disabled
- * @a11y role="radiogroup" labelled by the group label; helper text is linked with aria-describedby; Error sets aria-invalid on the group.
+ * @a11y role="radiogroup" labelled by the group label; helper text is linked with aria-describedby, so the error message is read with the group; Error sets aria-invalid on the group.
+ * @a11y Errors are group-level (left bar + message), never on individual options; the bar is not the only signal, the message says what to fix.
  * @a11y Keyboard: one Tab stop for the group; arrow keys move between options and select them; Space selects the focused option.
  * @a11y Each option is a role="radio" button named by its <label>; clicking the label selects it.
  */
@@ -66,7 +70,13 @@ function RadioGroup({
   return (
     <div
       data-slot="radio-group-field"
-      className={cn("flex w-full flex-col items-start gap-(--space-2)", className)}
+      className={cn(
+        "flex w-full flex-col items-start gap-(--space-2)",
+        // Error bar. Like the helper colour, not shown while disabled.
+        invalid && !disabled &&
+          "border-l-(length:--border-width-2) border-(--color-border-error) pl-(--space-3)",
+        className
+      )}
     >
       {label && (
         // Label/Small

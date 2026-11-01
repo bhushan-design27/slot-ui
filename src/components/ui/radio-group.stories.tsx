@@ -116,6 +116,19 @@ export const AllVariants: Story = {
   ),
 }
 
+/** Error: the left bar and the message; the message is the group's accessible description. */
+export const ErrorMessage: Story = {
+  name: 'Error message',
+  args: { invalid: true, helper: 'Choose an appointment type' },
+  play: async ({ canvas }) => {
+    const group = canvas.getByRole('radiogroup', { name: 'Appointment type' })
+    await expect(group).toHaveAttribute('aria-invalid', 'true')
+    await expect(group).toHaveAccessibleDescription('Choose an appointment type')
+    // Options are never marked as errors.
+    for (const radio of canvas.getAllByRole('radio')) await expect(radio).not.toHaveAttribute('aria-invalid')
+  },
+}
+
 /** Arrow keys move between options and select them; the group is one Tab stop. */
 export const Keyboard: Story = {
   args: { defaultValue: 'in-person' },

@@ -151,6 +151,7 @@ appointment type.
 - The user must choose exactly one option, and there are 2 to 5 of them.
 - Seeing every option side by side helps the user compare before choosing.
 - Inside a form, with a group `label`, and `helper` when the choice needs explaining.
+- `invalid` with a `helper` message saying what to fix, when the group fails validation. Group-level errors use a left bar and a message; individual options are never marked as errors.
 
 ### Don't use when
 

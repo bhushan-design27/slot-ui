@@ -597,7 +597,8 @@
         }
       ],
       "accessibility": [
-        "role=\"radiogroup\" labelled by the group label; helper text is linked with aria-describedby; Error sets aria-invalid on the group.",
+        "role=\"radiogroup\" labelled by the group label; helper text is linked with aria-describedby, so the error message is read with the group; Error sets aria-invalid on the group.",
+        "Errors are group-level (left bar + message), never on individual options; the bar is not the only signal, the message says what to fix.",
         "Keyboard: one Tab stop for the group; arrow keys move between options and select them; Space selects the focused option.",
         "Each option is a role=\"radio\" button named by its <label>; clicking the label selects it."
       ],
@@ -625,7 +626,8 @@
         "useWhen": [
           "The user must choose exactly one option, and there are 2 to 5 of them.",
           "Seeing every option side by side helps the user compare before choosing.",
-          "Inside a form, with a group `label`, and `helper` when the choice needs explaining."
+          "Inside a form, with a group `label`, and `helper` when the choice needs explaining.",
+          "`invalid` with a `helper` message saying what to fix, when the group fails validation. Group-level errors use a left bar and a message; individual options are never marked as errors."
         ],
         "dontUseWhen": [
           "There are more than 5 options, or space is tight: use Select.",
@@ -1001,6 +1003,7 @@
         "value": "#dc2626",
         "usedBy": [
           "Input",
+          "RadioGroup",
           "Select"
         ]
       },
