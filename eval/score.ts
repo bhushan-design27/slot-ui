@@ -1,7 +1,7 @@
 /**
  * Scores every eval run in eval/results/runs.json (protocol.md, "Scoring").
  *
- *   npm run eval:score [-- --only run-abc123] [-- --no-screens]
+ *   npm run eval:score [-- --only run-abc123] [-- --no-screens] [-- --results eval/results-pilot]
  *
  * Everything is checked with this repo's scripts and B's manifest
  * (manifest/slot.manifest.json), never with the copy inside the run.
@@ -23,7 +23,6 @@ import { chromium, type Browser } from 'playwright'
 import type { Run } from './lib.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
-const RESULTS = join(ROOT, 'eval/results')
 const AXE = join(ROOT, 'node_modules/axe-core/axe.min.js')
 const WIDTHS = [
   { width: 390, height: 844 },
@@ -35,11 +34,12 @@ const AXE_HOST_RULES = ['document-title', 'html-has-lang', 'html-lang-valid']
 
 const { values: opts } = parseArgs({
   options: {
-    runs: { type: 'string', default: join(RESULTS, 'runs.json') },
+    results: { type: 'string', default: 'eval/results' },
     only: { type: 'string', multiple: true },
     'no-screens': { type: 'boolean', default: false },
   },
 })
+const RESULTS = resolve(ROOT, opts.results!)
 
 // ---------------------------------------------------------------- manifest
 
@@ -154,8 +154,13 @@ function resolveModule(r: Run, from: string, source: string): string | null {
   return base
 }
 
-const HARD_CODED = [
-  { name: 'arbitrary value', re: /(?<![\w-])(?:[\w-]+:)*-?[a-z][\w-]*-\[(?!var\()[^\]\s]+\]/g },
+const HARD_CODED: { name: string; re: RegExp; cssOnly?: boolean; keep?: (match: string) => boolean }[] = [
+  // Not variants (`data-[swipe=move]:`), and not values made only of tokens (`shadow-[0_var(--x)_var(--y)]`).
+  {
+    name: 'arbitrary value',
+    re: /(?<![\w-])(?:[\w-]+:)*-?[a-z][\w-]*-\[(?!var\()[^\]\s]+\](?!:)/g,
+    keep: (m: string) => /[\d#]/.test(m.slice(m.indexOf('[')).replace(/var\(--[\w-]+\)/g, '').replace(/(?<![A-Za-z0-9.])0(?![A-Za-z0-9.])/g, '')),
+  },
   {
     name: 'default spacing/size class',
     re: /(?<![\w/-])(?:[\w-]+:)*-?(?:p[xytrblse]?|m[xytrblse]?|gap(?:-[xy])?|space-[xy]|w|h|min-[wh]|max-[wh]|size|inset(?:-[xy])?|top|left|right|bottom|translate-[xy])-(?!0(?![\d.]))(?:\d+(?:\.\d+)?|px)(?![\w/-])/g,
@@ -175,12 +180,12 @@ function analyse(r: Run, files: string[], s: Score, baseTokensCss: Set<string>, 
     else {
       const ast = parse(readFileSync(join(r.dir, f), 'utf8'), { sourceType: 'module', plugins: ['typescript', 'jsx'] })
       walk(ast.program, (n) => {
-        if (n.type !== 'ExportNamedDeclaration') return
+        if (n.type !== 'ExportNamedDeclaration' || n.exportKind === 'type') return
         const decl = n.declaration as Node | null
         const names = decl?.type === 'FunctionDeclaration' ? [(decl.id as { name: string }).name]
           : decl?.type === 'VariableDeclaration' ? (decl.declarations as { id: { name?: string } }[]).map((d) => d.id.name ?? '')
-          : ((n.specifiers as { exported: { name: string } }[]) ?? []).map((x) => x.exported.name)
-        for (const name of names.filter(isPascal)) s.inventedComponents.add(`${name} (new in ${f})`, f)
+          : ((n.specifiers as { exported: { name: string }; exportKind?: string }[]) ?? []).filter((x) => x.exportKind !== 'type').map((x) => x.exported.name)
+        for (const name of names.filter(isPascal)) s.inventedComponents.add(`${name} (new or changed: ${f})`, f)
       })
     }
   }
@@ -209,7 +214,7 @@ function analyse(r: Run, files: string[], s: Score, baseTokensCss: Set<string>, 
             const slot = SLOT.get(imported)
             const stem = uiFile.replace(/^src\/components\/ui\//, '').replace(/\.tsx?$/, '')
             if (slot && slot.stem === stem) origins.set(local, { kind: 'slot', name: imported })
-            else origins.set(local, { kind: 'ui-new', key: `${imported} (new in ${uiFile})` })
+            else origins.set(local, { kind: 'ui-new', key: `${imported} (${existedAtBase(r, uiFile) && !files.includes(uiFile) ? 'exists but not in the manifest' : 'new or changed'}: ${uiFile})` })
           } else if (resolved) origins.set(local, { kind: 'local', source: relative(r.dir, resolved) })
           else if (NON_UI_MODULES.has(source) || source.startsWith('@/lib/')) origins.set(local, { kind: 'ok' })
           else origins.set(local, { kind: 'package', source })
@@ -275,7 +280,8 @@ function analyse(r: Run, files: string[], s: Score, baseTokensCss: Set<string>, 
       if (!isTokensCss) {
         for (const m of text.matchAll(/var\(\s*(--[\w-]+)|\((?:[a-z-]+:)?(--[\w-]+)\)/g)) {
           const v = m[1] ?? m[2]
-          if (MANIFEST_VARS.has(v) || v.startsWith('--tw-')) continue
+          // --tw-* and --radix-* are set at runtime by Tailwind and Radix, not tokens.
+          if (MANIFEST_VARS.has(v) || /^--(tw|radix)-/.test(v)) continue
           ;(baseTokensCss.has(v) ? s.inventedTokens.primitive : baseIndexCss.has(v) ? s.inventedTokens.theme : s.inventedTokens.new).add(v, where)
         }
       }
@@ -288,7 +294,7 @@ function analyse(r: Run, files: string[], s: Score, baseTokensCss: Set<string>, 
       if (isTokensCss || /\.stories\./.test(f)) continue
       for (const rule of HARD_CODED) {
         if (rule.cssOnly && !isCss) continue
-        for (const m of text.matchAll(rule.re)) s.hardCodedValues.add(`${rule.name}: ${m[0].trim()}`, where)
+        for (const m of text.matchAll(rule.re)) if (!rule.keep || rule.keep(m[0])) s.hardCodedValues.add(`${rule.name}: ${m[0].trim()}`, where)
       }
     }
   }
@@ -385,13 +391,17 @@ async function render(r: Run, files: string[], s: Score, browser: Browser): Prom
 // ---------------------------------------------------------------- transcript
 
 function readTranscript(r: Run, s: Score, all: Run[]) {
-  const folder = join(homedir(), '.claude/projects', r.dir.replace(/[^a-zA-Z0-9]/g, '-'))
-  if (!existsSync(folder)) return
-  const files = readdirSync(folder).filter((f) => f.endsWith('.jsonl') && (!r.sessionId || f === `${r.sessionId}.jsonl`))
+  // The run script's stream-json logs (eval:run), else Claude Code's own session files.
+  const own = join(RESULTS, 'transcripts')
+  const session = join(homedir(), '.claude/projects', r.dir.replace(/[^a-zA-Z0-9]/g, '-'))
+  const ownFiles = existsSync(own) ? readdirSync(own).filter((f) => f.startsWith(`${r.id}-`) && f.endsWith('.jsonl')).map((f) => join(own, f)) : []
+  const files = ownFiles.length ? ownFiles
+    : existsSync(session) ? readdirSync(session).filter((f) => f.endsWith('.jsonl') && (!r.sessionId || f === `${r.sessionId}.jsonl`)).map((f) => join(session, f))
+    : []
   const outside = [resolve(ROOT, '..'), ...all.filter((o) => o.id !== r.id).map((o) => o.dir)]
   for (const f of files) {
     s.transcript.found = true
-    for (const line of readFileSync(join(folder, f), 'utf8').split('\n')) {
+    for (const line of readFileSync(f, 'utf8').split('\n')) {
       if (!line.trim()) continue
       const content = (JSON.parse(line) as { message?: { content?: unknown } }).message?.content
       if (!Array.isArray(content)) continue
@@ -408,7 +418,9 @@ function readTranscript(r: Run, s: Score, all: Run[]) {
 
 // ---------------------------------------------------------------- main
 
-const runs = JSON.parse(readFileSync(opts.runs!, 'utf8')) as Run[]
+const runs = JSON.parse(readFileSync(join(RESULTS, 'runs.json'), 'utf8')) as Run[]
+// The A/B key lives apart from runs.json, so recording "did it ask" stays blind.
+const conditionKey = JSON.parse(readFileSync(join(RESULTS, 'condition-key.json'), 'utf8')) as Record<string, 'A' | 'B'>
 const selected = runs.filter((r) => !opts.only?.length || opts.only.includes(r.id))
 // Process in random order, so file times in judge/ don't reveal the condition.
 const order = [...selected].sort(() => randomBytes(1)[0] - 128)
@@ -471,9 +483,10 @@ await browser?.close()
 
 // ---------------------------------------------------------------- summary (unblinded)
 
-type Saved = Score & { run: Run } & Record<string, unknown>
+type Saved = Score & { run: Run; condition?: 'A' | 'B' } & Record<string, unknown>
+// Fresh run records (asked etc. may have been filled in after scoring), plus the condition.
 const scored = runs.filter((r) => existsSync(join(RESULTS, 'scores', `${r.id}.json`)))
-  .map((r) => JSON.parse(readFileSync(join(RESULTS, 'scores', `${r.id}.json`), 'utf8')) as Saved)
+  .map((r) => ({ ...(JSON.parse(readFileSync(join(RESULTS, 'scores', `${r.id}.json`), 'utf8')) as Saved), run: r, condition: conditionKey[r.id] }))
 const c = (t: unknown) => (t as { count: number }).count
 const metrics = (x: Saved) => ({
   components: c(x.inventedComponents),
@@ -513,7 +526,7 @@ const md = [
   '',
   ...header(['Condition', 'Runs', 'Asked']),
   ...(['A', 'B'] as const).map((cond) => {
-    const list = scored.filter((x) => x.run.condition === cond)
+    const list = scored.filter((x) => x.condition === cond)
     const t = sum(list)
     return row([cond, list.length, list.filter((x) => x.run.asked).length, ...COLS.map(([k]) => t[k])])
   }),
@@ -522,21 +535,22 @@ const md = [
   '',
   ...header(['Category', 'Condition']),
   ...['n', 'm', 'o'].flatMap((cat) => (['A', 'B'] as const).map((cond) => {
-    const t = sum(scored.filter((x) => x.run.condition === cond && x.run.task.startsWith(`${cat}`)))
+    const t = sum(scored.filter((x) => x.condition === cond && x.run.task.startsWith(`${cat}`)))
     return row([{ n: 'Normal', m: 'Missing pieces', o: 'Off-system' }[cat]!, cond, ...COLS.map(([k]) => t[k])])
   })),
   '',
   '## By run',
   '',
   ...header(['Task', 'Condition', 'Run', 'Asked', 'Rendered', 'Outside paths']),
-  ...[...scored].sort((a, b) => a.run.task.localeCompare(b.run.task) || a.run.condition.localeCompare(b.run.condition)).map((x) => {
+  ...[...scored].sort((a, b) => a.run.task.localeCompare(b.run.task) || a.condition!.localeCompare(b.condition!)).map((x) => {
     const m = metrics(x)
     const blank = x.render.blank.length ? ` (${x.render.blank.length} blank)` : ''
     const rendered = ([x.render.home ? 'home' : '', x.render.stories.length ? `${x.render.stories.length} stories` : ''].filter(Boolean).join(', ') || (x.changedFiles.length ? 'nothing' : 'no changes')) + blank
-    return row([x.run.task, x.run.condition, x.run.id, yn(x.run.asked), rendered, x.transcript.found ? x.transcript.outsidePaths.length : '?', ...COLS.map(([k]) => m[k])])
+    return row([x.run.task, x.condition!, x.run.id, yn(x.run.asked), rendered, x.transcript.found ? x.transcript.outsidePaths.length : '?', ...COLS.map(([k]) => m[k])])
   }),
   '',
 ]
 writeFileSync(join(RESULTS, 'summary.md'), md.join('\n'))
-writeFileSync(join(RESULTS, 'summary.json'), JSON.stringify(scored.map((x) => ({ run: x.run, ...metrics(x) })), null, 2) + '\n')
-console.log(`\n${scored.length} run(s) scored. Unblinded: eval/results/summary.md. For the judge: eval/results/judge/ only.`)
+writeFileSync(join(RESULTS, 'summary.json'), JSON.stringify(scored.map((x) => ({ run: x.run, condition: x.condition, ...metrics(x) })), null, 2) + '\n')
+const REL = relative(ROOT, RESULTS)
+console.log(`\n${scored.length} run(s) scored. Unblinded: ${REL}/summary.md. For the judge: ${REL}/judge/ only.`)

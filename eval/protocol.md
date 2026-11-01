@@ -26,8 +26,15 @@ Runs never happen in `slot-ui` or `../slot-ui-baseline` themselves.
   run.
 - A neutral folder name (`~/slot-eval-runs/run-<random>`), outside
   `bhushan-projects`, so neither `CLAUDE.md` discovery nor `ls ..` finds
-  `slot-ui`. Which run is which condition is recorded only in
-  `eval/results/runs.json`, in this repo.
+  `slot-ui`.
+
+## Neutral ids
+
+Every file about a run is named by its random id (`run-3fa2c1`), never
+its condition: prompts, transcripts, final messages, usage, scores.
+`runs.json` has no condition either. The A/B key is only in
+`<results>/condition-key.json`; keep it from whoever records "did it
+ask" and from the judge until both are done.
 
 Every later run starts from its own untouched copy, so no run sees what
 an earlier run built.
@@ -38,8 +45,8 @@ an earlier run built.
   line, then the delivery line. Same bytes for A and B. Don't add
   context, hints, file names, or "use the design system".
 - `npm run eval:prepare` writes the exact prompt for each run to
-  `eval/results/prompts/<run>.txt`. Paste or pipe that file; don't
-  retype it.
+  `eval/results/prompts/<run>.txt`, and `npm run eval:run` sends that
+  file as is.
 
 ## Sessions
 
@@ -54,11 +61,63 @@ an earlier run built.
     This keeps the conditions equal, and stops B's rule "Figma first,
     then code" from editing the real Slot Figma file
     (`kcQ8UEPlSVCNw8Qs2LL6aZ`) during the eval;
-  - permissions: bypassed inside the throwaway copy (nothing outside it
-    is touched by the scorer or needed by the task);
-  - a budget cap per run (`--max-budget-usd 10`), the same for both.
+  - the narrowest permissions a run can finish with: read and edit
+    files inside the run's own folder, run the package's npm scripts,
+    use skills. Everything else is denied without asking
+    (`dontAsk`), including the web. The exact settings are in
+    "Permissions" below;
+  - a runaway guard per run (`--max-budget-usd 25`, API-equivalent
+    estimate, and a 60-minute timeout), the same for both.
 - Interleave the runs in a random order (`runs.json` is written in that
   order), so model or time-of-day drift doesn't fall on one condition.
+
+## Permissions
+
+`eval/run.ts` writes this to `<results>/settings/<run>.json` and passes
+it with `--settings`, plus `--permission-mode dontAsk` on the command
+line (`<dir>` is the run's absolute folder):
+
+```json
+{
+  "permissions": {
+    "defaultMode": "dontAsk",
+    "allow": ["Read(/<dir>/**)", "Edit(/<dir>/**)", "Bash(npm run *)", "Skill"],
+    "deny": [
+      "Bash(npm run dev*)", "Bash(npm run storybook*)", "Bash(npm run preview*)",
+      "WebFetch", "WebSearch"
+    ]
+  }
+}
+```
+
+- `Edit` covers every file-editing tool. `/<dir>` with the leading
+  extra slash is an absolute path (`//Users/…/run-3fa2c1/**`).
+- `dev`, `storybook` and `preview` start servers that never exit.
+- No `npx`, `git`, shell utilities or `npm install`. `npx tsc -b` is
+  covered by `npm run build`, which runs `tsc -b`.
+- Every denial is recorded (`usage/<run>-<turn>.json`,
+  `permissionDenials`), so a run that was blocked shows up.
+- Residual risk: an agent can add an npm script and run it, so this
+  limits honest mistakes, not a determined agent. The copy is
+  throwaway, and transcripts are checked for paths outside it.
+
+## Running
+
+Billing safety: `eval:run` stops before any run if `ANTHROPIC_API_KEY`
+or `ANTHROPIC_AUTH_TOKEN` is set, or if `claude auth status` doesn't
+show a claude.ai subscription. It prints that status at the start of
+every batch. Runs get a clean environment (no `ANTHROPIC_*`, no
+`CLAUDE*`).
+
+1. **Pilot** (`npm run eval:pilot`): `m2-cancelled-toast` once per
+   condition, in `eval/results-pilot/` and `~/slot-eval-pilot/`. Check
+   that both runs finished, what was denied, and how questions showed
+   up. Don't start the full set until the pilot is approved.
+2. **Full set**: `npm run eval:prepare`, then `npm run eval:run`. Runs
+   go one at a time, in the random order of `runs.json`.
+3. After each batch, read only `final/<run>-<turn>.md` for each run,
+   then reply or record (see "Questions").
+4. `npm run eval:score`.
 
 ## Questions
 
@@ -71,13 +130,19 @@ Choose what you think is best and explain it in your report
 
 - Same text every time, no matter what was asked. Never answer the
   question itself.
+- To reply: `npm run eval:run -- --reply <run>`. It resumes the same
+  session with that text and sets `asked` and `questions`.
 - If it asks again, send the same reply again, at most 3 times. After
   that, stop the run and note it.
+- Decide from `final/<run>-<turn>.md` only, not the transcript (the
+  transcript shows which skills were loaded, so it gives away the
+  condition). The final message can still hint at it (B tends to
+  mention plans and checks); that can't be hidden.
 - A request to approve finished work ("Please review and approve") is
   not a question: don't reply, and record it as `askedApproval`.
 - Record in `eval/results/runs.json` for each run:
-  - `asked`: `true` or `false`;
-  - `questions`: how many times the reply was sent;
+  - `asked`: `true` or `false` (`--reply` sets `true`);
+  - `questions`: how many times the reply was sent (`--reply` counts);
   - `askedApproval`: `true` or `false`;
   - `notes`: what it asked, in a few words.
 

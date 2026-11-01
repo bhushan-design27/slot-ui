@@ -3,36 +3,40 @@
  * "Isolation"): 10 tasks × conditions A and B = 20 copies.
  *
  *   npm run eval:prepare [-- --out ~/slot-eval-runs --a eval/condition-a --b main]
+ *                        [-- --results eval/results --tasks m2-cancelled-toast]
  *
  * Each copy is a `git archive` of the condition's ref in a new git repo
  * with one "Initial commit", with node_modules cloned from this repo.
  * Folder names are neutral (run-<random>); which run is which is written
- * only to eval/results/runs.json here. Prompts go to
- * eval/results/prompts/<run>.txt. Refuses to touch existing runs.
+ * only to <results>/condition-key.json here; <results>/runs.json has no
+ * condition, so recording "did it ask" can be done blind. Prompts go to
+ * <results>/prompts/<run>.txt. Refuses to touch existing runs.
  */
 import { execFileSync } from 'node:child_process'
 import { randomBytes } from 'node:crypto'
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { homedir, tmpdir } from 'node:os'
-import { join, resolve } from 'node:path'
+import { join, relative, resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 import { readTasks, DELIVERY_LINE, type Run } from './lib.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
-const RESULTS = join(ROOT, 'eval/results')
 
 const { values } = parseArgs({
   options: {
     out: { type: 'string', default: join(homedir(), 'slot-eval-runs') },
     a: { type: 'string', default: 'eval/condition-a' },
     b: { type: 'string', default: 'main' },
+    results: { type: 'string', default: 'eval/results' },
+    tasks: { type: 'string', multiple: true },
   },
 })
+const RESULTS = resolve(ROOT, values.results!)
 const OUT = resolve(values.out!.replace(/^~(?=\/|$)/, homedir()))
 const REFS = { A: values.a!, B: values.b! } as const
 
 if (existsSync(join(RESULTS, 'runs.json'))) {
-  console.error('eval/results/runs.json already exists. Move it (and its run folders) away to prepare a new set.')
+  console.error(`${relative(ROOT, RESULTS)}/runs.json already exists. Move it (and its run folders) away to prepare a new set.`)
   process.exit(1)
 }
 if (OUT.startsWith(resolve(ROOT, '..') + '/')) {
@@ -75,7 +79,12 @@ function snapshot(condition: 'A' | 'B'): string {
   return dir
 }
 
-const tasks = readTasks(join(ROOT, 'eval/tasks.md'))
+const tasks = readTasks(join(ROOT, 'eval/tasks.md')).filter((t) => !values.tasks?.length || values.tasks.includes(t.id))
+const unknown = (values.tasks ?? []).filter((id) => !tasks.some((t) => t.id === id))
+if (unknown.length) {
+  console.error(`Unknown task id(s): ${unknown.join(', ')} (see eval/tasks.md)`)
+  process.exit(1)
+}
 const snapshots = { A: snapshot('A'), B: snapshot('B') }
 
 // Random interleaved order (protocol.md, "Sessions").
@@ -88,6 +97,7 @@ for (let i = pairs.length - 1; i > 0; i--) {
 mkdirSync(OUT, { recursive: true })
 mkdirSync(join(RESULTS, 'prompts'), { recursive: true })
 const runs: Run[] = []
+const conditionKey: Record<string, 'A' | 'B'> = {}
 
 for (const { task, condition } of pairs) {
   const id = `run-${randomBytes(3).toString('hex')}`
@@ -101,10 +111,13 @@ for (const { task, condition } of pairs) {
   const base = git(dir, 'rev-parse', 'HEAD')
 
   writeFileSync(join(RESULTS, 'prompts', `${id}.txt`), `${task.text}\n\n${DELIVERY_LINE}\n`)
-  runs.push({ id, task: task.id, condition, dir, base, sessionId: null, asked: null, questions: null, askedApproval: null, notes: '' })
+  runs.push({ id, task: task.id, dir, base, sessionId: null, asked: null, questions: null, askedApproval: null, notes: '' })
+  conditionKey[id] = condition
   console.log(`${id}  ${task.id}`)
 }
 
 for (const dir of Object.values(snapshots)) rmSync(dir, { recursive: true, force: true })
 writeFileSync(join(RESULTS, 'runs.json'), JSON.stringify(runs, null, 2) + '\n')
-console.log(`\n${runs.length} runs in ${OUT}. Conditions are in eval/results/runs.json (don't show it to the judge).`)
+writeFileSync(join(RESULTS, 'condition-key.json'), JSON.stringify(conditionKey, null, 2) + '\n')
+const rel = relative(ROOT, RESULTS)
+console.log(`\n${runs.length} runs in ${OUT}.\nA/B key: ${rel}/condition-key.json (keep it from whoever records "did it ask" and from the judge).`)

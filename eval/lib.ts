@@ -1,14 +1,17 @@
-/** Shared by eval/prepare.ts and eval/score.ts. */
+/** Shared by the eval scripts. */
 import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 
 export type Task = { id: string; category: string; text: string }
 
-/** One run in eval/results/runs.json. The last five fields are filled in by whoever runs it. */
+/**
+ * One run in <results>/runs.json. Deliberately has no condition: the A/B
+ * key is in <results>/condition-key.json, so whoever records "did it ask"
+ * works blind. The last five fields are filled in during the run.
+ */
 export type Run = {
   id: string
   task: string
-  condition: 'A' | 'B'
   dir: string
   /** The copy's "Initial commit"; everything after it is the run's output. */
   base: string
@@ -41,3 +44,6 @@ export function readTasks(path = TASKS_MD): Task[] {
   if (tasks.length !== 10) throw new Error(`tasks.md: expected 10 tasks, found ${tasks.length}`)
   return tasks
 }
+
+/** The only reply to a question (protocol.md, "Questions"). */
+export const REPLY = 'Choose what you think is best and explain it in your report'

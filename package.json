@@ -18,7 +18,9 @@
     "registry:build": "shadcn build --output storybook-static/r",
     "check:slot": "node scripts/check-slot.ts",
     "eval:prepare": "node eval/prepare.ts",
-    "eval:score": "node eval/score.ts"
+    "eval:score": "node eval/score.ts",
+    "eval:run": "node eval/run.ts",
+    "eval:pilot": "node eval/prepare.ts --tasks m2-cancelled-toast --results eval/results-pilot --out ~/slot-eval-pilot && node eval/run.ts --results eval/results-pilot"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
