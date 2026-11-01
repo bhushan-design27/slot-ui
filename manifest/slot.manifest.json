@@ -362,6 +362,103 @@
       "registryItem": "https://bhushan-design27.github.io/slot-ui/r/dialog.json"
     },
     {
+      "name": "Disclosure",
+      "description": "A row with a summary and optional detail line that expands to show more content below it.",
+      "figma": {
+        "component": "Disclosure",
+        "nodeId": "117:91"
+      },
+      "props": [
+        {
+          "name": "summary",
+          "type": "string",
+          "required": true,
+          "description": "The trigger text: a short summary of what expands. Sentence case."
+        },
+        {
+          "name": "detail",
+          "type": "string",
+          "required": false,
+          "description": "Optional second line under the summary, Body/Small in text-secondary."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "description": "Figma Open state (controlled)."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "required": false,
+          "description": "Initially open when uncontrolled."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "(open: boolean) => void",
+          "required": false
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "required": false,
+          "description": "Content slot, shown when open, stacked with space-3."
+        }
+      ],
+      "inherits": {
+        "from": "Radix Collapsible.Root",
+        "note": "Other props pass through to the rendered element (e.g. aria-*, onClick, className).",
+        "omitted": [
+          "children",
+          "asChild"
+        ]
+      },
+      "states": [
+        {
+          "figma": "Default",
+          "code": "Default rendering, no prop"
+        },
+        {
+          "figma": "Hover",
+          "code": "CSS :hover, not a prop"
+        },
+        {
+          "figma": "Focus",
+          "code": "CSS :focus-visible, not a prop"
+        },
+        {
+          "figma": "Open",
+          "code": "`open` prop"
+        }
+      ],
+      "accessibility": [
+        "The trigger is a native <button> with aria-expanded and aria-controls pointing at the content.",
+        "The visible summary and detail line are the button's accessible name (no aria-label, so the name always contains the visible text), so it should make sense on its own; the chevron is decorative.",
+        "Closed content is removed from the accessibility tree, so don't put the only copy of required information inside."
+      ],
+      "importPath": "@/components/ui/disclosure",
+      "exports": [
+        "Disclosure"
+      ],
+      "usage": {
+        "status": "Approved",
+        "purpose": "Shows a summary (and an optional detail line) that the user can expand to see more below it, e.g. a compact booking summary on mobile.",
+        "useWhen": [
+          "Secondary detail that most people don't need to read every time, but some will want to check (the full booking details on a small screen).",
+          "The `summary` makes sense on its own when collapsed; with `detail`, the two read as one name (\"Deep tissue massage\", \"Tue 4 Nov, 10:00 · $95\"). Together they are the button's accessible name.",
+          "Use `detail` for a second, secondary line instead of letting one long summary wrap.",
+          "Closed by default; use `defaultOpen` (or `open`) only when most people will need the content."
+        ],
+        "dontUseWhen": [
+          "The content is required to complete the task (a form field, a terms checkbox): show it.",
+          "The content needs a decision before continuing: use Dialog.",
+          "There's room to show everything (e.g. desktop with a side column): show a Card instead.",
+          "You'd nest a Disclosure inside a Card, or a Disclosure inside a Disclosure."
+        ]
+      },
+      "registryItem": "https://bhushan-design27.github.io/slot-ui/r/disclosure.json"
+    },
+    {
       "name": "Icon",
       "description": "A 20px Lucide icon in the Slot icon colours.",
       "figma": {
@@ -508,7 +605,7 @@
         ],
         "dontUseWhen": [
           "The answer comes from a known list: use RadioGroup (2 to 5 options) or Select (more, or when space is tight).",
-          "The text spans multiple lines: Slot has no textarea yet.",
+          "The text may span more than one line (notes, messages): use Textarea.",
           "You'd use `placeholder` instead of `label`: placeholders disappear while typing and aren't a label."
         ]
       },
@@ -797,6 +894,94 @@
         ]
       },
       "registryItem": "https://bhushan-design27.github.io/slot-ui/r/select.json"
+    },
+    {
+      "name": "Textarea",
+      "description": "A multi-line text field with label and helper text, at least 120px tall.",
+      "figma": {
+        "component": "Textarea",
+        "nodeId": "115:58"
+      },
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Visible label, Label/Small."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "description": "Example input shown while empty. Never a replacement for the label."
+        },
+        {
+          "name": "helper",
+          "type": "string",
+          "required": false,
+          "description": "Helper text under the field; turns error red when invalid."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "description": "Figma Error state. Rendered as aria-invalid."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Figma Disabled state. Native attribute."
+        }
+      ],
+      "inherits": {
+        "from": "<textarea>",
+        "note": "Other props pass through to the rendered element (e.g. aria-*, onClick, className)."
+      },
+      "states": [
+        {
+          "figma": "Default",
+          "code": "Default rendering, no prop"
+        },
+        {
+          "figma": "Focus",
+          "code": "CSS :focus-visible, not a prop"
+        },
+        {
+          "figma": "Error",
+          "code": "`invalid` prop, rendered as aria-invalid"
+        },
+        {
+          "figma": "Disabled",
+          "code": "Native `disabled` attribute"
+        }
+      ],
+      "accessibility": [
+        "The label is a <label for>, so clicking it focuses the field and screen readers announce it.",
+        "Helper text is linked with aria-describedby; in the Error state it should say how to fix the problem.",
+        "Error sets aria-invalid; helper text stays text-secondary when disabled (WCAG contrast).",
+        "Mark optional fields in the label (\"(optional)\"), not only in the helper."
+      ],
+      "importPath": "@/components/ui/textarea",
+      "exports": [
+        "Textarea"
+      ],
+      "usage": {
+        "status": "Approved",
+        "purpose": "A multi-line text field for longer free text, such as notes or a message, with a label and optional helper text.",
+        "useWhen": [
+          "The answer is free text that may run to more than one line (\"Notes for your therapist\").",
+          "Always with a visible `label`; mark optional fields in the label (\"(optional)\"), and add `helper` to say what kind of text helps.",
+          "`invalid` when validation fails, with `helper` saying how to fix it."
+        ],
+        "dontUseWhen": [
+          "The answer is a single line (a name, email, phone number): use Input.",
+          "The answer comes from a known list: use RadioGroup or Select.",
+          "You'd use `placeholder` instead of `label`: placeholders disappear while typing and aren't a label."
+        ]
+      },
+      "registryItem": "https://bhushan-design27.github.io/slot-ui/r/textarea.json"
     }
   ],
   "tokens": {
@@ -999,7 +1184,8 @@
           "Chip",
           "Input",
           "RadioGroup",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       },
       {
@@ -1015,7 +1201,8 @@
         "usedBy": [
           "Input",
           "RadioGroup",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       },
       {
@@ -1030,7 +1217,8 @@
         "value": "#8592a5",
         "usedBy": [
           "Input",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       },
       {
@@ -1047,9 +1235,11 @@
         "usedBy": [
           "Button",
           "Chip",
+          "Disclosure",
           "Input",
           "RadioGroup",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       },
       {
@@ -1094,6 +1284,7 @@
         "usedBy": [
           "Card",
           "Dialog",
+          "Disclosure",
           "Select"
         ]
       },
@@ -1172,7 +1363,8 @@
         "usedBy": [
           "Input",
           "RadioGroup",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       },
       {
@@ -1189,13 +1381,14 @@
         "usedBy": [
           "Input",
           "RadioGroup",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       },
       {
         "name": "color/surface/hover",
         "cssVariable": "--color-surface-hover",
-        "job": "Background for the hovered or keyboard-highlighted row in a menu or list.",
+        "job": "Background of a hovered interactive row, e.g. a menu option or a disclosure summary.",
         "jobSource": "figma-description",
         "scopes": [
           "FRAME_FILL",
@@ -1204,6 +1397,7 @@
         "aliasOf": "color/slate/50",
         "value": "#f8fafc",
         "usedBy": [
+          "Disclosure",
           "Select"
         ]
       },
@@ -1237,6 +1431,7 @@
         "usedBy": [
           "Card",
           "Dialog",
+          "Disclosure",
           "Select"
         ]
       },
@@ -1299,7 +1494,8 @@
           "Chip",
           "Input",
           "RadioGroup",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       },
       {
@@ -1315,7 +1511,8 @@
         "usedBy": [
           "Input",
           "RadioGroup",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       },
       {
@@ -1359,7 +1556,8 @@
         "value": "#64748b",
         "usedBy": [
           "Input",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       },
       {
@@ -1376,9 +1574,11 @@
           "Card",
           "Chip",
           "Dialog",
+          "Disclosure",
           "Input",
           "RadioGroup",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       },
       {
@@ -1393,9 +1593,11 @@
         "value": "#64748b",
         "usedBy": [
           "Dialog",
+          "Disclosure",
           "Input",
           "RadioGroup",
-          "Select"
+          "Select",
+          "Textarea"
         ]
       }
     ],
@@ -1511,6 +1713,14 @@
         "name": "layout/form-max",
         "cssVariable": "--layout-form-max",
         "value": "560px",
+        "scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      },
+      {
+        "name": "layout/textarea-min-height",
+        "cssVariable": "--layout-textarea-min-height",
+        "value": "120px",
         "scopes": [
           "WIDTH_HEIGHT"
         ]

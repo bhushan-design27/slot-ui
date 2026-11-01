@@ -37,6 +37,7 @@
           "font-size-small": "14px",
           "layout-content-max": "1200px",
           "layout-form-max": "560px",
+          "layout-textarea-min-height": "120px",
           "radius-full": "9999px",
           "radius-lg": "12px",
           "radius-md": "8px",
@@ -196,6 +197,26 @@
       ]
     },
     {
+      "name": "disclosure",
+      "type": "registry:ui",
+      "title": "Disclosure",
+      "description": "A row with a summary and optional detail line that expands to show more content below it.",
+      "dependencies": [
+        "cn",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json",
+        "https://bhushan-design27.github.io/slot-ui/r/icon.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/disclosure.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "icon",
       "type": "registry:ui",
       "title": "Icon",
@@ -267,6 +288,24 @@
       "files": [
         {
           "path": "src/components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "A multi-line text field with label and helper text, at least 120px tall.",
+      "dependencies": [
+        "cn"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/textarea.tsx",
           "type": "registry:ui"
         }
       ]

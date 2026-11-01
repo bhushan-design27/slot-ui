@@ -96,6 +96,29 @@ must happen before the user continues.
 - Opening a dialog from inside another dialog.
 - The footer has no visible dismiss action: Slot dialogs have no close (×) button, so a dismiss action ("Keep booking", "Cancel") is required.
 
+## Disclosure
+
+Status: Approved
+
+### Purpose
+
+Shows a summary (and an optional detail line) that the user can expand to see more below it,
+e.g. a compact booking summary on mobile.
+
+### Use when
+
+- Secondary detail that most people don't need to read every time, but some will want to check (the full booking details on a small screen).
+- The `summary` makes sense on its own when collapsed; with `detail`, the two read as one name ("Deep tissue massage", "Tue 4 Nov, 10:00 · $95"). Together they are the button's accessible name.
+- Use `detail` for a second, secondary line instead of letting one long summary wrap.
+- Closed by default; use `defaultOpen` (or `open`) only when most people will need the content.
+
+### Don't use when
+
+- The content is required to complete the task (a form field, a terms checkbox): show it.
+- The content needs a decision before continuing: use Dialog.
+- There's room to show everything (e.g. desktop with a side column): show a Card instead.
+- You'd nest a Disclosure inside a Card, or a Disclosure inside a Disclosure.
+
 ## Icon
 
 Status: DRAFT - needs review
@@ -134,7 +157,7 @@ or email, with a label and optional helper text.
 ### Don't use when
 
 - The answer comes from a known list: use RadioGroup (2 to 5 options) or Select (more, or when space is tight).
-- The text spans multiple lines: Slot has no textarea yet.
+- The text may span more than one line (notes, messages): use Textarea.
 - You'd use `placeholder` instead of `label`: placeholders disappear while typing and aren't a label.
 
 ## RadioGroup
@@ -181,3 +204,24 @@ field that fits in a form.
 - The user can pick several values, or is toggling filters: use Chip.
 - The list is very long or needs search: Slot has no combobox with search yet.
 - Selecting an option should trigger an action or navigation immediately: use Button.
+
+## Textarea
+
+Status: Approved
+
+### Purpose
+
+A multi-line text field for longer free text, such as notes or a message,
+with a label and optional helper text.
+
+### Use when
+
+- The answer is free text that may run to more than one line ("Notes for your therapist").
+- Always with a visible `label`; mark optional fields in the label ("(optional)"), and add `helper` to say what kind of text helps.
+- `invalid` when validation fails, with `helper` saying how to fix it.
+
+### Don't use when
+
+- The answer is a single line (a name, email, phone number): use Input.
+- The answer comes from a known list: use RadioGroup or Select.
+- You'd use `placeholder` instead of `label`: placeholders disappear while typing and aren't a label.

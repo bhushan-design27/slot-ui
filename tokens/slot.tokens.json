@@ -779,7 +779,7 @@
       "hover": {
         "$type": "color",
         "$value": "{color.slate.50}",
-        "$description": "Background for the hovered or keyboard-highlighted row in a menu or list.",
+        "$description": "Background of a hovered interactive row, e.g. a menu option or a disclosure summary.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -1194,6 +1194,25 @@
           ],
           "codeSyntax": {
             "WEB": "var(--layout-form-max)"
+          }
+        }
+      }
+    },
+    "textarea-min-height": {
+      "$type": "dimension",
+      "$value": {
+        "value": 120,
+        "unit": "px"
+      },
+      "$description": "Minimum height of a Textarea field: 4 Body/Medium lines plus space/3 padding top and bottom.",
+      "$extensions": {
+        "com.figma": {
+          "collection": "Primitives",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--layout-textarea-min-height)"
           }
         }
       }

@@ -31,6 +31,7 @@
   --font-size-small: 14px;
   --layout-content-max: 1200px;
   --layout-form-max: 560px;
+  --layout-textarea-min-height: 120px;
   --radius-full: 9999px;
   --radius-lg: 12px;
   --radius-md: 8px;
