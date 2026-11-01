@@ -66,6 +66,7 @@
           "color-border-subtle": "var(--color-slate-200)",
           "color-icon-default": "var(--color-slate-500)",
           "color-icon-disabled": "var(--color-slate-400)",
+          "color-icon-on-action": "var(--color-white)",
           "color-shadow-raised": "var(--color-slate-900-a10)",
           "color-surface-disabled": "var(--color-slate-50)",
           "color-surface-field": "var(--color-white)",
@@ -223,6 +224,25 @@
       "files": [
         {
           "path": "src/components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "RadioGroup",
+      "description": "Choose exactly one of 2 to 5 options, all visible at once.",
+      "dependencies": [
+        "cn",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/radio-group.tsx",
           "type": "registry:ui"
         }
       ]

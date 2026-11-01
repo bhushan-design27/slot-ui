@@ -49,7 +49,10 @@ Rules for working in the **Slot** Figma file (`kcQ8UEPlSVCNw8Qs2LL6aZ`).
 
 ## Borders and sizing
 - For components with borders, exclude strokes from layout.
-- Verify component heights match the size scale: **36 / 48 / 56**.
+- Verify component heights match the size scale: **36 / 48 / 56**. The
+  scale applies to controls with a background or border box (Button,
+  Input, Select, Chip). Radio rows are 24px (20px circle + Body/Medium
+  line); stacked with space/3 they repeat every 36px.
 - Nested corners: inner radius = outer radius minus padding.
 
 ## After every change

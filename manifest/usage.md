@@ -27,7 +27,7 @@ The variant tells the user how important or risky the action is.
 ### Don't use when
 
 - The action navigates to another page: use a link, or a Button with `asChild` wrapping the link, so it is announced as a link.
-- The control switches something on or off, or selects an option: use Chip (or a future checkbox / switch).
+- The control selects an option: use RadioGroup or Select (one choice) or Chip (filters).
 - You need a red button for emphasis rather than a destructive action: `danger` means destructive only.
 - Two `primary` buttons would sit side by side: make one `secondary`.
 
@@ -59,19 +59,18 @@ Status: DRAFT - needs review
 
 ### Purpose
 
-A toggle for filtering or picking options where all the choices stay
-visible, e.g. filtering services by type.
+Toggles a filter on or off. Each chip is independent, so the user can
+turn on several at once, e.g. filtering services by type.
 
 ### Use when
 
-- The options are few (roughly 2 to 8) and short (one or two words), and showing them all helps the user scan.
-- The user can turn options on and off independently (multi-select filters).
-- Changing a chip updates content immediately (filtering a list), without a submit button.
+- Filtering content: each chip turns one filter on or off, and several can be on at the same time.
+- Changing a chip updates the content immediately, without a submit button.
+- The filters are short (one or two words) and few enough to show in one row or two.
 
 ### Don't use when
 
-- There are many options, or long labels: use Select.
-- The user must pick exactly one value inside a form that is submitted: use Select (a single-choice chip group needs extra radio-group semantics Slot doesn't provide yet).
+- The user must choose exactly one option: use RadioGroup (2 to 5 options) or Select (a longer list, or when space is tight).
 - The chip triggers an action rather than a state: use Button.
 - The chip is a read-only label or status: Slot has no badge yet; don't use a disabled Chip for it.
 
@@ -134,9 +133,31 @@ or email, with a label and optional helper text.
 
 ### Don't use when
 
-- The answer comes from a known, short list: use Select (or Chip for filters).
+- The answer comes from a known list: use RadioGroup (2 to 5 options) or Select (more, or when space is tight).
 - The text spans multiple lines: Slot has no textarea yet.
 - You'd use `placeholder` instead of `label`: placeholders disappear while typing and aren't a label.
+
+## RadioGroup
+
+Status: DRAFT - needs review
+
+### Purpose
+
+Chooses exactly one of 2 to 5 options, all visible at once, e.g. the
+appointment type.
+
+### Use when
+
+- The user must choose exactly one option, and there are 2 to 5 of them.
+- Seeing every option side by side helps the user compare before choosing.
+- Inside a form, with a group `label`, and `helper` when the choice needs explaining.
+
+### Don't use when
+
+- There are more than 5 options, or space is tight: use Select.
+- The user can choose several options, or is toggling filters: use Chip.
+- There is only one option to switch on or off: Slot has no checkbox or switch yet; don't use a one-option RadioGroup.
+- Choosing an option should trigger an action immediately: use Button.
 
 ## Select
 
@@ -144,18 +165,18 @@ Status: DRAFT - needs review
 
 ### Purpose
 
-Picks one value from a list of predefined options, in a compact field
-that fits in a form.
+Picks exactly one value from a list of predefined options, in a compact
+field that fits in a form.
 
 ### Use when
 
-- The user picks exactly one value from a known list, typically 4 or more options, or long labels.
-- Space is limited and showing all options at once would crowd the form.
+- The user picks exactly one value and there are more than 5 options.
+- Space is tight (e.g. a dense form or a narrow column), even with 5 or fewer options.
 - Inside a form, alongside Inputs, with a visible `label` and optional `helper`.
 
 ### Don't use when
 
-- There are only 2 or 3 short options that benefit from being visible: use Chip.
-- The user can pick several values: use Chip (multi-select).
+- There are 2 to 5 options and there is room to show them: use RadioGroup, so every option is visible without opening a menu.
+- The user can pick several values, or is toggling filters: use Chip.
 - The list is very long or needs search: Slot has no combobox with search yet.
 - Selecting an option should trigger an action or navigation immediately: use Button.

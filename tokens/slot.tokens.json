@@ -629,10 +629,28 @@
           "com.figma": {
             "collection": "Semantic",
             "scopes": [
+              "SHAPE_FILL",
               "STROKE_COLOR"
             ],
             "codeSyntax": {
               "WEB": "var(--color-icon-disabled)"
+            }
+          }
+        }
+      },
+      "on-action": {
+        "$type": "color",
+        "$value": "{color.white}",
+        "$description": "Icon or mark drawn on an action fill, e.g. the radio dot or a checkbox check.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-on-action)"
             }
           }
         }
@@ -1071,7 +1089,7 @@
         "com.figma": {
           "collection": "Primitives",
           "scopes": [
-            "ALL_SCOPES"
+            "WIDTH_HEIGHT"
           ],
           "codeSyntax": {
             "WEB": "var(--layout-content-max)"
@@ -1089,7 +1107,7 @@
         "com.figma": {
           "collection": "Primitives",
           "scopes": [
-            "ALL_SCOPES"
+            "WIDTH_HEIGHT"
           ],
           "codeSyntax": {
             "WEB": "var(--layout-form-max)"

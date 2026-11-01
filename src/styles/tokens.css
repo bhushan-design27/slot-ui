@@ -62,6 +62,7 @@
   --color-border-subtle: var(--color-slate-200);
   --color-icon-default: var(--color-slate-500);
   --color-icon-disabled: var(--color-slate-400);
+  --color-icon-on-action: var(--color-white);
   --color-shadow-raised: var(--color-slate-900-a10);
   --color-surface-disabled: var(--color-slate-50);
   --color-surface-field: var(--color-white);
