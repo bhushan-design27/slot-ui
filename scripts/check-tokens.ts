@@ -11,7 +11,7 @@
  * Figma (it is where the literal values live), so it is skipped.
  *
  * Run with: npm run check:tokens
- * SLOT_ROOT=<dir> scans another copy of the repo instead (npm run eval:score).
+ * SLOT_ROOT=<dir> scans another copy of the repo instead.
  */
 import { readdirSync, readFileSync } from 'node:fs'
 import { extname, join, relative, resolve } from 'node:path'
