@@ -62,8 +62,8 @@ an earlier run built.
     then code" from editing the real Slot Figma file
     (`kcQ8UEPlSVCNw8Qs2LL6aZ`) during the eval;
   - the narrowest permissions a run can finish with: read and edit
-    files inside the run's own folder, run the package's npm scripts,
-    use skills. Everything else is denied without asking
+    files inside the run's own folder, run the package's npm scripts and
+    `npx tsc -b`, use skills. Everything else is denied without asking
     (`dontAsk`), including the web. The exact settings are in
     "Permissions" below;
   - a runaway guard per run (`--max-budget-usd 25`, API-equivalent
@@ -81,7 +81,7 @@ line (`<dir>` is the run's absolute folder):
 {
   "permissions": {
     "defaultMode": "dontAsk",
-    "allow": ["Read(/<dir>/**)", "Edit(/<dir>/**)", "Bash(npm run *)", "Skill"],
+    "allow": ["Read(/<dir>/**)", "Edit(/<dir>/**)", "Bash(npm run *)", "Bash(npx tsc -b*)", "Skill"],
     "deny": [
       "Bash(npm run dev*)", "Bash(npm run storybook*)", "Bash(npm run preview*)",
       "WebFetch", "WebSearch"
@@ -93,8 +93,11 @@ line (`<dir>` is the run's absolute folder):
 - `Edit` covers every file-editing tool. `/<dir>` with the leading
   extra slash is an absolute path (`//Users/…/run-3fa2c1/**`).
 - `dev`, `storybook` and `preview` start servers that never exit.
-- No `npx`, `git`, shell utilities or `npm install`. `npx tsc -b` is
-  covered by `npm run build`, which runs `tsc -b`.
+- `npx tsc -b` is the one command allowed beyond the npm scripts: in
+  the first pilot both agents tried it (in combined commands like
+  `npm run check:tokens && npx tsc -b`), got denied, and then skipped
+  every check. Read-only commands (`ls`, `cat`, `grep`) need no rule.
+  No other `npx`, no `git` writes, no `npm install`.
 - Every denial is recorded (`usage/<run>-<turn>.json`,
   `permissionDenials`), so a run that was blocked shows up.
 - Residual risk: an agent can add an npm script and run it, so this

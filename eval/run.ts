@@ -75,7 +75,7 @@ function authStatus() {
 
 /**
  * The narrowest settings a run can finish with: read and edit files inside
- * its own folder, and run the package's npm scripts. Anything else would
+ * its own folder, run the package's npm scripts and the type check. Anything else would
  * need a prompt, and dontAsk turns every prompt into a denial (recorded in
  * usage/<run>-<turn>.json as permission_denials).
  */
@@ -84,7 +84,8 @@ function settingsFor(r: Run) {
   return {
     permissions: {
       defaultMode: 'dontAsk',
-      allow: [`Read(${inside})`, `Edit(${inside})`, 'Bash(npm run *)', 'Skill'],
+      // npx tsc -b: the type check both pilot agents reached for (B's checks list it).
+      allow: [`Read(${inside})`, `Edit(${inside})`, 'Bash(npm run *)', 'Bash(npx tsc -b*)', 'Skill'],
       deny: [
         // Long-running servers would only hang the run.
         'Bash(npm run dev*)', 'Bash(npm run storybook*)', 'Bash(npm run preview*)',

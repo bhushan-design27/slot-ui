@@ -344,12 +344,39 @@
         "Dialog",
         "DialogClose"
       ],
+      "parts": [
+        {
+          "name": "DialogClose",
+          "description": "Closes the dialog when its child is activated, e.g. `<DialogClose asChild><Button variant=\"secondary\">Keep booking</Button></DialogClose>`.",
+          "props": [
+            {
+              "name": "asChild",
+              "type": "boolean",
+              "required": false,
+              "description": "Render the child (a Button) as the close control instead of a plain button."
+            },
+            {
+              "name": "children",
+              "type": "React.ReactNode",
+              "required": false,
+              "description": "The control that closes the dialog, e.g. a Button."
+            }
+          ],
+          "inherits": {
+            "from": "Radix Dialog.Close",
+            "note": "Other props pass through to the rendered element (e.g. aria-*, onClick, className)."
+          },
+          "states": [],
+          "accessibility": []
+        }
+      ],
       "usage": {
-        "status": "Approved",
+        "status": "DRAFT - needs review",
         "purpose": "Interrupts the current task to ask for a decision or confirmation that must happen before the user continues.",
         "useWhen": [
           "Confirming a destructive or irreversible action (\"Cancel booking?\"), with a `secondary` Button to dismiss and a `danger` or `primary` Button to confirm.",
-          "A short, focused decision or input that belongs to the current screen and can't be skipped."
+          "A short, focused decision or input that belongs to the current screen and can't be skipped.",
+          "Every footer action that closes the dialog is a Button wrapped in DialogClose with `asChild`."
         ],
         "dontUseWhen": [
           "Showing information that doesn't need a decision (success messages, tips): show it inline on the page.",

@@ -78,7 +78,7 @@ turn on several at once, e.g. filtering services by type.
 
 ## Dialog
 
-Status: Approved
+Status: DRAFT - needs review
 
 ### Purpose
 
@@ -89,6 +89,7 @@ must happen before the user continues.
 
 - Confirming a destructive or irreversible action ("Cancel booking?"), with a `secondary` Button to dismiss and a `danger` or `primary` Button to confirm.
 - A short, focused decision or input that belongs to the current screen and can't be skipped.
+- Every footer action that closes the dialog is a Button wrapped in DialogClose with `asChild`.
 
 ### Don't use when
 
