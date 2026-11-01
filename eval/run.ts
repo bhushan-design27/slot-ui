@@ -3,7 +3,7 @@
  *
  *   npm run eval:run [-- --results eval/results] [-- --only run-abc123]
  *   npm run eval:run -- --reply run-abc123    send the fixed reply to a run that asked
- *   npm run eval:pilot                        prepare + run the pilot (m2, A and B)
+ *   npm run eval:pilot                        prepare + run a pilot (m2, A and B) in eval/pilots/next
  *
  * Starts every run in <results>/runs.json that hasn't started, one at a
  * time, each in its own copy and a fresh session. Stops before any run if
