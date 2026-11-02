@@ -22,7 +22,8 @@
     "eval:run": "node eval/run.ts",
     "eval:pilot": "node eval/prepare.ts --tasks m2-cancelled-toast --results eval/pilots/next --out ~/slot-eval-pilots/next && node eval/run.ts --results eval/pilots/next",
     "eval:serve": "node eval/serve.ts",
-    "eval:blind": "node eval/blind.ts"
+    "eval:blind": "node eval/blind.ts",
+    "eval:judge": "cd /Users/bhushan/slot-eval-judge && claude -p \"Read JUDGE.md and follow it.\" --model claude-opus-5-5 --setting-sources project,local --strict-mcp-config --mcp-config '{\"mcpServers\":{}}' --permission-mode dontAsk --settings '{\"permissions\":{\"allow\":[\"Read(//Users/bhushan/slot-eval-judge/**)\",\"Edit(//Users/bhushan/slot-eval-judge/judgement.md)\"]}}'"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
