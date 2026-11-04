@@ -671,6 +671,40 @@
         }
       }
     },
+    "brand": {
+      "mark": {
+        "$type": "color",
+        "$value": "{color.blue.600}",
+        "$description": "Fill for the Slot logo mark: the bottom and top stones.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-mark)"
+            }
+          }
+        }
+      },
+      "mark-strong": {
+        "$type": "color",
+        "$value": "{color.blue.700}",
+        "$description": "Fill for the middle stone of the Slot logo mark, a shade darker than color/brand/mark.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-brand-mark-strong)"
+            }
+          }
+        }
+      }
+    },
     "icon": {
       "default": {
         "$type": "color",

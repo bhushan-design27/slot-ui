@@ -69,6 +69,8 @@
           "color-border-selected": "var(--color-blue-600)",
           "color-border-selected-hover": "var(--color-blue-700)",
           "color-border-subtle": "var(--color-slate-200)",
+          "color-brand-mark": "var(--color-blue-600)",
+          "color-brand-mark-strong": "var(--color-blue-700)",
           "color-icon-default": "var(--color-slate-500)",
           "color-icon-disabled": "var(--color-slate-400)",
           "color-icon-on-action": "var(--color-white)",
@@ -249,6 +251,25 @@
       "files": [
         {
           "path": "src/components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "logo",
+      "type": "registry:ui",
+      "title": "Logo",
+      "description": "The Slot logo: three balanced stones, with or without the \"Slot\" wordmark.",
+      "dependencies": [
+        "class-variance-authority",
+        "cn"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/logo.tsx",
           "type": "registry:ui"
         }
       ]

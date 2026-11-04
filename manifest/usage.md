@@ -163,6 +163,27 @@ or email, with a label and optional helper text.
 - The text may span more than one line (notes, messages): use Textarea.
 - You'd use `placeholder` instead of `label`: placeholders disappear while typing and aren't a label.
 
+## Logo
+
+Status: DRAFT - needs review
+
+### Purpose
+
+The Slot brand: three balanced stones, with the "Slot" wordmark
+(`lockup`) or alone (`mark`).
+
+### Use when
+
+- Identifying the product in a header, sign-in screen or footer: `lockup`.
+- Space is tight or the name is already visible nearby: `mark`.
+- `size`: `medium` (40px mark) in headers and hero areas; `small` (24px mark) in compact bars and footers.
+
+### Don't use when
+
+- You'd recolour, stretch or redraw it: use it as is, in the brand tokens.
+- As decoration or a bullet: it always means "Slot".
+- You'd add the wordmark next to a `mark` yourself: use `lockup`.
+
 ## RadioGroup
 
 Status: Approved

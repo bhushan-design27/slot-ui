@@ -639,6 +639,68 @@
       "registryItem": "https://bhushan-design27.github.io/slot-ui/r/input.json"
     },
     {
+      "name": "Logo",
+      "description": "The Slot logo: three balanced stones, with or without the \"Slot\" wordmark.",
+      "figma": {
+        "component": "Logo",
+        "nodeId": "133:123"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"lockup\" | \"mark\"",
+          "required": false,
+          "allowedValues": [
+            "lockup",
+            "mark"
+          ],
+          "default": "lockup",
+          "description": "lockup = mark plus the \"Slot\" wordmark; mark = the stones only."
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\"",
+          "required": false,
+          "allowedValues": [
+            "small",
+            "medium"
+          ],
+          "default": "medium",
+          "description": "small = 24px mark; medium = 40px mark."
+        }
+      ],
+      "inherits": {
+        "from": "<span>",
+        "note": "Other props pass through to the rendered element (e.g. aria-*, onClick, className)."
+      },
+      "states": [],
+      "accessibility": [
+        "lockup: the visible \"Slot\" wordmark is the accessible name; the mark is decorative (aria-hidden).",
+        "mark: rendered as role=\"img\" with aria-label=\"Slot\"; pass aria-label to change the name.",
+        "Inside a link, the logo is the link's name, so the link needs no extra label."
+      ],
+      "importPath": "@/components/ui/logo",
+      "exports": [
+        "Logo",
+        "logoVariants"
+      ],
+      "usage": {
+        "status": "DRAFT - needs review",
+        "purpose": "The Slot brand: three balanced stones, with the \"Slot\" wordmark (`lockup`) or alone (`mark`).",
+        "useWhen": [
+          "Identifying the product in a header, sign-in screen or footer: `lockup`.",
+          "Space is tight or the name is already visible nearby: `mark`.",
+          "`size`: `medium` (40px mark) in headers and hero areas; `small` (24px mark) in compact bars and footers."
+        ],
+        "dontUseWhen": [
+          "You'd recolour, stretch or redraw it: use it as is, in the brand tokens.",
+          "As decoration or a bullet: it always means \"Slot\".",
+          "You'd add the wordmark next to a `mark` yourself: use `lockup`."
+        ]
+      },
+      "registryItem": "https://bhushan-design27.github.io/slot-ui/r/logo.json"
+    },
+    {
       "name": "RadioGroup",
       "description": "Choose exactly one of 2 to 5 options, all visible at once.",
       "figma": {
@@ -1316,6 +1378,34 @@
         ]
       },
       {
+        "name": "color/brand/mark",
+        "cssVariable": "--color-brand-mark",
+        "job": "Fill for the Slot logo mark: the bottom and top stones.",
+        "jobSource": "figma-description",
+        "scopes": [
+          "SHAPE_FILL"
+        ],
+        "aliasOf": "color/blue/600",
+        "value": "#3e7ca6",
+        "usedBy": [
+          "Logo"
+        ]
+      },
+      {
+        "name": "color/brand/mark-strong",
+        "cssVariable": "--color-brand-mark-strong",
+        "job": "Fill for the middle stone of the Slot logo mark, a shade darker than color/brand/mark.",
+        "jobSource": "figma-description",
+        "scopes": [
+          "SHAPE_FILL"
+        ],
+        "aliasOf": "color/blue/700",
+        "value": "#2f6890",
+        "usedBy": [
+          "Logo"
+        ]
+      },
+      {
         "name": "color/icon/default",
         "cssVariable": "--color-icon-default",
         "job": "Icons at rest.",
@@ -1603,6 +1693,7 @@
           "Dialog",
           "Disclosure",
           "Input",
+          "Logo",
           "RadioGroup",
           "Select",
           "Textarea"
