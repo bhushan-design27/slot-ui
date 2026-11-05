@@ -422,6 +422,28 @@
           }
         }
       },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.278431,
+            0.333333,
+            0.411765
+          ],
+          "alpha": 1,
+          "hex": "#475569"
+        },
+        "$extensions": {
+          "com.figma": {
+            "collection": "Primitives",
+            "scopes": [],
+            "codeSyntax": {
+              "WEB": "var(--color-slate-600)"
+            }
+          }
+        }
+      },
       "700": {
         "$type": "color",
         "$value": {
@@ -836,8 +858,8 @@
       },
       "secondary": {
         "$type": "color",
-        "$value": "{color.slate.500}",
-        "$description": "Border that matches text/secondary, e.g. the upcoming step marker in the Step Indicator.",
+        "$value": "{color.slate.600}",
+        "$description": "Border that matches text/secondary (slate/600), e.g. the upcoming step marker in the Step Indicator.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -1517,7 +1539,7 @@
       },
       "secondary": {
         "$type": "color",
-        "$value": "{color.slate.500}",
+        "$value": "{color.slate.600}",
         "$description": "Supporting text: helper text, descriptions and captions.",
         "$extensions": {
           "com.figma": {
