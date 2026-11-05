@@ -101,6 +101,28 @@ The variant tells the user how important or risky the action is.
 - Two `primary` buttons would sit side by side: make one `secondary`.
 - An icon-only button would need explaining: use a labelled size instead; icons alone are for actions everyone recognises.
 
+## Calendar
+
+Status: DRAFT - needs review
+
+### Purpose
+
+A month grid for choosing one day, with previous and next month
+buttons, today marked and unavailable days struck through.
+
+### Use when
+
+- Choosing the day of a booking, before picking a time.
+- Set `minDate` (usually today) and `maxDate` (how far ahead people can book); the month arrows stop there.
+- Pass days that can't be booked in `unavailable` (dates, or matchers such as closed weekdays).
+- Week start and date formats follow the Slot locale rule; don't change them per screen.
+
+### Don't use when
+
+- Picking a time: use TimeSlotGroup after the day is chosen.
+- Typing a known date such as a date of birth: a text field with the date format in its helper is faster.
+- Picking a date range: Slot has no range picker yet.
+
 ## Card
 
 Status: Approved

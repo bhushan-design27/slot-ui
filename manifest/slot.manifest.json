@@ -322,6 +322,100 @@
       "registryItem": "https://bhushan-design27.github.io/slot-ui/r/button.json"
     },
     {
+      "name": "Calendar",
+      "description": "A month grid for choosing one day, with previous / next month buttons.",
+      "figma": {
+        "component": "Calendar",
+        "nodeId": "176:380"
+      },
+      "props": [
+        {
+          "name": "selected",
+          "type": "Date",
+          "required": false,
+          "description": "The chosen day."
+        },
+        {
+          "name": "onSelect",
+          "type": "(date: Date | undefined) => void",
+          "required": false,
+          "description": "Called with the chosen day (undefined when deselected)."
+        },
+        {
+          "name": "minDate",
+          "type": "Date",
+          "required": false,
+          "description": "First selectable day; months before it can't be shown."
+        },
+        {
+          "name": "maxDate",
+          "type": "Date",
+          "required": false,
+          "description": "Last selectable day; months after it can't be shown."
+        },
+        {
+          "name": "unavailable",
+          "type": "Matcher | Matcher[]",
+          "required": false,
+          "description": "Days that can't be booked (dates or react-day-picker matchers), e.g. `{ dayOfWeek: [0] }`."
+        },
+        {
+          "name": "month",
+          "type": "Date",
+          "required": false,
+          "description": "The month shown (controlled)."
+        },
+        {
+          "name": "defaultMonth",
+          "type": "Date",
+          "required": false,
+          "description": "The month shown first (uncontrolled). Defaults to the selected day's month or today."
+        },
+        {
+          "name": "onMonthChange",
+          "type": "(month: Date) => void",
+          "required": false
+        },
+        {
+          "name": "today",
+          "type": "Date",
+          "required": false,
+          "description": "Override today (tests and stories)."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "states": [],
+      "accessibility": [
+        "A role=\"grid\" labelled by the month (\"November 2026\"); each day is a button named by its full date, today and selected included.",
+        "Keyboard (WAI-ARIA date grid): one Tab stop in the grid; arrows move by day and week, Home / End to the start / end of the week, Page Up / Page Down by month; Enter or Space selects.",
+        "Unavailable days are disabled (announced and skipped) and struck through, so the cue isn't colour alone."
+      ],
+      "importPath": "@/components/ui/calendar",
+      "exports": [
+        "Calendar"
+      ],
+      "usage": {
+        "status": "DRAFT - needs review",
+        "purpose": "A month grid for choosing one day, with previous and next month buttons, today marked and unavailable days struck through.",
+        "useWhen": [
+          "Choosing the day of a booking, before picking a time.",
+          "Set `minDate` (usually today) and `maxDate` (how far ahead people can book); the month arrows stop there.",
+          "Pass days that can't be booked in `unavailable` (dates, or matchers such as closed weekdays).",
+          "Week start and date formats follow the Slot locale rule; don't change them per screen."
+        ],
+        "dontUseWhen": [
+          "Picking a time: use TimeSlotGroup after the day is chosen.",
+          "Typing a known date such as a date of birth: a text field with the date format in its helper is faster.",
+          "Picking a date range: Slot has no range picker yet."
+        ]
+      },
+      "registryItem": "https://bhushan-design27.github.io/slot-ui/r/calendar.json"
+    },
+    {
       "name": "Card",
       "description": "A bordered container that groups related content under a title.",
       "figma": {
@@ -1754,6 +1848,7 @@
         "value": "#3e7ca6",
         "usedBy": [
           "Button",
+          "Calendar",
           "StepIndicator"
         ]
       },
@@ -1819,6 +1914,7 @@
         "aliasOf": "color/blue/600",
         "value": "#3e7ca6",
         "usedBy": [
+          "Calendar",
           "Chip",
           "ChoiceCardGroup",
           "RadioGroup",
@@ -1837,6 +1933,7 @@
         "aliasOf": "color/blue/700",
         "value": "#2f6890",
         "usedBy": [
+          "Calendar",
           "RadioGroup",
           "TimeSlotGroup"
         ]
@@ -1961,6 +2058,7 @@
         "usedBy": [
           "AppHeader",
           "Button",
+          "Calendar",
           "Chip",
           "ChoiceCardGroup",
           "Disclosure",
@@ -2348,6 +2446,7 @@
         "aliasOf": "color/slate/50",
         "value": "#f8fafc",
         "usedBy": [
+          "Calendar",
           "ChoiceCardGroup",
           "Disclosure",
           "Select"
@@ -2415,6 +2514,7 @@
         "value": "#ffffff",
         "usedBy": [
           "AppHeader",
+          "Calendar",
           "Card",
           "ChoiceCardGroup",
           "Dialog",
@@ -2531,6 +2631,7 @@
         "value": "#8592a5",
         "usedBy": [
           "Button",
+          "Calendar",
           "Chip",
           "ChoiceCardGroup",
           "Input",
@@ -2600,6 +2701,7 @@
         "value": "#ffffff",
         "usedBy": [
           "Button",
+          "Calendar",
           "Chip",
           "TimeSlotGroup"
         ]
@@ -2645,6 +2747,7 @@
         "aliasOf": "color/slate/900",
         "value": "#0f172a",
         "usedBy": [
+          "Calendar",
           "Card",
           "Chip",
           "ChoiceCardGroup",
@@ -2671,6 +2774,7 @@
         "aliasOf": "color/slate/600",
         "value": "#475569",
         "usedBy": [
+          "Calendar",
           "ChoiceCardGroup",
           "Dialog",
           "Disclosure",

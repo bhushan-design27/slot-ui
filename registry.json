@@ -231,6 +231,26 @@
       ]
     },
     {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "A month grid for choosing one day, with previous / next month buttons.",
+      "dependencies": [
+        "cn",
+        "react-day-picker"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json",
+        "https://bhushan-design27.github.io/slot-ui/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
