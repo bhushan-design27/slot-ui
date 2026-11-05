@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import avatarSrc from '@/assets/avatar-placeholder.png'
+import avatarSrc from '@/assets/avatar-photo.jpg'
 import { Avatar } from './avatar'
 
 const meta = {
   title: 'Components/Avatar',
   component: Avatar,
   parameters: { layout: 'centered' },
-  args: { name: 'Alex Morgan', size: 'large', src: avatarSrc, decorative: false },
+  args: { name: 'Maya Kim', size: 'large', src: avatarSrc, decorative: false },
   argTypes: {
     size: { control: 'inline-radio', options: ['small', 'large'] },
     src: { control: 'text' },
@@ -34,11 +34,11 @@ export const AllVariants: Story = {
         </tr>
       </thead>
       <tbody>
-        {([['image', avatarSrc], ['initials', undefined], ['broken image', '/missing.png']] as const).map(([row, src]) => (
+        {([['photo', avatarSrc], ['initials', undefined], ['broken image', '/missing.png']] as const).map(([row, src]) => (
           <tr key={row}>
             <th className="pr-(--space-4) text-left font-medium text-(--color-text-primary)">{row}</th>
-            <td><Avatar name="Alex Morgan" size="small" src={src} /></td>
-            <td><Avatar name="Alex Morgan" size="large" src={src} /></td>
+            <td><Avatar name="Maya Kim" size="small" src={src} /></td>
+            <td><Avatar name="Maya Kim" size="large" src={src} /></td>
           </tr>
         ))}
       </tbody>
@@ -52,8 +52,8 @@ export const WithName: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <div className="flex items-center gap-(--space-3) text-(length:--font-size-body) leading-(--font-line-height-body) text-(--color-text-primary)">
-      <Avatar name="Alex Morgan" decorative />
-      Alex Morgan
+      <Avatar name="Maya Kim" decorative />
+      Maya Kim
     </div>
   ),
 }

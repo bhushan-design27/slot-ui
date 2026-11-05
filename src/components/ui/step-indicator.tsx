@@ -11,7 +11,7 @@ import { Icon } from "@/components/ui/icon"
  *
  * Step `status`: Completed = action-primary marker with a check,
  * Current = border-action ring (border-width-2) + Label/Small label,
- * Upcoming = border-control ring (border-width-1), text-secondary.
+ * Upcoming = border-secondary ring (border-width-1), text-secondary.
  *
  * One <ol> serves both layouts, so assistive tech always gets the full
  * list; the mobile summary line is aria-hidden (it repeats the list).
@@ -66,7 +66,7 @@ function StepIndicator({ className, current, ...props }: StepIndicatorProps) {
                   status === "current" &&
                     "bg-(--color-surface-page) text-(--color-text-action) inset-ring-(length:--border-width-2) inset-ring-(--color-border-action)",
                   status === "upcoming" &&
-                    "bg-(--color-surface-page) text-(--color-text-secondary) inset-ring-(length:--border-width-1) inset-ring-(--color-border-control)"
+                    "bg-(--color-surface-page) text-(--color-text-secondary) inset-ring-(length:--border-width-1) inset-ring-(--color-border-secondary)"
                 )}
               >
                 {status === "completed" ? <Icon name="check" className="text-(--color-icon-on-action)" /> : number}

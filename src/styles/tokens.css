@@ -72,6 +72,7 @@
   --color-border-focus: var(--color-blue-600);
   --color-border-info: var(--color-blue-600);
   --color-border-neutral: var(--color-slate-400);
+  --color-border-secondary: var(--color-slate-500);
   --color-border-selected: var(--color-blue-600);
   --color-border-selected-hover: var(--color-blue-700);
   --color-border-subtle: var(--color-slate-200);

@@ -1572,8 +1572,7 @@
         "value": "#8592a5",
         "usedBy": [
           "Chip",
-          "RadioGroup",
-          "StepIndicator"
+          "RadioGroup"
         ]
       },
       {
@@ -1679,6 +1678,20 @@
         "value": "#8592a5",
         "usedBy": [
           "Badge"
+        ]
+      },
+      {
+        "name": "color/border/secondary",
+        "cssVariable": "--color-border-secondary",
+        "job": "Border that matches text/secondary, e.g. the upcoming step marker in the Step Indicator.",
+        "jobSource": "figma-description",
+        "scopes": [
+          "STROKE_COLOR"
+        ],
+        "aliasOf": "color/slate/500",
+        "value": "#64748b",
+        "usedBy": [
+          "StepIndicator"
         ]
       },
       {

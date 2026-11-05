@@ -834,6 +834,22 @@
           }
         }
       },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.slate.500}",
+        "$description": "Border that matches text/secondary, e.g. the upcoming step marker in the Step Indicator.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-secondary)"
+            }
+          }
+        }
+      },
       "selected": {
         "$type": "color",
         "$value": "{color.blue.600}",
