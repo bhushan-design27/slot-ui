@@ -61,6 +61,74 @@
     }
   },
   "color": {
+    "amber": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.988235,
+            0.960784,
+            0.87451
+          ],
+          "alpha": 1,
+          "hex": "#fcf5df"
+        },
+        "$extensions": {
+          "com.figma": {
+            "collection": "Primitives",
+            "scopes": [],
+            "codeSyntax": {
+              "WEB": "var(--color-amber-50)"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.658824,
+            0.509804,
+            0.058824
+          ],
+          "alpha": 1,
+          "hex": "#a8820f"
+        },
+        "$extensions": {
+          "com.figma": {
+            "collection": "Primitives",
+            "scopes": [],
+            "codeSyntax": {
+              "WEB": "var(--color-amber-600)"
+            }
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.435294,
+            0.32549,
+            0
+          ],
+          "alpha": 1,
+          "hex": "#6f5300"
+        },
+        "$extensions": {
+          "com.figma": {
+            "collection": "Primitives",
+            "scopes": [],
+            "codeSyntax": {
+              "WEB": "var(--color-amber-800)"
+            }
+          }
+        }
+      }
+    },
     "blue": {
       "50": {
         "$type": "color",
@@ -129,7 +197,97 @@
         }
       }
     },
+    "green": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.933333,
+            0.968627,
+            0.945098
+          ],
+          "alpha": 1,
+          "hex": "#eef7f1"
+        },
+        "$extensions": {
+          "com.figma": {
+            "collection": "Primitives",
+            "scopes": [],
+            "codeSyntax": {
+              "WEB": "var(--color-green-50)"
+            }
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.184314,
+            0.541176,
+            0.341176
+          ],
+          "alpha": 1,
+          "hex": "#2f8a57"
+        },
+        "$extensions": {
+          "com.figma": {
+            "collection": "Primitives",
+            "scopes": [],
+            "codeSyntax": {
+              "WEB": "var(--color-green-600)"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.129412,
+            0.411765,
+            0.247059
+          ],
+          "alpha": 1,
+          "hex": "#21693f"
+        },
+        "$extensions": {
+          "com.figma": {
+            "collection": "Primitives",
+            "scopes": [],
+            "codeSyntax": {
+              "WEB": "var(--color-green-700)"
+            }
+          }
+        }
+      }
+    },
     "red": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.996078,
+            0.94902,
+            0.94902
+          ],
+          "alpha": 1,
+          "hex": "#fef2f2"
+        },
+        "$extensions": {
+          "com.figma": {
+            "collection": "Primitives",
+            "scopes": [],
+            "codeSyntax": {
+              "WEB": "var(--color-red-50)"
+            }
+          }
+        }
+      },
       "600": {
         "$type": "color",
         "$value": {
@@ -260,6 +418,28 @@
             "scopes": [],
             "codeSyntax": {
               "WEB": "var(--color-slate-500)"
+            }
+          }
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2,
+            0.254902,
+            0.333333
+          ],
+          "alpha": 1,
+          "hex": "#334155"
+        },
+        "$extensions": {
+          "com.figma": {
+            "collection": "Primitives",
+            "scopes": [],
+            "codeSyntax": {
+              "WEB": "var(--color-slate-700)"
             }
           }
         }
@@ -622,6 +802,38 @@
           }
         }
       },
+      "info": {
+        "$type": "color",
+        "$value": "{color.blue.600}",
+        "$description": "Border for info status.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-info)"
+            }
+          }
+        }
+      },
+      "neutral": {
+        "$type": "color",
+        "$value": "{color.slate.400}",
+        "$description": "Border for neutral status.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-neutral)"
+            }
+          }
+        }
+      },
       "selected": {
         "$type": "color",
         "$value": "{color.blue.600}",
@@ -666,6 +878,38 @@
             ],
             "codeSyntax": {
               "WEB": "var(--color-border-subtle)"
+            }
+          }
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green.600}",
+        "$description": "Border for success status.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-success)"
+            }
+          }
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber.600}",
+        "$description": "Border for warning status.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-border-warning)"
             }
           }
         }
@@ -739,6 +983,38 @@
           }
         }
       },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red.700}",
+        "$description": "Icon for error status, e.g. in an Inline message.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-error)"
+            }
+          }
+        }
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.blue.700}",
+        "$description": "Icon for info status, e.g. in an Inline message.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-info)"
+            }
+          }
+        }
+      },
       "on-action": {
         "$type": "color",
         "$value": "{color.white}",
@@ -752,6 +1028,38 @@
             ],
             "codeSyntax": {
               "WEB": "var(--color-icon-on-action)"
+            }
+          }
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green.700}",
+        "$description": "Icon for success status, e.g. in an Inline message.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-success)"
+            }
+          }
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber.800}",
+        "$description": "Icon for warning status, e.g. in an Inline message.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-warning)"
             }
           }
         }
@@ -793,6 +1101,23 @@
           }
         }
       },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red.50}",
+        "$description": "Background for error status, e.g. an error Badge or Inline message.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-error)"
+            }
+          }
+        }
+      },
       "field": {
         "$type": "color",
         "$value": "{color.white}",
@@ -823,6 +1148,40 @@
             ],
             "codeSyntax": {
               "WEB": "var(--color-surface-hover)"
+            }
+          }
+        }
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.blue.50}",
+        "$description": "Background for info status, e.g. an info Badge or Inline message.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-info)"
+            }
+          }
+        }
+      },
+      "neutral": {
+        "$type": "color",
+        "$value": "{color.slate.50}",
+        "$description": "Background for neutral status, e.g. a cancelled booking Badge, and the Avatar initials fallback.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-neutral)"
             }
           }
         }
@@ -875,6 +1234,57 @@
             ],
             "codeSyntax": {
               "WEB": "var(--color-surface-selected)"
+            }
+          }
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green.50}",
+        "$description": "Background for success status, e.g. a success Badge or Inline message.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-success)"
+            }
+          }
+        }
+      },
+      "track": {
+        "$type": "color",
+        "$value": "{color.slate.200}",
+        "$description": "Unfilled part of a track, e.g. upcoming segments in the compact Step indicator.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-track)"
+            }
+          }
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber.50}",
+        "$description": "Background for warning status, e.g. a warning Badge or Inline message.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-surface-warning)"
             }
           }
         }
@@ -931,8 +1341,8 @@
       },
       "error": {
         "$type": "color",
-        "$value": "{color.red.600}",
-        "$description": "Error messages, e.g. helper text in the Error state.",
+        "$value": "{color.red.700}",
+        "$description": "Error text: field error helpers and error status, on surface/error or white.",
         "$extensions": {
           "com.figma": {
             "collection": "Semantic",
@@ -941,6 +1351,38 @@
             ],
             "codeSyntax": {
               "WEB": "var(--color-text-error)"
+            }
+          }
+        }
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.blue.700}",
+        "$description": "Text for info status, on surface/info or white.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-info)"
+            }
+          }
+        }
+      },
+      "neutral": {
+        "$type": "color",
+        "$value": "{color.slate.700}",
+        "$description": "Text for neutral status, on surface/neutral or white.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-neutral)"
             }
           }
         }
@@ -1021,6 +1463,38 @@
             ],
             "codeSyntax": {
               "WEB": "var(--color-text-secondary)"
+            }
+          }
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green.700}",
+        "$description": "Text for success status, on surface/success or white.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-success)"
+            }
+          }
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber.800}",
+        "$description": "Text for warning status, on surface/warning or white.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "TEXT_FILL"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-text-warning)"
             }
           }
         }

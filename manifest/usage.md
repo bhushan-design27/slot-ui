@@ -10,6 +10,64 @@ to `Approved`; agents always write `DRAFT - needs review` (CLAUDE.md,
 an entry has no component, or an entry names a component, prop or prop
 value that doesn't exist. Name things Slot doesn't have in lowercase.
 
+## AppHeader
+
+Status: DRAFT - needs review
+
+### Purpose
+
+The bar at the top of every screen: the Logo (linking home) and a
+"My bookings" link.
+
+### Use when
+
+- At the top of every booking and account screen, once, above the page content.
+- Set `homeHref` and `bookingsHref` to the app's real routes.
+
+### Don't use when
+
+- You'd add more links, buttons or a search field: AppHeader has the Logo and "My bookings" only.
+- Inside a Dialog or a Card.
+
+## Avatar
+
+Status: DRAFT - needs review
+
+### Purpose
+
+A round image of a person (a therapist, or the signed-in user), with
+initials when there's no image or it fails to load.
+
+### Use when
+
+- Showing who a booking is with: `size` `small` (32px) in lists and rows, `large` (64px) on a profile or summary.
+- `decorative` when the person's name is shown right next to it, so it isn't read twice; otherwise leave it off and the avatar is named by `name`.
+
+### Don't use when
+
+- For things that aren't people (services, places): use an icon or nothing.
+- As a button on its own: put it inside a link or button with a text label.
+
+## Badge
+
+Status: DRAFT - needs review
+
+### Purpose
+
+A short, non-interactive status label, such as a booking status.
+
+### Use when
+
+- `success` for done or confirmed, `info` for upcoming or informational, `warning` for something that needs attention soon, `error` for failures that need action (payment failed).
+- `neutral` for finished or inactive states. A cancelled booking is always `neutral`, never `error`: cancelling isn't a failure.
+- One or two words in sentence case ("Confirmed", "Payment failed").
+
+### Don't use when
+
+- The user can act on it: use Button or Chip.
+- The status needs a sentence or a next step: use InlineMessage.
+- To count things or as decoration.
+
 ## Button
 
 Status: Approved
@@ -142,6 +200,27 @@ icon colours. Only the icons in the Figma Icon component are available.
 - The icon you need isn't in `name`'s allowed values: add it to the Figma Icon component first, then to the code; don't import another Lucide icon directly.
 - Decoration only, with no meaning: leave it out.
 
+## InlineMessage
+
+Status: DRAFT - needs review
+
+### Purpose
+
+A status message in the page flow: what happened and what to do next,
+with an icon and an optional title.
+
+### Use when
+
+- After an action or event: `success` (booking confirmed), `info` (something changed), `warning` (something to know before continuing), `error` (something failed and needs action).
+- Put it near what it's about, e.g. above the form or the booking it refers to.
+- Add `title` only when the message needs a short headline.
+
+### Don't use when
+
+- A single field is invalid: use that field's own error state and helper text instead.
+- The user must decide before continuing: use Dialog.
+- A one- or two-word status: use Badge.
+
 ## Input
 
 Status: Approved
@@ -228,6 +307,24 @@ field that fits in a form.
 - The user can pick several values, or is toggling filters: use Chip.
 - The list is very long or needs search: Slot has no combobox with search yet.
 - Selecting an option should trigger an action or navigation immediately: use Button.
+
+## StepIndicator
+
+Status: DRAFT - needs review
+
+### Purpose
+
+Progress through the five booking steps: service, therapist, time, details and review.
+
+### Use when
+
+- At the top of each booking step, under AppHeader and above the page title; set `current` to the step's number (the details step is 4).
+- It switches layout by itself: every step label from 640px wide, compact segments and a "step n of 5" line below.
+
+### Don't use when
+
+- Outside the five booking steps, or for a flow with other steps: Slot has no general stepper yet.
+- As navigation: steps aren't links.
 
 ## Textarea
 

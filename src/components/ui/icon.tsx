@@ -1,6 +1,6 @@
 import * as React from "react"
 import { cn } from "cn"
-import { Check, ChevronDown, type LucideIcon } from "lucide-react"
+import { Check, ChevronDown, CircleAlert, CircleCheck, Info, TriangleAlert, type LucideIcon } from "lucide-react"
 
 /*
  * Figma: Icon (79:22). Lucide icons at 20px; `name` values are the Figma
@@ -13,6 +13,10 @@ import { Check, ChevronDown, type LucideIcon } from "lucide-react"
 const icons = {
   "chevron-down": ChevronDown,
   check: Check,
+  info: Info,
+  "circle-check": CircleCheck,
+  "triangle-alert": TriangleAlert,
+  "circle-alert": CircleAlert,
 } satisfies Record<string, LucideIcon>
 
 type IconName = keyof typeof icons
