@@ -16,7 +16,7 @@ type TextareaProps = React.ComponentProps<"textarea"> & {
   label?: string
   /** Example input shown while empty. Never a replacement for the label. */
   placeholder?: string
-  /** Helper text under the field; turns error red when invalid. */
+  /** Optional helper text under the field; turns error red when invalid. Figma `show helper` = `helper` is set: leave it out for no helper line. */
   helper?: string
   /** Figma Error state. Rendered as aria-invalid. */
   invalid?: boolean

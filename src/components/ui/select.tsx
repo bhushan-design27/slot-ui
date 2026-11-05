@@ -24,7 +24,7 @@ type SelectProps = {
   label?: string
   /** Shown while no option is selected. */
   placeholder?: string
-  /** Helper text under the field; turns error red when invalid. */
+  /** Optional helper text under the field; turns error red when invalid. Figma `show helper` = `helper` is set: leave it out for no helper line. */
   helper?: string
   /** The choices, in display order. */
   options: SelectOption[]

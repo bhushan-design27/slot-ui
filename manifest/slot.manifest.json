@@ -566,7 +566,7 @@
           "name": "helper",
           "type": "string",
           "required": false,
-          "description": "Helper text under the field; turns error red when invalid."
+          "description": "Optional helper text under the field; turns error red when invalid. Figma `show helper` = `helper` is set: leave it out for no helper line."
         },
         {
           "name": "invalid",
@@ -854,7 +854,7 @@
           "name": "helper",
           "type": "string",
           "required": false,
-          "description": "Helper text under the field; turns error red when invalid."
+          "description": "Optional helper text under the field; turns error red when invalid. Figma `show helper` = `helper` is set: leave it out for no helper line."
         },
         {
           "name": "value",
@@ -1008,7 +1008,7 @@
           "name": "helper",
           "type": "string",
           "required": false,
-          "description": "Helper text under the field; turns error red when invalid."
+          "description": "Optional helper text under the field; turns error red when invalid. Figma `show helper` = `helper` is set: leave it out for no helper line."
         },
         {
           "name": "invalid",
