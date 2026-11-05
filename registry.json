@@ -219,7 +219,8 @@
         "radix-ui"
       ],
       "registryDependencies": [
-        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json"
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json",
+        "https://bhushan-design27.github.io/slot-ui/r/icon.json"
       ],
       "files": [
         {

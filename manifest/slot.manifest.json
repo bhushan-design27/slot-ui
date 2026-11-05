@@ -217,24 +217,6 @@
           "description": "Visual emphasis: primary, secondary or danger (destructive)."
         },
         {
-          "name": "size",
-          "type": "\"small\" | \"medium\" | \"large\"",
-          "required": false,
-          "allowedValues": [
-            "small",
-            "medium",
-            "large"
-          ],
-          "default": "medium",
-          "description": "Height 36 / 48 / 56."
-        },
-        {
-          "name": "children",
-          "type": "React.ReactNode",
-          "required": false,
-          "description": "The label. Sentence case."
-        },
-        {
           "name": "disabled",
           "type": "boolean",
           "required": false,
@@ -248,16 +230,37 @@
           "description": "Render the single child (e.g. a link) with button styles instead of a <button>."
         },
         {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | \"large\" | \"icon\"",
+          "required": false,
+          "allowedValues": [
+            "small",
+            "medium",
+            "large",
+            "icon"
+          ],
+          "default": "medium",
+          "description": "Height 36 / 48 / 56; icon = a 36x36 icon-only button (needs `icon` and `aria-label`)."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "required": false,
+          "description": "The label. Sentence case. Not used with size=\"icon\"."
+        },
+        {
+          "name": "icon",
+          "type": "IconName",
+          "required": false,
+          "description": "Icon-only buttons: the Lucide icon (Figma: the nested Icon's name)."
+        },
+        {
           "name": "type",
           "type": "inherited (native attribute)",
           "required": false,
           "default": "button"
         }
       ],
-      "inherits": {
-        "from": "<button>",
-        "note": "Other props pass through to the rendered element (e.g. aria-*, onClick, className)."
-      },
       "states": [
         {
           "figma": "Default",
@@ -279,7 +282,8 @@
       "accessibility": [
         "Renders a native <button> with type=\"button\" by default, so it never submits a form by accident.",
         "Disabled uses the native attribute: the button leaves the tab order and is announced as unavailable.",
-        "Focus ring: 2px border-focus outline, 2px from the button (transparent gap), on :focus-visible only."
+        "Focus ring: 2px border-focus outline, 2px from the button (transparent gap), on :focus-visible only.",
+        "size=\"icon\" requires aria-label (enforced by the types); the icon itself is decorative."
       ],
       "importPath": "@/components/ui/button",
       "exports": [
@@ -287,19 +291,21 @@
         "buttonVariants"
       ],
       "usage": {
-        "status": "Approved",
+        "status": "DRAFT - needs review",
         "purpose": "Triggers an action: submitting, saving, confirming, opening a dialog. The variant tells the user how important or risky the action is.",
         "useWhen": [
           "`primary`: the main action of a screen, form or dialog (\"Book now\", \"Save changes\"). At most one primary button per area.",
           "`secondary`: alternative or less important actions next to a primary one (\"Back\", \"Keep booking\"), or actions on a screen that has no single main action.",
           "`danger`: the action destroys or cancels something and can't easily be undone (\"Cancel booking\", \"Delete account\"). Usually confirmed in a Dialog first.",
-          "`size`: `medium` by default; `large` for the main action on a sparse screen or a touch-first layout; `small` in dense layouts, next to other small controls."
+          "`size`: `medium` by default; `large` for the main action on a sparse screen or a touch-first layout; `small` in dense layouts, next to other small controls.",
+          "`size` `icon` (36x36, with `icon` and `aria-label`): a well-known action that needs no visible label, such as previous/next month in a calendar. The `aria-label` says the action (\"Previous month\")."
         ],
         "dontUseWhen": [
           "The action navigates to another page: use a link, or a Button with `asChild` wrapping the link, so it is announced as a link.",
           "The control selects an option: use RadioGroup or Select (one choice) or Chip (filters).",
           "You need a red button for emphasis rather than a destructive action: `danger` means destructive only.",
-          "Two `primary` buttons would sit side by side: make one `secondary`."
+          "Two `primary` buttons would sit side by side: make one `secondary`.",
+          "An icon-only button would need explaining: use a labelled size instead; icons alone are for actions everyone recognises."
         ]
       },
       "registryItem": "https://bhushan-design27.github.io/slot-ui/r/button.json"

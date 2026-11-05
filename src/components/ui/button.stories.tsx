@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { expect } from 'storybook/test'
 import { Button } from './button'
 
 const variants = ['primary', 'secondary', 'danger'] as const
 const sizes = ['small', 'medium', 'large'] as const
+const allSizes = [...sizes, 'icon'] as const
 const states = ['Default', 'Hover', 'Focus', 'Disabled'] as const
 
 const meta = {
@@ -47,7 +49,7 @@ export const AllVariants: Story = {
         <tr>
           <td />
           {variants.map((variant) => (
-            <th key={variant} colSpan={sizes.length} className="text-left font-medium text-(--color-text-primary)">
+            <th key={variant} colSpan={allSizes.length} className="text-left font-medium text-(--color-text-primary)">
               {variant}
             </th>
           ))}
@@ -55,7 +57,7 @@ export const AllVariants: Story = {
         <tr>
           <td />
           {variants.flatMap((variant) =>
-            sizes.map((size) => (
+            allSizes.map((size) => (
               <th key={`${variant}-${size}`} className="text-left font-normal">
                 {size}
               </th>
@@ -68,11 +70,15 @@ export const AllVariants: Story = {
           <tr key={state} data-figma-state={state}>
             <th className="pr-(--space-4) text-left font-medium text-(--color-text-primary)">{state}</th>
             {variants.flatMap((variant) =>
-              sizes.map((size) => (
+              allSizes.map((size) => (
                 <td key={`${variant}-${size}`}>
-                  <Button variant={variant} size={size} disabled={state === 'Disabled'}>
-                    Book now
-                  </Button>
+                  {size === 'icon' ? (
+                    <Button variant={variant} size="icon" icon="chevron-left" aria-label="Previous month" disabled={state === 'Disabled'} />
+                  ) : (
+                    <Button variant={variant} size={size} disabled={state === 'Disabled'}>
+                      Book now
+                    </Button>
+                  )}
                 </td>
               )),
             )}
@@ -81,4 +87,26 @@ export const AllVariants: Story = {
       </tbody>
     </table>
   ),
+}
+
+/** size="icon": the accessible name comes from aria-label (Figma `label`). */
+export const IconOnly: Story = {
+  name: 'Icon only',
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <div className="flex gap-(--space-2)">
+      <Button variant="secondary" size="icon" icon="chevron-left" aria-label="Previous month" />
+      <Button variant="secondary" size="icon" icon="chevron-right" aria-label="Next month" />
+    </div>
+  ),
+  play: async ({ canvas, userEvent }) => {
+    const previous = canvas.getByRole('button', { name: 'Previous month' })
+    const next = canvas.getByRole('button', { name: 'Next month' })
+    await expect(previous).toHaveAttribute('type', 'button')
+    await userEvent.tab()
+    await expect(previous).toHaveFocus()
+    await userEvent.tab()
+    await expect(next).toHaveFocus()
+    await expect(next.querySelector('svg')).toHaveAttribute('aria-hidden', 'true')
+  },
 }

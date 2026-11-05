@@ -2,6 +2,7 @@ import * as React from "react"
 import { cva } from "class-variance-authority"
 import { cn } from "cn"
 import { Slot } from "radix-ui"
+import { Icon, type IconName } from "@/components/ui/icon"
 
 /*
  * Figma: Button (12:54). variant × size map to props; state is CSS:
@@ -16,6 +17,13 @@ import { Slot } from "radix-ui"
  * border-width-2: same geometry, but the gap is transparent, so it works on
  * any background. Only colours transition (not outline-color, which
  * `transition-colors` includes), so the ring appears instantly.
+ *
+ * size="icon" (Figma size=Icon): a 36x36 square, space-2 padding around a
+ * 20px Icon. The Figma `label` property is its accessible name, so in code
+ * `aria-label` is required (TypeScript fails without it) and there are no
+ * children. The icon uses currentColor, i.e. the label colour of each
+ * state; Figma binds the matching icon tokens (icon/on-action,
+ * icon/action, icon/action-hover, icon/disabled, icon/on-disabled).
  */
 const buttonVariants = cva(
   [
@@ -52,6 +60,8 @@ const buttonVariants = cva(
         // Label/Medium
         large:
           "px-(--space-6) py-(--space-4) text-(length:--font-size-body) leading-(--font-line-height-body)",
+        // 36 x 36: space-2 + 20px Icon + space-2
+        icon: "p-(--space-2)",
       },
     },
     defaultVariants: {
@@ -61,17 +71,44 @@ const buttonVariants = cva(
   }
 )
 
-type ButtonProps = React.ComponentProps<"button"> & {
+type ButtonBaseProps = Omit<React.ComponentProps<"button">, "children"> & {
   /** Visual emphasis: primary, secondary or danger (destructive). */
   variant?: "primary" | "secondary" | "danger"
-  /** Height 36 / 48 / 56. */
-  size?: "small" | "medium" | "large"
-  /** The label. Sentence case. */
-  children?: React.ReactNode
   /** Figma Disabled state. Native attribute. */
   disabled?: boolean
   /** Render the single child (e.g. a link) with button styles instead of a <button>. */
   asChild?: boolean
+}
+
+type LabelButtonProps = ButtonBaseProps & {
+  /** Height 36 / 48 / 56; icon = a 36x36 icon-only button. */
+  size?: "small" | "medium" | "large"
+  /** The label. Sentence case. */
+  children?: React.ReactNode
+  icon?: never
+}
+
+type IconButtonProps = ButtonBaseProps & {
+  /** Height 36 / 48 / 56; icon = a 36x36 icon-only button. */
+  size: "icon"
+  /** Icon-only buttons: the Lucide icon (Figma: the nested Icon's name). */
+  icon: IconName
+  /** Required for icon-only buttons: the accessible name, e.g. "Previous month" (Figma `label`). */
+  "aria-label": string
+  children?: never
+}
+
+/**
+ * The implementation's props: one flat type, so react-docgen (the manifest)
+ * can read every prop and value. Callers get the stricter overloads below.
+ */
+type ButtonProps = ButtonBaseProps & {
+  /** Height 36 / 48 / 56; icon = a 36x36 icon-only button (needs `icon` and `aria-label`). */
+  size?: "small" | "medium" | "large" | "icon"
+  /** The label. Sentence case. Not used with size="icon". */
+  children?: React.ReactNode
+  /** Icon-only buttons: the Lucide icon (Figma: the nested Icon's name). */
+  icon?: IconName
 }
 
 /**
@@ -82,14 +119,19 @@ type ButtonProps = React.ComponentProps<"button"> & {
  * @a11y Renders a native <button> with type="button" by default, so it never submits a form by accident.
  * @a11y Disabled uses the native attribute: the button leaves the tab order and is announced as unavailable.
  * @a11y Focus ring: 2px border-focus outline, 2px from the button (transparent gap), on :focus-visible only.
+ * @a11y size="icon" requires aria-label (enforced by the types); the icon itself is decorative.
  */
 
+function Button(props: IconButtonProps): React.JSX.Element
+function Button(props: LabelButtonProps): React.JSX.Element
 function Button({
   className,
   variant = "primary",
   size = "medium",
   asChild = false,
   type = "button",
+  icon,
+  children,
   ...props
 }: ButtonProps) {
   const Comp = asChild ? Slot.Root : "button"
@@ -102,7 +144,9 @@ function Button({
       type={asChild ? undefined : type}
       className={cn(buttonVariants({ variant, size }), className)}
       {...props}
-    />
+    >
+      {icon ? <Icon name={icon} className="text-current" /> : children}
+    </Comp>
   )
 }
 

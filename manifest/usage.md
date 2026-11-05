@@ -74,7 +74,7 @@ A short, non-interactive status label, such as a booking status.
 
 ## Button
 
-Status: Approved
+Status: DRAFT - needs review
 
 ### Purpose
 
@@ -87,6 +87,7 @@ The variant tells the user how important or risky the action is.
 - `secondary`: alternative or less important actions next to a primary one ("Back", "Keep booking"), or actions on a screen that has no single main action.
 - `danger`: the action destroys or cancels something and can't easily be undone ("Cancel booking", "Delete account"). Usually confirmed in a Dialog first.
 - `size`: `medium` by default; `large` for the main action on a sparse screen or a touch-first layout; `small` in dense layouts, next to other small controls.
+- `size` `icon` (36x36, with `icon` and `aria-label`): a well-known action that needs no visible label, such as previous/next month in a calendar. The `aria-label` says the action ("Previous month").
 
 ### Don't use when
 
@@ -94,6 +95,7 @@ The variant tells the user how important or risky the action is.
 - The control selects an option: use RadioGroup or Select (one choice) or Chip (filters).
 - You need a red button for emphasis rather than a destructive action: `danger` means destructive only.
 - Two `primary` buttons would sit side by side: make one `secondary`.
+- An icon-only button would need explaining: use a labelled size instead; icons alone are for actions everyone recognises.
 
 ## Card
 
