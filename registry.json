@@ -479,6 +479,26 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "time-slot-group",
+      "type": "registry:ui",
+      "title": "TimeSlotGroup",
+      "description": "A grid of times for one day that behaves as a radio group.",
+      "dependencies": [
+        "cn",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "https://bhushan-design27.github.io/slot-ui/r/slot-tokens.json",
+        "https://bhushan-design27.github.io/slot-ui/r/inline-message.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/time-slot-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

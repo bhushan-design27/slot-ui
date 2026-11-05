@@ -1582,6 +1582,115 @@
         ]
       },
       "registryItem": "https://bhushan-design27.github.io/slot-ui/r/textarea.json"
+    },
+    {
+      "name": "TimeSlotGroup",
+      "description": "A grid of times for one day that behaves as a radio group.",
+      "figma": {
+        "component": "Time Slot Group",
+        "nodeId": "175:415"
+      },
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "description": "Visible label, Label/Small, e.g. \"Available times on Tuesday, November 10\"."
+        },
+        {
+          "name": "slots",
+          "type": "TimeSlot[]",
+          "required": true,
+          "description": "The day's times, in order."
+        },
+        {
+          "name": "emptyMessage",
+          "type": "string",
+          "required": false,
+          "default": "No times left on this day. Try another day.",
+          "description": "Shown in an info InlineMessage when no slot is available."
+        }
+      ],
+      "inherits": {
+        "from": "Radix RadioGroup.Root",
+        "note": "Other props pass through to the rendered element (e.g. aria-*, onClick, className).",
+        "omitted": [
+          "orientation",
+          "dir",
+          "children"
+        ]
+      },
+      "states": [],
+      "accessibility": [
+        "role=\"radiogroup\" labelled by the visible label; one Tab stop; arrow keys move to the next or previous available time and select it.",
+        "Each slot is a role=\"radio\" named by its time (\"10:00 AM\"); unavailable times are disabled, so they are announced as unavailable and skipped.",
+        "With no available times, an info InlineMessage (role=\"status\") replaces the grid, so changing to a full day is announced politely."
+      ],
+      "importPath": "@/components/ui/time-slot-group",
+      "exports": [
+        "TimeSlotGroup",
+        "TimeSlotItem"
+      ],
+      "parts": [
+        {
+          "name": "TimeSlotItem",
+          "description": "One time in a TimeSlotGroup. TimeSlotGroup renders these from `slots`.",
+          "figma": {
+            "component": "Time Slot",
+            "nodeId": "175:335"
+          },
+          "props": [
+            {
+              "name": "time",
+              "type": "Date",
+              "required": true
+            }
+          ],
+          "inherits": {
+            "from": "Radix RadioGroup.Item",
+            "note": "Other props pass through to the rendered element (e.g. aria-*, onClick, className).",
+            "omitted": [
+              "value",
+              "children"
+            ]
+          },
+          "states": [
+            {
+              "figma": "Default",
+              "code": "Default rendering, no prop"
+            },
+            {
+              "figma": "Hover",
+              "code": "CSS :hover, not a prop"
+            },
+            {
+              "figma": "Focus",
+              "code": "CSS :focus-visible, not a prop"
+            },
+            {
+              "figma": "Disabled",
+              "code": "Native `disabled` attribute"
+            }
+          ],
+          "accessibility": [
+            "Figma `selected` is the group's `value` (the slot's ISO time), announced from aria-checked."
+          ]
+        }
+      ],
+      "usage": {
+        "status": "DRAFT - needs review",
+        "purpose": "The times available on one day, as a grid you pick one from: 3 columns on phones, 4 from 640px.",
+        "useWhen": [
+          "Choosing a start time after the day is chosen; the `label` names the day (\"Available times on Tuesday, November 10\").",
+          "Pass every time of the day in `slots`, in order; mark taken ones as disabled so the grid doesn't jump between days.",
+          "A day with no available time shows the info message by itself; set `emptyMessage` only to change its wording."
+        ],
+        "dontUseWhen": [
+          "Choosing a day: use a calendar first, then this for the time.",
+          "Picking one of a few non-time options: use RadioGroup or ChoiceCardGroup."
+        ]
+      },
+      "registryItem": "https://bhushan-design27.github.io/slot-ui/r/time-slot-group.json"
     }
   ],
   "tokens": {
@@ -1676,7 +1785,8 @@
         "value": "#ffffff",
         "usedBy": [
           "Button",
-          "Chip"
+          "Chip",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -1693,7 +1803,8 @@
         "usedBy": [
           "Button",
           "Chip",
-          "RadioGroup"
+          "RadioGroup",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -1710,7 +1821,8 @@
         "usedBy": [
           "Chip",
           "ChoiceCardGroup",
-          "RadioGroup"
+          "RadioGroup",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -1725,7 +1837,8 @@
         "aliasOf": "color/blue/700",
         "value": "#2f6890",
         "usedBy": [
-          "RadioGroup"
+          "RadioGroup",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -1756,7 +1869,8 @@
         "usedBy": [
           "Button",
           "Chip",
-          "ChoiceCardGroup"
+          "ChoiceCardGroup",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -1772,7 +1886,8 @@
         "usedBy": [
           "Chip",
           "ChoiceCardGroup",
-          "RadioGroup"
+          "RadioGroup",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -1792,7 +1907,8 @@
           "Input",
           "RadioGroup",
           "Select",
-          "Textarea"
+          "Textarea",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -1851,7 +1967,8 @@
           "Input",
           "RadioGroup",
           "Select",
-          "Textarea"
+          "Textarea",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -1910,7 +2027,8 @@
         "usedBy": [
           "Chip",
           "ChoiceCardGroup",
-          "RadioGroup"
+          "RadioGroup",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -1925,7 +2043,8 @@
         "value": "#2f6890",
         "usedBy": [
           "ChoiceCardGroup",
-          "RadioGroup"
+          "RadioGroup",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -2396,7 +2515,8 @@
         "usedBy": [
           "AppHeader",
           "Button",
-          "Chip"
+          "Chip",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -2416,7 +2536,8 @@
           "Input",
           "RadioGroup",
           "Select",
-          "Textarea"
+          "Textarea",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -2479,7 +2600,8 @@
         "value": "#ffffff",
         "usedBy": [
           "Button",
-          "Chip"
+          "Chip",
+          "TimeSlotGroup"
         ]
       },
       {
@@ -2534,7 +2656,8 @@
           "RadioGroup",
           "Select",
           "StepIndicator",
-          "Textarea"
+          "Textarea",
+          "TimeSlotGroup"
         ]
       },
       {

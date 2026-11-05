@@ -358,6 +358,26 @@ Progress through the five booking steps: service, therapist, time, details and r
 - Outside the five booking steps, or for a flow with other steps: Slot has no general stepper yet.
 - As navigation: steps aren't links.
 
+## TimeSlotGroup
+
+Status: DRAFT - needs review
+
+### Purpose
+
+The times available on one day, as a grid you pick one from: 3 columns
+on phones, 4 from 640px.
+
+### Use when
+
+- Choosing a start time after the day is chosen; the `label` names the day ("Available times on Tuesday, November 10").
+- Pass every time of the day in `slots`, in order; mark taken ones as disabled so the grid doesn't jump between days.
+- A day with no available time shows the info message by itself; set `emptyMessage` only to change its wording.
+
+### Don't use when
+
+- Choosing a day: use a calendar first, then this for the time.
+- Picking one of a few non-time options: use RadioGroup or ChoiceCardGroup.
+
 ## Textarea
 
 Status: Approved
