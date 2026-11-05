@@ -108,6 +108,20 @@ function keysOfTypeofAlias(source: string, propsType: string, prop: string): str
   return [...body.matchAll(/^\s*"?([\w-]+)"?:/gm)].map((m) => m[1])
 }
 
+/**
+ * A prop typed with an alias imported from another Slot component file
+ * (e.g. `icon?: IconName` from "@/components/ui/icon") → that alias's
+ * `keyof typeof obj` keys, so the manifest lists the allowed values.
+ */
+function keysOfImportedAlias(source: string, typeName: string): string[] | undefined {
+  const from = source.match(new RegExp(`import \\{[^}]*\\btype ${typeName}\\b[^}]*\\} from "@/components/ui/([\\w-]+)"`))?.[1]
+  if (!from) return undefined
+  const other = read(`${COMPONENT_DIR}/${from}.tsx`)
+  const object = other.match(new RegExp(`type ${typeName} = keyof typeof (\\w+)`))?.[1]
+  const body = object && other.match(new RegExp(`const ${object} = \\{([\\s\\S]*?)\\n\\}`))?.[1]
+  return body ? [...body.matchAll(/^\s*"?([\w-]+)"?:/gm)].map((m) => m[1]) : undefined
+}
+
 type Prop = {
   name: string
   type: string
@@ -128,6 +142,12 @@ function props(doc: Documentation, source: string, propsType: string): Prop[] {
       } else if (ts?.name === 'unknown') {
         prop.allowedValues = keysOfTypeofAlias(source, propsType, name)
         prop.type = prop.allowedValues.map((v) => JSON.stringify(v)).join(' | ')
+      } else if (ts?.name && /^[A-Z]\w*$/.test(ts.name)) {
+        const imported = keysOfImportedAlias(source, ts.name)
+        if (imported) {
+          prop.allowedValues = imported
+          prop.type = imported.map((v) => JSON.stringify(v)).join(' | ')
+        }
       }
       if (p.defaultValue) prop.default = literal(String(p.defaultValue.value))
       if (p.description) prop.description = p.description

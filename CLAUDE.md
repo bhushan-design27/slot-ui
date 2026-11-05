@@ -61,6 +61,12 @@ Rules for working in the **Slot** Figma file (`kcQ8UEPlSVCNw8Qs2LL6aZ`).
   scale applies to controls with a background or border box (Button,
   Input, Select, Chip). Radio rows are 24px (20px circle + Body/Medium
   line); stacked with space/3 they repeat every 36px.
+- Choice card is exempt from the scale: like Card, its height follows its
+  content (space/4 padding + title + description = 76px).
+- Selected states: small controls (Chip, Time slot) use the solid
+  selected fill (action/selected + text/on-action). Large selectable cards
+  (Choice card) use a tint (surface/selected), a border/width/2
+  border/selected ring and a check; their text keeps its normal colours.
 - Nested corners: inner radius = outer radius minus padding.
 - Error indicators that mark a whole group sit outside the group's box,
   so showing them never shifts or indents content. (Radio Group: the bar

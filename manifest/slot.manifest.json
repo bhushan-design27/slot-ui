@@ -250,8 +250,19 @@
         },
         {
           "name": "icon",
-          "type": "IconName",
+          "type": "\"chevron-down\" | \"check\" | \"info\" | \"circle-check\" | \"triangle-alert\" | \"circle-alert\" | \"chevron-left\" | \"chevron-right\" | \"users\"",
           "required": false,
+          "allowedValues": [
+            "chevron-down",
+            "check",
+            "info",
+            "circle-check",
+            "triangle-alert",
+            "circle-alert",
+            "chevron-left",
+            "chevron-right",
+            "users"
+          ],
           "description": "Icon-only buttons: the Lucide icon (Figma: the nested Icon's name)."
         },
         {
@@ -469,6 +480,182 @@
         ]
       },
       "registryItem": "https://bhushan-design27.github.io/slot-ui/r/chip.json"
+    },
+    {
+      "name": "ChoiceCardGroup",
+      "description": "A radio group of large selectable cards: pick one service or one therapist.",
+      "figma": {
+        "component": "Choice Card Group",
+        "nodeId": "173:352"
+      },
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Visible group label, Label/Small, e.g. \"Choose a service\"."
+        },
+        {
+          "name": "helper",
+          "type": "string",
+          "required": false,
+          "description": "Helper text under the cards; turns error red when invalid."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "description": "Figma Error state: helper in text-error plus the error bar. Rendered as aria-invalid."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": false,
+          "description": "Figma Disabled state: every card is disabled."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "required": false,
+          "description": "The ChoiceCards."
+        }
+      ],
+      "inherits": {
+        "from": "Radix RadioGroup.Root",
+        "note": "Other props pass through to the rendered element (e.g. aria-*, onClick, className).",
+        "omitted": [
+          "orientation",
+          "dir",
+          "children"
+        ]
+      },
+      "states": [
+        {
+          "figma": "Default",
+          "code": "Default rendering, no prop"
+        },
+        {
+          "figma": "Error",
+          "code": "`invalid` prop, rendered as aria-invalid"
+        },
+        {
+          "figma": "Disabled",
+          "code": "Native `disabled` attribute"
+        }
+      ],
+      "accessibility": [
+        "role=\"radiogroup\" labelled by the visible label; helper text is linked with aria-describedby; Error sets aria-invalid on the group.",
+        "Keyboard: one Tab stop (the selected card, else the first); arrow keys move between cards and select them; Space selects the focused card.",
+        "Continue sits outside the group, as the next Tab stop."
+      ],
+      "importPath": "@/components/ui/choice-card-group",
+      "exports": [
+        "ChoiceCardGroup",
+        "ChoiceCard"
+      ],
+      "parts": [
+        {
+          "name": "ChoiceCard",
+          "description": "One card in a ChoiceCardGroup: title, description, optional avatar or icon and detail.",
+          "figma": {
+            "component": "Choice Card",
+            "nodeId": "172:322"
+          },
+          "props": [
+            {
+              "name": "title",
+              "type": "string",
+              "required": true,
+              "description": "The choice, Label/Medium: a service or a therapist's name."
+            },
+            {
+              "name": "description",
+              "type": "string",
+              "required": true,
+              "description": "Supporting text, Body/Small text-secondary."
+            },
+            {
+              "name": "detail",
+              "type": "string",
+              "required": false,
+              "description": "Optional trailing detail, Label/Medium, e.g. a price (Figma `show detail`)."
+            },
+            {
+              "name": "avatar",
+              "type": "{ name: string; src?: string }",
+              "required": false,
+              "description": "Optional leading person (Figma `show avatar`); decorative, the title names them."
+            },
+            {
+              "name": "icon",
+              "type": "\"chevron-down\" | \"check\" | \"info\" | \"circle-check\" | \"triangle-alert\" | \"circle-alert\" | \"chevron-left\" | \"chevron-right\" | \"users\"",
+              "required": false,
+              "allowedValues": [
+                "chevron-down",
+                "check",
+                "info",
+                "circle-check",
+                "triangle-alert",
+                "circle-alert",
+                "chevron-left",
+                "chevron-right",
+                "users"
+              ],
+              "description": "Optional leading icon tile when there's no person, e.g. \"users\" (Figma `show icon`)."
+            }
+          ],
+          "inherits": {
+            "from": "Radix RadioGroup.Item",
+            "note": "Other props pass through to the rendered element (e.g. aria-*, onClick, className).",
+            "omitted": [
+              "title",
+              "children",
+              "asChild"
+            ]
+          },
+          "states": [
+            {
+              "figma": "Default",
+              "code": "Default rendering, no prop"
+            },
+            {
+              "figma": "Hover",
+              "code": "CSS :hover, not a prop"
+            },
+            {
+              "figma": "Focus",
+              "code": "CSS :focus-visible, not a prop"
+            },
+            {
+              "figma": "Disabled",
+              "code": "Native `disabled` attribute"
+            }
+          ],
+          "accessibility": [
+            "Figma `selected` is the group's `value` (not a prop on the card), announced from aria-checked.",
+            "A role=\"radio\" button named by its title; the description and detail are its accessible description.",
+            "The avatar, icon tile and check are decorative; Selected is announced from aria-checked."
+          ]
+        }
+      ],
+      "usage": {
+        "status": "DRAFT - needs review",
+        "purpose": "A radio group of large cards for picking one option that needs more than a word: one service, or one therapist.",
+        "useWhen": [
+          "Each option needs a title and a line of description, and maybe a price (`detail`) or a person (`avatar`).",
+          "Therapists: `avatar` with the therapist's name and photo; for \"Any available therapist\", use `icon` `users` so the titles line up with the avatar cards.",
+          "Always with a visible `label`; `invalid` with a `helper` that says what to choose (\"Choose a service to continue\"). Put the continue button after the group, not inside it.",
+          "Selected cards use a tint, a ring and a check (the large-card selected style); don't restyle them."
+        ],
+        "dontUseWhen": [
+          "The options are short labels: use RadioGroup (2 to 5) or Select (more).",
+          "More than one can be chosen: Slot has no checkbox cards yet.",
+          "The card should navigate or open something: use Card with a link, or Button."
+        ]
+      },
+      "registryItem": "https://bhushan-design27.github.io/slot-ui/r/choice-card-group.json"
     },
     {
       "name": "Dialog",
@@ -1441,7 +1628,8 @@
         "aliasOf": "color/slate/200",
         "value": "#e2e8f0",
         "usedBy": [
-          "Button"
+          "Button",
+          "ChoiceCardGroup"
         ]
       },
       {
@@ -1521,6 +1709,7 @@
         "value": "#3e7ca6",
         "usedBy": [
           "Chip",
+          "ChoiceCardGroup",
           "RadioGroup"
         ]
       },
@@ -1566,7 +1755,8 @@
         "value": "#2f6890",
         "usedBy": [
           "Button",
-          "Chip"
+          "Chip",
+          "ChoiceCardGroup"
         ]
       },
       {
@@ -1581,6 +1771,7 @@
         "value": "#8592a5",
         "usedBy": [
           "Chip",
+          "ChoiceCardGroup",
           "RadioGroup"
         ]
       },
@@ -1597,6 +1788,7 @@
         "usedBy": [
           "Button",
           "Chip",
+          "ChoiceCardGroup",
           "Input",
           "RadioGroup",
           "Select",
@@ -1615,6 +1807,7 @@
         "value": "#dc2626",
         "usedBy": [
           "Badge",
+          "ChoiceCardGroup",
           "InlineMessage",
           "Input",
           "RadioGroup",
@@ -1653,6 +1846,7 @@
           "AppHeader",
           "Button",
           "Chip",
+          "ChoiceCardGroup",
           "Disclosure",
           "Input",
           "RadioGroup",
@@ -1692,13 +1886,13 @@
       {
         "name": "color/border/secondary",
         "cssVariable": "--color-border-secondary",
-        "job": "Border that matches text/secondary, e.g. the upcoming step marker in the Step Indicator.",
+        "job": "Border that matches text/secondary (slate/600), e.g. the upcoming step marker in the Step Indicator.",
         "jobSource": "figma-description",
         "scopes": [
           "STROKE_COLOR"
         ],
-        "aliasOf": "color/slate/500",
-        "value": "#64748b",
+        "aliasOf": "color/slate/600",
+        "value": "#475569",
         "usedBy": [
           "StepIndicator"
         ]
@@ -1715,6 +1909,7 @@
         "value": "#3e7ca6",
         "usedBy": [
           "Chip",
+          "ChoiceCardGroup",
           "RadioGroup"
         ]
       },
@@ -1729,6 +1924,7 @@
         "aliasOf": "color/blue/700",
         "value": "#2f6890",
         "usedBy": [
+          "ChoiceCardGroup",
           "RadioGroup"
         ]
       },
@@ -1746,6 +1942,7 @@
           "AppHeader",
           "Avatar",
           "Card",
+          "ChoiceCardGroup",
           "Dialog",
           "Disclosure",
           "Select"
@@ -1859,6 +2056,7 @@
         "aliasOf": "color/slate/400",
         "value": "#8592a5",
         "usedBy": [
+          "ChoiceCardGroup",
           "Icon",
           "RadioGroup"
         ]
@@ -1903,6 +2101,7 @@
         "aliasOf": "color/white",
         "value": "#ffffff",
         "usedBy": [
+          "ChoiceCardGroup",
           "RadioGroup",
           "StepIndicator"
         ]
@@ -1917,7 +2116,9 @@
         ],
         "aliasOf": "color/slate/500",
         "value": "#64748b",
-        "usedBy": []
+        "usedBy": [
+          "ChoiceCardGroup"
+        ]
       },
       {
         "name": "color/icon/success",
@@ -1975,6 +2176,7 @@
         "aliasOf": "color/slate/50",
         "value": "#f8fafc",
         "usedBy": [
+          "ChoiceCardGroup",
           "Input",
           "RadioGroup",
           "Select",
@@ -2027,6 +2229,7 @@
         "aliasOf": "color/slate/50",
         "value": "#f8fafc",
         "usedBy": [
+          "ChoiceCardGroup",
           "Disclosure",
           "Select"
         ]
@@ -2060,7 +2263,8 @@
         "value": "#f8fafc",
         "usedBy": [
           "Avatar",
-          "Badge"
+          "Badge",
+          "ChoiceCardGroup"
         ]
       },
       {
@@ -2093,6 +2297,7 @@
         "usedBy": [
           "AppHeader",
           "Card",
+          "ChoiceCardGroup",
           "Dialog",
           "Disclosure",
           "Select",
@@ -2111,6 +2316,7 @@
         "aliasOf": "color/blue/50",
         "value": "#eef4f9",
         "usedBy": [
+          "ChoiceCardGroup",
           "Select"
         ]
       },
@@ -2206,6 +2412,7 @@
         "usedBy": [
           "Button",
           "Chip",
+          "ChoiceCardGroup",
           "Input",
           "RadioGroup",
           "Select",
@@ -2224,6 +2431,7 @@
         "value": "#b91c1c",
         "usedBy": [
           "Badge",
+          "ChoiceCardGroup",
           "Input",
           "RadioGroup",
           "Select",
@@ -2317,6 +2525,7 @@
         "usedBy": [
           "Card",
           "Chip",
+          "ChoiceCardGroup",
           "Dialog",
           "Disclosure",
           "InlineMessage",
@@ -2336,9 +2545,10 @@
         "scopes": [
           "TEXT_FILL"
         ],
-        "aliasOf": "color/slate/500",
-        "value": "#64748b",
+        "aliasOf": "color/slate/600",
+        "value": "#475569",
         "usedBy": [
+          "ChoiceCardGroup",
           "Dialog",
           "Disclosure",
           "Input",
@@ -2621,6 +2831,8 @@
       "rules": [
         "For components with borders, exclude strokes from layout.",
         "Verify component heights match the size scale: **36 / 48 / 56**. The scale applies to controls with a background or border box (Button, Input, Select, Chip). Radio rows are 24px (20px circle + Body/Medium line); stacked with space/3 they repeat every 36px.",
+        "Choice card is exempt from the scale: like Card, its height follows its content (space/4 padding + title + description = 76px).",
+        "Selected states: small controls (Chip, Time slot) use the solid selected fill (action/selected + text/on-action). Large selectable cards (Choice card) use a tint (surface/selected), a border/width/2 border/selected ring and a check; their text keeps its normal colours.",
         "Nested corners: inner radius = outer radius minus padding.",
         "Error indicators that mark a whole group sit outside the group's box, so showing them never shifts or indents content. (Radio Group: the bar is 14px left of the content, border/width/2 + space/3; containers must leave that space unclipped. Form columns have at least 16px of margin on mobile.)"
       ]

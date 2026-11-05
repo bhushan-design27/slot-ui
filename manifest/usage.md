@@ -14,6 +14,10 @@ Dates and times are en-US (CLAUDE.md, "UI copy"): weeks start on
 Sunday, "Tuesday, November 10" (long), "Tue, Nov 10" (short), times
 "10:00 AM". Format them with `src/lib/format.ts`, never by hand.
 
+Selected states (CLAUDE.md, "Borders and sizing"): small controls
+(Chip, time slots) use the solid selected fill; large selectable cards
+(choice cards) use a tint, a ring and a check.
+
 ## AppHeader
 
 Status: DRAFT - needs review
@@ -118,6 +122,28 @@ booking summary.
 - You only need spacing between sections: use space tokens, not a border.
 - The content needs the user's decision before continuing: use Dialog.
 - You would nest a card inside a card.
+
+## ChoiceCardGroup
+
+Status: DRAFT - needs review
+
+### Purpose
+
+A radio group of large cards for picking one option that needs more
+than a word: one service, or one therapist.
+
+### Use when
+
+- Each option needs a title and a line of description, and maybe a price (`detail`) or a person (`avatar`).
+- Therapists: `avatar` with the therapist's name and photo; for "Any available therapist", use `icon` `users` so the titles line up with the avatar cards.
+- Always with a visible `label`; `invalid` with a `helper` that says what to choose ("Choose a service to continue"). Put the continue button after the group, not inside it.
+- Selected cards use a tint, a ring and a check (the large-card selected style); don't restyle them.
+
+### Don't use when
+
+- The options are short labels: use RadioGroup (2 to 5) or Select (more).
+- More than one can be chosen: Slot has no checkbox cards yet.
+- The card should navigate or open something: use Card with a link, or Button.
 
 ## Chip
 
