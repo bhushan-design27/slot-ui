@@ -3,7 +3,7 @@ import { InlineMessage } from './inline-message'
 
 const variants = ['info', 'success', 'warning', 'error'] as const
 const examples: Record<(typeof variants)[number], { title: string; message: string }> = {
-  info: { title: 'Booking updated', message: "We've moved your appointment to 10:30." },
+  info: { title: 'Booking updated', message: "We've moved your appointment to 10:30 AM." },
   success: { title: 'Booking confirmed', message: "We've sent the details to your email." },
   warning: { title: 'Arrive 10 minutes early', message: 'Your first visit starts with a short health form.' },
   error: { title: "We couldn't take payment", message: 'Check your card details and try again.' },

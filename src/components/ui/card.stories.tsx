@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { formatDateTimeLong } from '@/lib/format'
 import { Card } from './card'
 
 const elevations = ['flat', 'raised'] as const
@@ -10,7 +11,7 @@ const bookingSummary = (
       Deep tissue massage, 60 min
     </p>
     <p className="w-full text-(length:--font-size-small) leading-(--font-line-height-small) text-(--color-text-secondary)">
-      Tuesday 4 November at 10:00
+      {formatDateTimeLong(new Date(2026, 10, 10, 10, 0))}
     </p>
   </>
 )

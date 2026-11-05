@@ -660,7 +660,7 @@
         "purpose": "Shows a summary (and an optional detail line) that the user can expand to see more below it, e.g. a compact booking summary on mobile.",
         "useWhen": [
           "Secondary detail that most people don't need to read every time, but some will want to check (the full booking details on a small screen).",
-          "The `summary` makes sense on its own when collapsed; with `detail`, the two read as one name (\"Deep tissue massage\", \"Tue 4 Nov, 10:00 · $95\"). Together they are the button's accessible name.",
+          "The `summary` makes sense on its own when collapsed; with `detail`, the two read as one name (\"Deep tissue massage\", \"Tue, Nov 10, 10:00 AM · $95\"). Together they are the button's accessible name.",
           "Use `detail` for a second, secondary line instead of letting one long summary wrap.",
           "Closed by default; use `defaultOpen` (or `open`) only when most people will need the content."
         ],
@@ -2567,7 +2567,8 @@
     {
       "section": "UI copy",
       "rules": [
-        "UI copy uses sentence case (e.g. \"Save changes\", not \"Save Changes\")."
+        "UI copy uses sentence case (e.g. \"Save changes\", not \"Save Changes\").",
+        "Locale is en-US everywhere (the studio is in the US), in Figma and code: - Weeks start on Sunday. - Dates: long \"Tuesday, November 10\", short \"Tue, Nov 10\"; months \"November 2026\". Add the year only where it is ambiguous. - Times are 12-hour: \"10:00 AM\". With a date: \"Tuesday, November 10 at 10:00 AM\" (long) or \"Tue, Nov 10, 10:00 AM\" (short). - Prices in US dollars: \"$95\". - In code, format dates and times with `src/lib/format.ts`, never by hand."
       ]
     },
     {

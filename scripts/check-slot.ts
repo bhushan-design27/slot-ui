@@ -3,7 +3,8 @@
  * allow-list in manifest/slot.manifest.json. Fails on:
  *
  * - imports of UI components from anywhere except src/components/ui
- *   (allowed besides: react, cn, other files in src/screens, and Storybook
+ *   (allowed besides: react, cn, @/lib/format (the Slot date/time formats,
+ *   CLAUDE.md "UI copy"), other files in src/screens, and Storybook
  *   packages in *.stories.tsx);
  * - raw HTML form controls: <button>, <input>, <select>, <textarea>;
  * - inline style attributes;
@@ -22,6 +23,8 @@ const ROOT = resolve(import.meta.dirname, '..')
 const SCREENS = join(ROOT, 'src/screens')
 const UI_DIR = join(ROOT, 'src/components/ui')
 const RAW_CONTROLS = new Set(['button', 'input', 'select', 'textarea'])
+// Slot's en-US date/time helpers (CLAUDE.md, "UI copy"): screens must use them.
+const SLOT_FORMAT = '@/lib/format'
 const STORYBOOK_IMPORT = /^(@storybook\/|storybook(\/|$))/
 // Always allowed on any component.
 const REACT_PROPS = new Set(['key', 'ref'])
@@ -89,7 +92,7 @@ for (const file of files(SCREENS)) {
       const resolved = source.startsWith('@/') ? join(ROOT, 'src', source.slice(2)) : source.startsWith('.') ? resolve(file, '..', source) : null
       const fromUi = resolved !== null && resolved.startsWith(UI_DIR + '/')
       const fromScreens = resolved !== null && resolved.startsWith(SCREENS + '/')
-      const allowed = fromUi || fromScreens || source === 'react' || source === 'cn' || (isStory && STORYBOOK_IMPORT.test(source))
+      const allowed = fromUi || fromScreens || source === 'react' || source === 'cn' || source === SLOT_FORMAT || (isStory && STORYBOOK_IMPORT.test(source))
       if (!allowed) problems.push(`${at(n)}  import from "${source}": screens import UI only from src/components/ui`)
       if (fromUi) {
         for (const s of n.specifiers as { imported?: { name: string }; local: { name: string } }[]) {

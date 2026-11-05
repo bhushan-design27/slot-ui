@@ -46,6 +46,14 @@ Rules for working in the **Slot** Figma file (`kcQ8UEPlSVCNw8Qs2LL6aZ`).
 
 ## UI copy
 - UI copy uses sentence case (e.g. "Save changes", not "Save Changes").
+- Locale is en-US everywhere (the studio is in the US), in Figma and code:
+  - Weeks start on Sunday.
+  - Dates: long "Tuesday, November 10", short "Tue, Nov 10"; months
+    "November 2026". Add the year only where it is ambiguous.
+  - Times are 12-hour: "10:00 AM". With a date: "Tuesday, November 10 at
+    10:00 AM" (long) or "Tue, Nov 10, 10:00 AM" (short).
+  - Prices in US dollars: "$95".
+  - In code, format dates and times with `src/lib/format.ts`, never by hand.
 
 ## Borders and sizing
 - For components with borders, exclude strokes from layout.

@@ -10,6 +10,10 @@ to `Approved`; agents always write `DRAFT - needs review` (CLAUDE.md,
 an entry has no component, or an entry names a component, prop or prop
 value that doesn't exist. Name things Slot doesn't have in lowercase.
 
+Dates and times are en-US (CLAUDE.md, "UI copy"): weeks start on
+Sunday, "Tuesday, November 10" (long), "Tue, Nov 10" (short), times
+"10:00 AM". Format them with `src/lib/format.ts`, never by hand.
+
 ## AppHeader
 
 Status: DRAFT - needs review
@@ -169,7 +173,7 @@ e.g. a compact booking summary on mobile.
 ### Use when
 
 - Secondary detail that most people don't need to read every time, but some will want to check (the full booking details on a small screen).
-- The `summary` makes sense on its own when collapsed; with `detail`, the two read as one name ("Deep tissue massage", "Tue 4 Nov, 10:00 · $95"). Together they are the button's accessible name.
+- The `summary` makes sense on its own when collapsed; with `detail`, the two read as one name ("Deep tissue massage", "Tue, Nov 10, 10:00 AM · $95"). Together they are the button's accessible name.
 - Use `detail` for a second, secondary line instead of letting one long summary wrap.
 - Closed by default; use `defaultOpen` (or `open`) only when most people will need the content.
 

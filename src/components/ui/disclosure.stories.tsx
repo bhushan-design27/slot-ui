@@ -1,12 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { formatDateTimeLong, formatDateTimeShort } from '@/lib/format'
 import { Disclosure } from './disclosure'
+
+const appointment = new Date(2026, 10, 10, 10, 0)
 
 const states = ['Default', 'Hover', 'Focus', 'Open'] as const
 
 const details = [
   { term: 'Service', detail: 'Deep tissue massage' },
   { term: 'Duration', detail: '60 min' },
-  { term: 'Date and time', detail: 'Tuesday 4 November at 10:00' },
+  { term: 'Date and time', detail: formatDateTimeLong(appointment) },
   { term: 'Price', detail: '$95' },
 ]
 
@@ -29,7 +32,7 @@ const meta = {
   parameters: { layout: 'centered' },
   args: {
     summary: 'Deep tissue massage',
-    detail: 'Tue 4 Nov, 10:00 · $95',
+    detail: `${formatDateTimeShort(appointment)} · $95`,
     children: <Details />,
   },
   argTypes: {

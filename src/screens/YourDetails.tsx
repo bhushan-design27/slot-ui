@@ -3,11 +3,15 @@ import { Card } from '@/components/ui/card'
 import { Disclosure } from '@/components/ui/disclosure'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { formatDateTimeLong, formatDateTimeShort } from '@/lib/format'
+
+/** The booking being made (example data): Tuesday, November 10, 2026 at 10:00 AM. */
+const appointment = new Date(2026, 10, 10, 10, 0)
 
 const summary = [
   { term: 'Service', detail: 'Deep tissue massage' },
   { term: 'Duration', detail: '60 min' },
-  { term: 'Date and time', detail: 'Tuesday 4 November at 10:00' },
+  { term: 'Date and time', detail: formatDateTimeLong(appointment) },
   { term: 'Price', detail: '$95' },
 ]
 
@@ -53,7 +57,7 @@ export function YourDetails() {
            * the accessibility tree.
            */}
           <aside aria-label="Booking summary" className="w-full lg:max-w-(--layout-form-max) lg:flex-1">
-            <Disclosure className="lg:hidden" summary="Deep tissue massage" detail="Tue 4 Nov, 10:00 · $95">
+            <Disclosure className="lg:hidden" summary="Deep tissue massage" detail={`${formatDateTimeShort(appointment)} · $95`}>
               <SummaryDetails />
             </Disclosure>
             <Card className="hidden lg:flex" title="Booking summary">
