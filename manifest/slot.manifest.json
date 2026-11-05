@@ -683,7 +683,7 @@
       "props": [
         {
           "name": "name",
-          "type": "\"chevron-down\" | \"check\" | \"info\" | \"circle-check\" | \"triangle-alert\" | \"circle-alert\"",
+          "type": "\"chevron-down\" | \"check\" | \"info\" | \"circle-check\" | \"triangle-alert\" | \"circle-alert\" | \"chevron-left\" | \"chevron-right\" | \"users\"",
           "required": true,
           "allowedValues": [
             "chevron-down",
@@ -691,7 +691,10 @@
             "info",
             "circle-check",
             "triangle-alert",
-            "circle-alert"
+            "circle-alert",
+            "chevron-left",
+            "chevron-right",
+            "users"
           ],
           "description": "Lucide icon name, as in the Figma Icon variants."
         },
@@ -1801,6 +1804,30 @@
         ]
       },
       {
+        "name": "color/icon/action",
+        "cssVariable": "--color-icon-action",
+        "job": "Icon on secondary actions, matching text/action, e.g. a Secondary icon-only Button.",
+        "jobSource": "figma-description",
+        "scopes": [
+          "STROKE_COLOR"
+        ],
+        "aliasOf": "color/blue/600",
+        "value": "#3e7ca6",
+        "usedBy": []
+      },
+      {
+        "name": "color/icon/action-hover",
+        "cssVariable": "--color-icon-action-hover",
+        "job": "Icon on secondary actions on hover, matching text/action-hover.",
+        "jobSource": "figma-description",
+        "scopes": [
+          "STROKE_COLOR"
+        ],
+        "aliasOf": "color/blue/700",
+        "value": "#2f6890",
+        "usedBy": []
+      },
+      {
         "name": "color/icon/default",
         "cssVariable": "--color-icon-default",
         "job": "Icons at rest.",
@@ -1873,6 +1900,18 @@
           "RadioGroup",
           "StepIndicator"
         ]
+      },
+      {
+        "name": "color/icon/on-disabled",
+        "cssVariable": "--color-icon-on-disabled",
+        "job": "Icon on a disabled filled action (action/disabled), matching text/on-disabled.",
+        "jobSource": "figma-description",
+        "scopes": [
+          "STROKE_COLOR"
+        ],
+        "aliasOf": "color/slate/500",
+        "value": "#64748b",
+        "usedBy": []
       },
       {
         "name": "color/icon/success",

@@ -966,6 +966,38 @@
       }
     },
     "icon": {
+      "action": {
+        "$type": "color",
+        "$value": "{color.blue.600}",
+        "$description": "Icon on secondary actions, matching text/action, e.g. a Secondary icon-only Button.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-action)"
+            }
+          }
+        }
+      },
+      "action-hover": {
+        "$type": "color",
+        "$value": "{color.blue.700}",
+        "$description": "Icon on secondary actions on hover, matching text/action-hover.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-action-hover)"
+            }
+          }
+        }
+      },
       "default": {
         "$type": "color",
         "$value": "{color.slate.500}",
@@ -1044,6 +1076,22 @@
             ],
             "codeSyntax": {
               "WEB": "var(--color-icon-on-action)"
+            }
+          }
+        }
+      },
+      "on-disabled": {
+        "$type": "color",
+        "$value": "{color.slate.500}",
+        "$description": "Icon on a disabled filled action (action/disabled), matching text/on-disabled.",
+        "$extensions": {
+          "com.figma": {
+            "collection": "Semantic",
+            "scopes": [
+              "STROKE_COLOR"
+            ],
+            "codeSyntax": {
+              "WEB": "var(--color-icon-on-disabled)"
             }
           }
         }
